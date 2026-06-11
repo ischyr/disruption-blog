@@ -1,0 +1,21 @@
+// Security glossary shown on /glossary. Each: term, definition, optional tag.
+export const glossary = [
+  { term: 'ACL', definition: 'Access Control List — rules defining which principals may access an object and how.' },
+  { term: 'AS-REP Roasting', definition: 'Cracking the AS-REP of an Active Directory account that has Kerberos pre-authentication disabled.' },
+  { term: 'Beacon', definition: 'An implant that periodically calls back to a C2 server to receive tasking.' },
+  { term: 'C2', definition: 'Command and Control — infrastructure an operator uses to control compromised hosts.' },
+  { term: 'CSRF', definition: 'Cross-Site Request Forgery — forcing an authenticated user’s browser to submit an unwanted request.' },
+  { term: 'IDOR', definition: 'Insecure Direct Object Reference — accessing another user’s object by manipulating an identifier.' },
+  { term: 'Kerberoasting', definition: 'Requesting service tickets for SPN-bearing accounts and cracking them offline to recover passwords.' },
+  { term: 'Lateral Movement', definition: 'Techniques used to move from one compromised host to others within a network.' },
+  { term: 'LFI', definition: 'Local File Inclusion — including local files via unvalidated path input, often leading to code execution.' },
+  { term: 'LOLBin', definition: 'Living-Off-the-Land Binary — a trusted system binary abused for malicious purposes.' },
+  { term: 'NTLM Relay', definition: 'Relaying captured NTLM authentication to another service to authenticate as the victim.' },
+  { term: 'Pass-the-Hash', definition: 'Authenticating using an NTLM hash directly, without knowing the plaintext password.' },
+  { term: 'Pivoting', definition: 'Routing traffic through a compromised host to reach otherwise unreachable networks.' },
+  { term: 'Privilege Escalation', definition: 'Gaining higher permissions than initially granted, e.g. user to root/SYSTEM.' },
+  { term: 'SSRF', definition: 'Server-Side Request Forgery — coercing a server into making requests to attacker-chosen destinations.' },
+  { term: 'SSTI', definition: 'Server-Side Template Injection — injecting template syntax that the engine evaluates, often to RCE.' },
+  { term: 'TTPs', definition: 'Tactics, Techniques, and Procedures — the behaviour patterns of a threat actor.' },
+  { term: 'XSS', definition: 'Cross-Site Scripting — executing attacker-controlled script in a victim’s browser context.' },
+]

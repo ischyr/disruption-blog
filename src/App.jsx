@@ -1,0 +1,47 @@
+import { Routes, Route, useLocation } from 'react-router-dom'
+import Navbar from './components/Navbar'
+import Footer from './components/Footer'
+import ScrollToTop from './components/ScrollToTop'
+import ReadingProgress from './components/ReadingProgress'
+import BackToTop from './components/BackToTop'
+import Home from './pages/Home'
+import About from './pages/About'
+import Blog from './pages/Blog'
+import BlogPost from './pages/BlogPost'
+import Tools from './pages/Tools'
+import Videos from './pages/Videos'
+import Quiz from './pages/Quiz'
+import Glossary from './pages/Glossary'
+import Graph from './pages/Graph'
+import NotFound from './pages/NotFound'
+
+export default function App() {
+  const location = useLocation()
+
+  return (
+    <div className="app">
+      <ReadingProgress />
+      <ScrollToTop />
+      <Navbar />
+      <main className="main">
+        {/* keyed by pathname so the fade-in animation replays on each navigation */}
+        <div className="route-fade" key={location.pathname}>
+          <Routes location={location}>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/tools" element={<Tools />} />
+            <Route path="/videos" element={<Videos />} />
+            <Route path="/quiz" element={<Quiz />} />
+            <Route path="/glossary" element={<Glossary />} />
+            <Route path="/graph" element={<Graph />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
+      </main>
+      <Footer />
+      <BackToTop />
+    </div>
+  )
+}

@@ -13,6 +13,8 @@ import Videos from './pages/Videos'
 import Quiz from './pages/Quiz'
 import Glossary from './pages/Glossary'
 import Graph from './pages/Graph'
+import Snippets from './pages/Snippets'
+import WarStories from './pages/WarStories'
 import NotFound from './pages/NotFound'
 
 export default function App() {
@@ -36,6 +38,8 @@ export default function App() {
             <Route path="/quiz" element={<Quiz />} />
             <Route path="/glossary" element={<Glossary />} />
             <Route path="/graph" element={<Graph />} />
+            <Route path="/snippets" element={<Snippets />} />
+            <Route path="/war-stories" element={<WarStories />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

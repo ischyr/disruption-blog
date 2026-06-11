@@ -1,16 +1,79 @@
-import { NavLink, Link } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import { NavLink, Link, useLocation } from 'react-router-dom'
 import { site } from '../config'
 
-const links = [
+const primary = [
   { to: '/', label: 'Home', end: true },
   { to: '/about', label: 'About' },
   { to: '/blog', label: 'Blog' },
   { to: '/tools', label: 'Tools' },
   { to: '/videos', label: 'Videos' },
+]
+
+const more = [
   { to: '/quiz', label: 'Quiz' },
   { to: '/glossary', label: 'Glossary' },
   { to: '/graph', label: 'Graph' },
+  { to: '/snippets', label: 'Snippets' },
+  { to: '/war-stories', label: 'War Stories' },
 ]
+
+function MoreMenu() {
+  const [open, setOpen] = useState(false)
+  const ref = useRef(null)
+  const { pathname } = useLocation()
+  const isActive = more.some((l) => l.to === pathname)
+
+  // close when the route changes
+  useEffect(() => {
+    setOpen(false)
+  }, [pathname])
+
+  // close on outside click / Escape
+  useEffect(() => {
+    if (!open) return
+    const onDown = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false)
+    }
+    const onKey = (e) => e.key === 'Escape' && setOpen(false)
+    document.addEventListener('mousedown', onDown)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('mousedown', onDown)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [open])
+
+  return (
+    <div className="nav-more" ref={ref}>
+      <button
+        type="button"
+        className={`nav-link nav-more-btn${isActive ? ' active' : ''}`}
+        aria-haspopup="true"
+        aria-expanded={open}
+        onClick={() => setOpen((o) => !o)}
+      >
+        More <span className="nav-more-caret">▾</span>
+      </button>
+      {open && (
+        <div className="nav-more-menu" role="menu">
+          {more.map((l) => (
+            <NavLink
+              key={l.to}
+              to={l.to}
+              role="menuitem"
+              className={({ isActive }) =>
+                isActive ? 'nav-more-item active' : 'nav-more-item'
+              }
+            >
+              {l.label}
+            </NavLink>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
 
 function SocialIcon({ href, label, children }) {
   return (
@@ -38,7 +101,7 @@ export default function Navbar() {
         </Link>
 
         <nav className="navbar-links">
-          {links.map((l) => (
+          {primary.map((l) => (
             <NavLink
               key={l.to}
               to={l.to}
@@ -50,6 +113,7 @@ export default function Navbar() {
               {l.label}
             </NavLink>
           ))}
+          <MoreMenu />
         </nav>
 
         <div className="navbar-socials">

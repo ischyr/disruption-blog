@@ -7,6 +7,7 @@ import Markdown from '../components/Markdown'
 import TableOfContents from '../components/TableOfContents'
 import RecentPosts from '../components/RecentPosts'
 import PostNav from '../components/PostNav'
+import PostQR from '../components/PostQR'
 
 export default function BlogPost() {
   const { slug } = useParams()
@@ -47,6 +48,12 @@ export default function BlogPost() {
 
   return (
     <div className={`page ${hasSidebar ? 'post-layout' : 'page-narrow'}`}>
+      {hasSidebar && (
+        <aside className="post-rail-left">
+          <PostQR />
+        </aside>
+      )}
+
       <div className="post-main">
         <Link to="/blog" className="cat-link back-link">
           ← cd ~/blog

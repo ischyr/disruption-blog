@@ -1,4 +1,4 @@
-# disa — Security Research Blog
+# 0xd1s - Security Research Blog
 
 A dark, terminal-styled blog built with **React + Vite**. Posts are plain
 markdown files with full syntax highlighting.
@@ -10,6 +10,15 @@ npm install
 npm run dev      # start dev server (http://localhost:5173)
 npm run build    # production build into dist/
 npm run preview  # preview the production build
+```
+
+## Commit a new feature or blog post
+
+```bash
+git add -A
+git commit -m "Add post: <title>"
+git push
+That's it. The push triggers the Deploy to GitHub Pages workflow → it runs npm run build on GitHub's server → publishes the new dist/ to your live site. It's typically live in 1–2 minutes. You don't build or touch dist/ yourself, and you don't re-do any of the Pages/DNS setup — that's all permanent now.
 ```
 
 ## Writing a post

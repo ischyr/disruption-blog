@@ -241,6 +241,68 @@ a {
   color: var(--text-bright);
 }
 
+/* ── "More" dropdown ──────────────────────────────────────────────── */
+.nav-more {
+  position: relative;
+  display: inline-flex;
+}
+
+.nav-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--font-sans);
+}
+
+.nav-more-caret {
+  font-size: 0.65rem;
+  transition: transform 0.15s;
+}
+
+.nav-more-btn[aria-expanded='true'] .nav-more-caret {
+  transform: rotate(180deg);
+}
+
+.nav-more-menu {
+  position: absolute;
+  top: calc(100% + 0.7rem);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  min-width: 144px;
+  padding: 0.4rem;
+  background: var(--panel);
+  border: 1px solid var(--border-bright);
+  border-radius: 10px;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.55);
+  z-index: 60;
+  animation: routeFade 0.15s ease both;
+}
+
+.nav-more-item {
+  padding: 0.45rem 0.7rem;
+  border-radius: 7px;
+  color: var(--muted-2);
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color 0.15s, background 0.15s;
+}
+
+.nav-more-item:hover {
+  color: var(--text-bright);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-more-item.active {
+  color: var(--text-bright);
+}
+
 .navbar-socials {
   display: flex;
   gap: 0.85rem;
@@ -921,16 +983,55 @@ a {
 }
 
 /* ── Blog post page ───────────────────────────────────────────────── */
+/* three columns: QR rail · article · sidebar (TOC + related).
+   widened past the global 1100 cap and re-centred on the viewport. */
 .post-layout {
-  display: flex;
-  align-items: flex-start;
-  gap: 3rem;
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr) 250px;
+  gap: 2.5rem;
+  align-items: start;
+  width: min(1260px, calc(100vw - 3rem));
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .post-main {
-  flex: 1;
   min-width: 0;
-  max-width: 780px;
+  max-width: none;
+}
+
+/* left rail holds the QR; static (top), so it scrolls away unlike the TOC */
+.post-rail-left {
+  align-self: start;
+}
+
+.post-qr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.post-qr-tile {
+  background: #fafafa;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  line-height: 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.post-qr-tile svg {
+  display: block;
+}
+
+.post-qr-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.4;
 }
 
 .back-link {
@@ -2046,6 +2147,82 @@ a {
   opacity: 0.28;
 }
 
+/* ── Snippets ─────────────────────────────────────────────────────── */
+.snippet-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.snippet {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.3rem 1.4rem 1.4rem;
+}
+
+.snippet-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.snippet-title {
+  margin: 0;
+  font-size: 1.12rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-bright);
+}
+
+.snippet-desc {
+  margin: 0.5rem 0 0;
+  color: var(--muted-2);
+  font-size: 0.9rem;
+}
+
+/* tighten the embedded code block inside a snippet card */
+.snippet .markdown .codeblock {
+  margin: 0.9rem 0 0;
+}
+
+/* ── War stories ──────────────────────────────────────────────────── */
+.story-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.story {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.story-body {
+  padding: 1.3rem 1.5rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.story-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--text-bright);
+}
+
+.story-text {
+  margin: 0;
+  color: var(--muted-2);
+  line-height: 1.7;
+}
+
 /* ── Footer ───────────────────────────────────────────────────────── */
 .footer {
   border-top: 1px solid var(--border);
@@ -2081,14 +2258,18 @@ a {
 
 /* ── Responsive ───────────────────────────────────────────────────── */
 @media (max-width: 1040px) {
-  /* the sidebar (contents + suggestions) is a desktop affordance — hide it
-     and let the article use the full readable width on smaller screens */
-  .post-sidebar {
+  /* the side rails (QR, contents, suggestions) are desktop affordances —
+     hide them and let the article use the full readable width */
+  .post-sidebar,
+  .post-rail-left {
     display: none;
   }
 
   .post-layout {
     display: block;
+    width: auto;
+    left: auto;
+    transform: none;
   }
 
   .post-main {

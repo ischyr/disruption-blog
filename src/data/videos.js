@@ -3,18 +3,13 @@
 // automatically from the ID.
 export const videos = [
   {
-    id: 'aircAruvnKk',
-    title: 'Example — replace with your video',
-    description: 'Swap these entries for your real uploads from the channel.',
+    id: 'kulrRKQ4kcQ',
+    title: 'HackTheBox - Fluffy ( Active Directory )',
+    description: 'Easy Windows machine from Hack The Box: https://www.hackthebox.com/machines/fluffy',
   },
   {
-    id: '8jLOx1hD3_o',
-    title: 'Example — another upload',
-    description: 'Each card links to the video and opens an in-page player.',
-  },
-  {
-    id: 'rfscVS0vtbw',
-    title: 'Example — a third one',
-    description: 'Add as many as you like; newest first looks best.',
+    id: 'aKLV6hLGgD0',
+    title: 'HackTheBox - Sauna ( Active Directory )',
+    description: 'Easy Windows machine from Hack The Box: https://www.hackthebox.com/machines/sauna',
   },
 ]

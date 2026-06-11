@@ -6,6 +6,7 @@ import { certs } from '../data/certs'
 import PostCard from '../components/PostCard'
 import StatIcon from '../components/StatIcon'
 import TerminalDots from '../components/TerminalDots'
+import ContributionHeatmap from '../components/ContributionHeatmap'
 
 export default function Home() {
   const featured = posts[0]
@@ -87,6 +88,13 @@ export default function Home() {
           <span className="stat-value">{certs.length}</span>
           <span className="stat-label">certifications</span>
         </Link>
+      </section>
+
+      <section className="activity">
+        <div className="section-header">
+          <h2>Posting activity</h2>
+        </div>
+        <ContributionHeatmap />
       </section>
 
       <section className="latest">

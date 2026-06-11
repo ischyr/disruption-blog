@@ -4,6 +4,7 @@ import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
 import ReadingProgress from './components/ReadingProgress'
 import BackToTop from './components/BackToTop'
+import ReadingRuler from './components/ReadingRuler'
 import Home from './pages/Home'
 import About from './pages/About'
 import Blog from './pages/Blog'
@@ -46,6 +47,7 @@ export default function App() {
       </main>
       <Footer />
       <BackToTop />
+      <ReadingRuler />
     </div>
   )
 }

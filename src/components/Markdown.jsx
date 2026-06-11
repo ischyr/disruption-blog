@@ -29,6 +29,7 @@ function getText(children) {
 function CodeBlock({ children }) {
   const ref = useRef(null)
   const [copied, setCopied] = useState(false)
+  const [wrap, setWrap] = useState(false)
 
   const className = children?.props?.className || ''
   const lang = /language-([\w+#-]+)/.exec(className)?.[1] || 'text'
@@ -53,11 +54,24 @@ function CodeBlock({ children }) {
     <div className="codeblock">
       <div className="codeblock-header">
         <span className="codeblock-lang">{lang}</span>
-        <button type="button" className="codeblock-copy" onClick={copy}>
-          {copied ? '✓ copied' : 'copy'}
-        </button>
+        <div className="codeblock-actions">
+          <button
+            type="button"
+            className={`codeblock-btn${wrap ? ' active' : ''}`}
+            onClick={() => setWrap((w) => !w)}
+            aria-pressed={wrap}
+            title="Toggle line wrapping"
+          >
+            wrap
+          </button>
+          <button type="button" className="codeblock-btn" onClick={copy}>
+            {copied ? '✓ copied' : 'copy'}
+          </button>
+        </div>
       </div>
-      <pre ref={ref}>{children}</pre>
+      <pre ref={ref} className={wrap ? 'wrap' : undefined}>
+        {children}
+      </pre>
     </div>
   )
 }

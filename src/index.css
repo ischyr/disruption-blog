@@ -148,6 +148,65 @@ a {
   height: 18px;
 }
 
+/* ── Reading ruler ────────────────────────────────────────────────── */
+.ruler-toggle {
+  position: fixed;
+  left: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 90;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 11px;
+  border: 1px solid var(--border-bright);
+  background: rgba(13, 13, 14, 0.85);
+  backdrop-filter: blur(8px);
+  color: var(--muted-2);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.ruler-toggle:hover {
+  color: var(--text-bright);
+  border-color: #3a3a40;
+}
+
+.ruler-toggle.active {
+  color: var(--accent);
+  border-color: rgba(229, 72, 77, 0.5);
+  background: rgba(229, 72, 77, 0.1);
+}
+
+.ruler-toggle svg {
+  width: 18px;
+  height: 18px;
+}
+
+.ruler {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  pointer-events: none;
+}
+
+/* top mask: top:0 → inline height. bottom mask: inline top → bottom:0. */
+.ruler-mask {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  background: rgba(5, 5, 5, 0.6);
+  border-bottom: 1px solid rgba(229, 72, 77, 0.45);
+}
+
+.ruler-mask-bottom {
+  bottom: 0;
+  border-bottom: none;
+  border-top: 1px solid rgba(229, 72, 77, 0.45);
+}
+
 /* ── 404 ──────────────────────────────────────────────────────────── */
 .notfound-code {
   font-size: 5rem;
@@ -1492,7 +1551,12 @@ a {
   text-transform: lowercase;
 }
 
-.codeblock-copy {
+.codeblock-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.codeblock-btn {
   font-family: var(--font-mono);
   font-size: 0.74rem;
   color: var(--muted);
@@ -1501,11 +1565,17 @@ a {
   border-radius: 6px;
   padding: 0.15rem 0.65rem;
   cursor: pointer;
-  transition: color 0.15s, border-color 0.15s;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
 }
 
-.codeblock-copy:hover {
+.codeblock-btn:hover {
   color: var(--text-bright);
+  border-color: #3a3a40;
+}
+
+.codeblock-btn.active {
+  color: var(--text-bright);
+  background: rgba(255, 255, 255, 0.06);
   border-color: #3a3a40;
 }
 
@@ -1516,6 +1586,13 @@ a {
   font-family: var(--font-mono);
   font-size: 0.85rem;
   line-height: 1.65;
+}
+
+/* word-wrap toggle */
+.codeblock pre.wrap {
+  overflow-x: visible;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
 .codeblock pre code {

@@ -21,10 +21,61 @@
   --sev-low: #60a5fa;
   --ok: #4ade80;
 
+  /* theme-aware surfaces */
+  --navbar-bg: rgba(10, 10, 12, 0.72);
+  --hover-bg: rgba(255, 255, 255, 0.05);
+  --selection: rgba(255, 255, 255, 0.16);
+
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     Helvetica, Arial, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', Consolas,
     monospace;
+}
+
+/* ── Light theme ──────────────────────────────────────────────────── */
+:root[data-theme='light'] {
+  --bg: #f7f7f8;
+  --bg-soft: #eeeef1;
+  --panel: #ffffff;
+  --panel-2: #f0f0f3;
+  --border: #e4e4e9;
+  --border-bright: #d3d3da;
+  --text: #3f3f46;
+  --text-bright: #0a0a0a;
+  --muted: #6b6b73;
+  --muted-2: #52525b;
+  --faint: #9a9aa3;
+  --accent: #dc2626;
+  --link: #18181b;
+
+  --sev-critical: #dc2626;
+  --sev-high: #ea580c;
+  --sev-medium: #d97706;
+  --sev-low: #2563eb;
+  --ok: #16a34a;
+
+  --navbar-bg: rgba(255, 255, 255, 0.8);
+  --hover-bg: rgba(0, 0, 0, 0.055);
+  --selection: rgba(0, 0, 0, 0.12);
+}
+
+/* fenced code blocks stay dark in both themes (syntax theme is dark) */
+:root[data-theme='light'] .codeblock {
+  background: #0d0d0e;
+  border-color: #2a2a2e;
+}
+:root[data-theme='light'] .codeblock-header {
+  background: #16181d;
+  border-color: #2a2a2e;
+}
+:root[data-theme='light'] .codeblock-lang,
+:root[data-theme='light'] .codeblock-btn {
+  color: #9aa3b2;
+  border-color: #2a2a2e;
+}
+:root[data-theme='light'] .codeblock-btn:hover,
+:root[data-theme='light'] .codeblock-btn.active {
+  color: #ffffff;
 }
 
 * {
@@ -47,7 +98,7 @@ body {
 }
 
 ::selection {
-  background: rgba(255, 255, 255, 0.16);
+  background: var(--selection);
 }
 
 a {
@@ -242,7 +293,7 @@ a {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(5, 5, 5, 0.72);
+  background: var(--navbar-bg);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border);
 }
@@ -356,7 +407,7 @@ a {
 
 .nav-more-item:hover {
   color: var(--text-bright);
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--hover-bg);
 }
 
 .nav-more-item.active {
@@ -383,6 +434,31 @@ a {
 .social-icon svg {
   width: 18px;
   height: 18px;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 1px solid var(--border-bright);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.theme-toggle:hover {
+  color: var(--text-bright);
+  border-color: #3a3a40;
+  background: var(--hover-bg);
+}
+
+.theme-toggle svg {
+  width: 16px;
+  height: 16px;
 }
 
 /* ── Mobile hamburger + menu (hidden on desktop) ──────────────────── */
@@ -428,21 +504,21 @@ a {
 
 .btn:hover {
   border-color: #3a3a40;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--hover-bg);
   color: var(--text-bright);
 }
 
 .btn-primary {
   background: var(--text-bright);
   border-color: var(--text-bright);
-  color: #0a0a0a;
+  color: var(--bg);
   font-weight: 600;
 }
 
 .btn-primary:hover {
-  background: #e4e4e7;
-  border-color: #e4e4e7;
-  color: #0a0a0a;
+  background: var(--text);
+  border-color: var(--text);
+  color: var(--bg);
 }
 
 /* ── Page headers ─────────────────────────────────────────────────── */
@@ -815,7 +891,7 @@ a {
 }
 
 .card:hover .card-title {
-  color: #fff;
+  color: var(--text-bright);
 }
 
 .card-foot {
@@ -980,7 +1056,7 @@ a {
 }
 
 .tag-chip.active {
-  color: #0a0a0a;
+  color: var(--bg);
   background: var(--text-bright);
   border-color: var(--text-bright);
   font-weight: 600;
@@ -1241,7 +1317,7 @@ a {
 .toc-link.active {
   color: var(--text-bright);
   border-left-color: var(--text-bright);
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--hover-bg);
   border-radius: 0 7px 7px 0;
   font-weight: 600;
 }
@@ -1508,7 +1584,7 @@ a {
 .author-follow a:hover {
   color: var(--text-bright);
   border-color: #3a3a40;
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--hover-bg);
 }
 
 .author-follow svg {
@@ -1732,7 +1808,7 @@ a {
 
 .codeblock-btn.active {
   color: var(--text-bright);
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--hover-bg);
   border-color: #3a3a40;
 }
 
@@ -2207,7 +2283,7 @@ a {
 .video-play svg {
   width: 46px;
   height: 46px;
-  color: #fff;
+  color: var(--text-bright);
   opacity: 0.9;
   filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.7));
   transition: transform 0.15s, opacity 0.15s;
@@ -2373,7 +2449,7 @@ a {
 .graph-item:hover,
 .graph-item.active {
   color: var(--text-bright);
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--hover-bg);
 }
 
 .graph-item-label {
@@ -2470,7 +2546,11 @@ a {
 }
 
 .graph-node {
-  cursor: pointer;
+  cursor: grab;
+}
+
+.graph-node:active {
+  cursor: grabbing;
 }
 
 .graph-node circle {
@@ -2629,7 +2709,7 @@ a {
 }
 
 .track-tab.active {
-  color: #0a0a0a;
+  color: var(--bg);
   background: var(--text-bright);
   border-color: var(--text-bright);
   font-weight: 600;
@@ -2941,7 +3021,7 @@ a {
 .helper-opts button.active {
   background: var(--text-bright);
   border-color: var(--text-bright);
-  color: #0a0a0a;
+  color: var(--bg);
   font-weight: 600;
 }
 

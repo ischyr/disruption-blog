@@ -23,6 +23,11 @@ export default function Graph() {
   const [transform, setTransform] = useState('')
   const svgRef = useRef(null)
   const zoomRef = useRef(null)
+  const simRef = useRef(null)
+  const tfRef = useRef({ x: 0, y: 0, k: 1 }) // current zoom transform
+  const dragRef = useRef(null) // node being dragged
+  const movedRef = useRef(false) // distinguish drag from click
+  const startRef = useRef({ x: 0, y: 0 })
 
   const { nodes, links } = useMemo(() => {
     const map = new Map()
@@ -98,24 +103,99 @@ export default function Graph() {
       .force('x', forceX(W / 2).strength(0.05))
       .force('y', forceY(H / 2).strength(0.05))
       .on('tick', () => setTick((t) => t + 1))
+    simRef.current = sim
     return () => sim.stop()
   }, [nodes, links])
 
-  // wheel / pinch / drag zoom + pan, applied as a transform on the graph group
+  // wheel / pinch / drag zoom + pan, applied as a transform on the graph group.
+  // The filter lets pan start only on empty canvas — dragging a node is ours.
   useEffect(() => {
     const sel = select(svgRef.current)
     const z = d3zoom()
       .scaleExtent([0.4, 6])
-      .on('zoom', (e) => setTransform(e.transform.toString()))
+      .filter((event) => {
+        if (event.button) return false
+        if (event.type !== 'wheel' && event.target.closest?.('.graph-node'))
+          return false
+        return true
+      })
+      .on('zoom', (e) => {
+        tfRef.current = e.transform
+        setTransform(e.transform.toString())
+      })
     sel.call(z)
     zoomRef.current = z
     return () => sel.on('.zoom', null)
   }, [])
 
+  // ── node dragging (pointer-based, accounts for zoom + viewBox scaling) ──
+  const toSim = (clientX, clientY) => {
+    const svg = svgRef.current
+    const ctm = svg?.getScreenCTM()
+    if (!ctm) return null
+    const p = new DOMPointReadOnly(clientX, clientY).matrixTransform(ctm.inverse())
+    const t = tfRef.current
+    return { x: (p.x - t.x) / t.k, y: (p.y - t.y) / t.k }
+  }
+
+  useEffect(() => {
+    const onMove = (e) => {
+      const node = dragRef.current
+      if (!node) return
+      const dx = e.clientX - startRef.current.x
+      const dy = e.clientY - startRef.current.y
+      if (dx * dx + dy * dy > 16) movedRef.current = true
+      const p = toSim(e.clientX, e.clientY)
+      if (p) {
+        node.fx = p.x
+        node.fy = p.y
+      }
+    }
+    const onUp = () => {
+      if (!dragRef.current) return
+      dragRef.current = null
+      simRef.current?.alphaTarget(0)
+    }
+    window.addEventListener('pointermove', onMove)
+    window.addEventListener('pointerup', onUp)
+    return () => {
+      window.removeEventListener('pointermove', onMove)
+      window.removeEventListener('pointerup', onUp)
+    }
+  }, [])
+
+  const onNodePointerDown = (e, node) => {
+    e.stopPropagation()
+    dragRef.current = node
+    movedRef.current = false
+    startRef.current = { x: e.clientX, y: e.clientY }
+    simRef.current?.alphaTarget(0.3).restart()
+    const p = toSim(e.clientX, e.clientY)
+    if (p) {
+      node.fx = p.x
+      node.fy = p.y
+    }
+  }
+
+  const onNodeClick = (node) => {
+    if (movedRef.current) {
+      movedRef.current = false
+      return // it was a drag, not a click
+    }
+    navigate(node.url)
+  }
+
   const zoomBy = (factor) => {
     if (zoomRef.current) zoomRef.current.scaleBy(select(svgRef.current), factor)
   }
   const resetZoom = () => {
+    // release any pinned nodes and re-settle the layout
+    nodes.forEach((n) => {
+      n.fx = null
+      n.fy = null
+    })
+    simRef.current?.alphaTarget(0.3).restart()
+    setTimeout(() => simRef.current?.alphaTarget(0), 600)
     if (zoomRef.current)
       zoomRef.current.transform(select(svgRef.current), zoomIdentity)
   }
@@ -203,7 +283,8 @@ export default function Graph() {
                   transform={`translate(${n.x ?? W / 2} ${n.y ?? H / 2})`}
                   onMouseEnter={() => setHover(n.id)}
                   onMouseLeave={() => setHover(null)}
-                  onClick={() => navigate(n.url)}
+                  onPointerDown={(e) => onNodePointerDown(e, n)}
+                  onClick={() => onNodeClick(n)}
                 >
                   <circle r={n.r} />
                   <text x={n.r + 6} y={4}>
@@ -226,7 +307,9 @@ export default function Graph() {
             </button>
           </div>
 
-          <span className="graph-hint">scroll to zoom · drag to pan</span>
+          <span className="graph-hint">
+            scroll to zoom · drag a node to move it · drag canvas to pan
+          </span>
         </div>
 
         <aside className="graph-panel">

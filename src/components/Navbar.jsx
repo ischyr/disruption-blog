@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { NavLink, Link, useLocation } from 'react-router-dom'
 import { site } from '../config'
+import ThemeToggle from './ThemeToggle'
 
 const primary = [
   { to: '/', label: 'Home', end: true },
@@ -167,6 +168,7 @@ export default function Navbar() {
 
         <div className="navbar-socials">
           <Socials />
+          <ThemeToggle />
         </div>
 
         <button
@@ -204,6 +206,7 @@ export default function Navbar() {
           </nav>
           <div className="navbar-mobile-socials">
             <Socials />
+            <ThemeToggle />
           </div>
         </div>
       )}

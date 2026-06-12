@@ -13,6 +13,15 @@ export const site = {
     'This blog is where I publish my research, CTF write-ups, tooling and anything else I find interesting in the security space.',
   ],
   academy: 'https://www.disruption-academy.com/',
+
+  // Author bio card shown at the end of each post. Drop an image at
+  // public/avatar.png (or change the path); a monogram is shown if it's missing.
+  author: {
+    name: '0xd1s',
+    bio: 'Security researcher & senior penetration tester. I write about offensive security, exploit development and red teaming.',
+    avatar: '/avatar.png',
+  },
+
   socials: {
     github: 'https://github.com/ischyr',
     linkedin: 'https://www.linkedin.com/in/iulian-schifirnet-238049201/',

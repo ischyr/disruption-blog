@@ -1435,6 +1435,97 @@ a {
   color: var(--text-bright);
 }
 
+/* ── Author bio card (end of post) ────────────────────────────────── */
+.author-card {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-top: 1.4rem;
+  padding: 1.3rem 1.5rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.author-avatar {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--border-bright);
+}
+
+.author-avatar-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--panel-2);
+  color: var(--text-bright);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.author-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.author-name {
+  display: block;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+  color: var(--text-bright);
+}
+
+.author-bio {
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--muted-2);
+}
+
+.author-follow {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.author-follow a {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  border: 1px solid var(--border-bright);
+  color: var(--muted-2);
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.author-follow a:hover {
+  color: var(--text-bright);
+  border-color: #3a3a40;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.author-follow svg {
+  width: 18px;
+  height: 18px;
+}
+
+@media (max-width: 560px) {
+  .author-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  .author-info {
+    text-align: center;
+  }
+}
+
 .post-header {
   background: var(--panel);
   border: 1px solid var(--border);

@@ -8,6 +8,7 @@ import TableOfContents from '../components/TableOfContents'
 import RecentPosts from '../components/RecentPosts'
 import PostNav from '../components/PostNav'
 import PostQR from '../components/PostQR'
+import AuthorCard from '../components/AuthorCard'
 
 export default function BlogPost() {
   const { slug } = useParams()
@@ -104,6 +105,7 @@ export default function BlogPost() {
         </article>
 
         <PostNav prev={prev} next={next} />
+        <AuthorCard />
       </div>
 
       {hasSidebar && (

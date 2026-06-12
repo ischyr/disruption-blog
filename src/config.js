@@ -19,7 +19,7 @@ export const site = {
   author: {
     name: '0xd1s',
     bio: 'Security researcher & senior penetration tester. I write about offensive security, exploit development and red teaming.',
-    avatar: '/avatar.png',
+    avatar: '/avatar.jpg',
   },
 
   socials: {

@@ -2505,6 +2505,207 @@ a {
   line-height: 1.7;
 }
 
+/* ── Start Here (learning roadmap) ────────────────────────────────── */
+.track-tabs {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 1.1rem;
+}
+
+.track-tab {
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 500;
+  padding: 0.5rem 1.1rem;
+  border-radius: 9px;
+  border: 1px solid var(--border-bright);
+  background: var(--panel);
+  color: var(--muted-2);
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
+}
+
+.track-tab:hover {
+  color: var(--text-bright);
+}
+
+.track-tab.active {
+  color: #0a0a0a;
+  background: var(--text-bright);
+  border-color: var(--text-bright);
+  font-weight: 600;
+}
+
+.track-blurb {
+  color: var(--muted-2);
+  margin: 0 0 2rem;
+  max-width: 60ch;
+}
+
+.path-level {
+  position: relative;
+  display: flex;
+  gap: 1.1rem;
+  padding-bottom: 1.4rem;
+}
+
+/* continuous spine connecting the level dots */
+.path-level::before {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--border-bright);
+}
+
+.path-level:first-child::before {
+  top: 16px;
+}
+
+.path-level:last-child::before {
+  bottom: calc(100% - 16px);
+}
+
+.path-rail {
+  position: relative;
+  flex-shrink: 0;
+  width: 32px;
+}
+
+.path-dot {
+  position: relative;
+  z-index: 1;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--panel-2);
+  border: 1px solid var(--border-bright);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text-bright);
+}
+
+.path-card {
+  flex: 1;
+  min-width: 0;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.2rem 1.4rem 1.4rem;
+}
+
+.path-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.path-level-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-bright);
+}
+
+.path-time {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--accent);
+}
+
+.path-focus {
+  margin: 0.4rem 0 0.4rem;
+  color: var(--muted-2);
+}
+
+.path-block {
+  margin-top: 0.9rem;
+}
+
+.path-block-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 0.45rem;
+}
+
+.cert-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  border: 1px solid var(--border-bright);
+  background: var(--panel-2);
+  border-radius: 6px;
+  padding: 0.15rem 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-bright);
+}
+
+.cert-chip-issuer {
+  font-size: 0.64rem;
+  color: var(--muted);
+}
+
+.path-resources {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.path-resources li::marker {
+  color: var(--faint);
+}
+
+.path-resources a {
+  color: var(--text);
+  font-size: 0.9rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--border-bright);
+}
+
+.path-resources a:hover {
+  color: var(--text-bright);
+  text-decoration-color: var(--muted);
+}
+
+/* per-level accent on the dot + timeline figure */
+.lvl-beginner .path-dot { border-color: rgba(74, 222, 128, 0.5); color: var(--ok); }
+.lvl-beginner .path-time { color: var(--ok); }
+.lvl-intermediate .path-dot { border-color: rgba(96, 165, 250, 0.5); color: var(--sev-low); }
+.lvl-intermediate .path-time { color: var(--sev-low); }
+.lvl-advanced .path-dot { border-color: rgba(251, 146, 60, 0.5); color: var(--sev-high); }
+.lvl-advanced .path-time { color: var(--sev-high); }
+.lvl-expert .path-dot { border-color: rgba(248, 113, 113, 0.5); color: var(--sev-critical); }
+.lvl-expert .path-time { color: var(--sev-critical); }
+
+.start-cta {
+  margin-top: 2.4rem;
+  padding: 1.8rem;
+  text-align: center;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.start-cta p {
+  margin: 0 0 1rem;
+  color: var(--muted-2);
+}
+
 /* ── Footer ───────────────────────────────────────────────────────── */
 .footer {
   border-top: 1px solid var(--border);

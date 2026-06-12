@@ -16,6 +16,7 @@ import Glossary from './pages/Glossary'
 import Graph from './pages/Graph'
 import Snippets from './pages/Snippets'
 import WarStories from './pages/WarStories'
+import StartHere from './pages/StartHere'
 import NotFound from './pages/NotFound'
 
 export default function App() {
@@ -41,6 +42,7 @@ export default function App() {
             <Route path="/graph" element={<Graph />} />
             <Route path="/snippets" element={<Snippets />} />
             <Route path="/war-stories" element={<WarStories />} />
+            <Route path="/start-here" element={<StartHere />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

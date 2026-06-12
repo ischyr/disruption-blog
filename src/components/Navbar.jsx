@@ -4,6 +4,7 @@ import { site } from '../config'
 
 const primary = [
   { to: '/', label: 'Home', end: true },
+  { to: '/start-here', label: 'Start Here' },
   { to: '/about', label: 'About' },
   { to: '/blog', label: 'Blog' },
   { to: '/tools', label: 'Tools' },

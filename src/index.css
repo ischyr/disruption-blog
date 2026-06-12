@@ -318,7 +318,7 @@ a {
 }
 
 .nav-more-caret {
-  font-size: 0.65rem;
+  font-size: 0.85rem;
   transition: transform 0.15s;
 }
 
@@ -382,6 +382,30 @@ a {
 .social-icon svg {
   width: 18px;
   height: 18px;
+}
+
+/* ── Mobile hamburger + menu (hidden on desktop) ──────────────────── */
+.navbar-burger {
+  display: none;
+  margin-left: auto;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-bright);
+  border-radius: 9px;
+  background: var(--panel);
+  color: var(--text-bright);
+  cursor: pointer;
+}
+
+.navbar-burger svg {
+  width: 22px;
+  height: 22px;
+}
+
+.navbar-mobile {
+  display: none;
 }
 
 /* ── Buttons ──────────────────────────────────────────────────────── */
@@ -1003,6 +1027,8 @@ a {
 }
 
 .cert-tile {
+  position: relative;
+  overflow: hidden;
   width: 100%;
   aspect-ratio: 1 / 1;
   display: flex;
@@ -1013,6 +1039,38 @@ a {
   border: 1px solid var(--border);
   border-radius: 14px;
   transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+}
+
+/* achieved-date overlay, revealed on hover */
+.cert-date {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.1rem;
+  padding-bottom: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-bright);
+  background: linear-gradient(transparent 30%, rgba(5, 5, 5, 0.9));
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+
+.cert-date-label {
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.cert:hover .cert-date,
+.cert:focus-within .cert-date {
+  opacity: 1;
 }
 
 .cert:hover .cert-tile {
@@ -2157,7 +2215,85 @@ a {
   background: #5a5a63;
 }
 
+/* widen the whole graph area past the global 1100 cap, re-centred */
+.graph-stage {
+  width: min(1340px, calc(100vw - 3rem));
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* three columns: tag index · graph · post index */
+.graph-layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr) 220px;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.graph-panel {
+  position: sticky;
+  top: 90px;
+  max-height: calc(100vh - 110px);
+  overflow-y: auto;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.1rem 1.1rem 0.6rem;
+}
+
+.graph-panel .toc-header {
+  margin-bottom: 0.4rem;
+}
+
+.graph-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding-bottom: 0.5rem;
+}
+
+.graph-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+  text-align: left;
+  padding: 0.4rem 0.55rem;
+  border: none;
+  border-radius: 7px;
+  background: none;
+  color: var(--muted-2);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+}
+
+.graph-item:hover,
+.graph-item.active {
+  color: var(--text-bright);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.graph-item-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.graph-count {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--faint);
+}
+
 .graph-wrap {
+  position: relative;
+  height: 70vh;
+  min-height: 560px;
   background:
     radial-gradient(700px 360px at 50% 0%, rgba(56, 189, 248, 0.04), transparent 70%),
     var(--panel);
@@ -2168,8 +2304,56 @@ a {
 
 .graph-svg {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
+  cursor: grab;
+  touch-action: none;
+}
+
+.graph-svg:active {
+  cursor: grabbing;
+}
+
+/* zoom controls + hint overlaid on the canvas */
+.graph-zoom {
+  position: absolute;
+  right: 0.9rem;
+  bottom: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.graph-zoom button {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: 1px solid var(--border-bright);
+  background: rgba(13, 13, 14, 0.85);
+  backdrop-filter: blur(8px);
+  color: var(--muted-2);
+  font-size: 1.05rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.graph-zoom button:hover {
+  color: var(--text-bright);
+  border-color: #3a3a40;
+}
+
+.graph-hint {
+  position: absolute;
+  left: 0.9rem;
+  bottom: 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--faint);
+  pointer-events: none;
 }
 
 .graph-link {
@@ -2212,16 +2396,37 @@ a {
   fill: #5a5a63;
 }
 
-.graph-node:hover circle {
+.graph-node:hover circle,
+.graph-node.focused circle {
   stroke: var(--text-bright);
 }
 
-.graph-node:hover text {
+.graph-node:hover text,
+.graph-node.focused text {
   fill: var(--text-bright);
 }
 
 .graph-node.dim {
   opacity: 0.28;
+}
+
+@media (max-width: 1040px) {
+  /* the graph index panels are a desktop affordance */
+  .graph-stage {
+    width: auto;
+    left: auto;
+    transform: none;
+  }
+  .graph-layout {
+    display: block;
+  }
+  .graph-panel {
+    display: none;
+  }
+  .graph-wrap {
+    height: auto;
+    min-height: 440px;
+  }
 }
 
 /* ── Snippets ─────────────────────────────────────────────────────── */
@@ -2386,21 +2591,54 @@ a {
     grid-template-columns: 1fr;
   }
 
-  .navbar-inner {
-    flex-wrap: wrap;
-    gap: 0.9rem;
-  }
-
-  .navbar-links {
-    order: 3;
-    width: 100%;
-    justify-content: flex-start;
-    gap: 1.3rem;
-    flex-wrap: wrap;
-  }
-
+  /* swap the inline nav + socials for a hamburger menu */
+  .navbar-links,
   .navbar-socials {
-    margin-left: auto;
+    display: none;
+  }
+
+  .navbar-burger {
+    display: flex;
+  }
+
+  .navbar-mobile {
+    display: block;
+    border-top: 1px solid var(--border);
+    background: var(--bg-soft);
+    padding: 0.6rem 1rem 1rem;
+    animation: routeFade 0.18s ease both;
+  }
+
+  .navbar-mobile-links {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .navbar-mobile-link {
+    padding: 0.85rem 0.4rem;
+    color: var(--muted-2);
+    font-size: 1rem;
+    font-weight: 500;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .navbar-mobile-link:last-child {
+    border-bottom: none;
+  }
+
+  .navbar-mobile-link.active {
+    color: var(--text-bright);
+  }
+
+  .navbar-mobile-socials {
+    display: flex;
+    gap: 1.4rem;
+    padding: 1.1rem 0.4rem 0.3rem;
+  }
+
+  .navbar-mobile-socials .social-icon svg {
+    width: 22px;
+    height: 22px;
   }
 
   .stats {

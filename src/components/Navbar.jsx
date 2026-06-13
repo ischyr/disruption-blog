@@ -18,6 +18,7 @@ const more = [
   { to: '/snippets', label: 'Snippets' },
   { to: '/war-stories', label: 'War Stories' },
   { to: '/ctf', label: 'CTF Events' },
+  { to: '/toolbox', label: 'Toolbox' },
 ]
 
 const allLinks = [...primary, ...more]

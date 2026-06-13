@@ -17,6 +17,7 @@ import Snippets from './pages/Snippets'
 import WarStories from './pages/WarStories'
 import StartHere from './pages/StartHere'
 import CtfEvents from './pages/CtfEvents'
+import Toolbox from './pages/Toolbox'
 import NotFound from './pages/NotFound'
 
 export default function App() {
@@ -43,6 +44,7 @@ export default function App() {
             <Route path="/war-stories" element={<WarStories />} />
             <Route path="/start-here" element={<StartHere />} />
             <Route path="/ctf" element={<CtfEvents />} />
+            <Route path="/toolbox" element={<Toolbox />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

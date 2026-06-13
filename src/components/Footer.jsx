@@ -17,6 +17,9 @@ export default function Footer() {
           <a href={site.academy} target="_blank" rel="noreferrer">
             Academy
           </a>
+          <a href="/feed.xml" target="_blank" rel="noreferrer">
+            RSS
+          </a>
         </nav>
       </div>
     </footer>

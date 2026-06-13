@@ -9,6 +9,7 @@ import RecentPosts from '../components/RecentPosts'
 import PostNav from '../components/PostNav'
 import PostQR from '../components/PostQR'
 import AuthorCard from '../components/AuthorCard'
+import MachineCard from '../components/MachineCard'
 
 export default function BlogPost() {
   const { slug } = useParams()
@@ -101,6 +102,7 @@ export default function BlogPost() {
             </div>
           </div>
 
+          <MachineCard machine={post.machine} />
           <Markdown>{body}</Markdown>
         </article>
 

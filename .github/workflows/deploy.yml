@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # rebuild daily so /ctf refreshes from CTFtime without a manual push
+  schedule:
+    - cron: '0 6 * * *'
 
 # permissions the deploy job needs
 permissions:

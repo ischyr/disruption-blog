@@ -11,12 +11,12 @@ import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
 import Tools from './pages/Tools'
 import Videos from './pages/Videos'
-import Quiz from './pages/Quiz'
 import Glossary from './pages/Glossary'
 import Graph from './pages/Graph'
 import Snippets from './pages/Snippets'
 import WarStories from './pages/WarStories'
 import StartHere from './pages/StartHere'
+import CtfEvents from './pages/CtfEvents'
 import NotFound from './pages/NotFound'
 
 export default function App() {
@@ -37,12 +37,12 @@ export default function App() {
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/tools" element={<Tools />} />
             <Route path="/videos" element={<Videos />} />
-            <Route path="/quiz" element={<Quiz />} />
             <Route path="/glossary" element={<Glossary />} />
             <Route path="/graph" element={<Graph />} />
             <Route path="/snippets" element={<Snippets />} />
             <Route path="/war-stories" element={<WarStories />} />
             <Route path="/start-here" element={<StartHere />} />
+            <Route path="/ctf" element={<CtfEvents />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

@@ -149,6 +149,25 @@ export const posts = Object.entries(files)
       cover = lookupImage(images, cover) || cover
     }
 
+    // Optional CTF/HTB "machine" box — shown as an info card on the write-up.
+    const machineKeys = ['os', 'difficulty', 'points', 'platform', 'released', 'ip']
+    let machine = null
+    if (machineKeys.some((k) => meta[k])) {
+      let avatar = meta.boxAvatar || meta.avatar || ''
+      if (avatar && !/^https?:\/\//i.test(avatar) && !avatar.startsWith('/')) {
+        avatar = lookupImage(images, avatar) || avatar
+      }
+      machine = {
+        os: meta.os || '',
+        difficulty: meta.difficulty || '',
+        points: meta.points || '',
+        platform: meta.platform || '',
+        released: meta.released || '',
+        ip: meta.ip || '',
+        avatar,
+      }
+    }
+
     return {
       slug,
       title: meta.title || slug,
@@ -157,6 +176,7 @@ export const posts = Object.entries(files)
       excerpt: meta.excerpt || autoExcerpt(body),
       image: cover,
       images,
+      machine,
       readTime: readTime(body),
       body,
     }

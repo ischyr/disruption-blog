@@ -5,6 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "fetch:ctf": "node scripts/fetch-ctf.mjs",
+    "gen:feeds": "node scripts/gen-feeds.mjs",
+    "prebuild": "node scripts/fetch-ctf.mjs && node scripts/gen-feeds.mjs",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"

@@ -3,6 +3,13 @@ title: HackTheBox - Soulmate
 date: 2026-06-13
 image: cover.png
 tags: [HackTheBox, Easy, Linux]
+platform: HackTheBox
+os: Linux
+difficulty: Easy
+points: 20
+released: 2025-08-30
+ip: 10.10.11.86
+boxAvatar: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/2c47fcf9c85c7fbdda73a9c1b54fd60e.png
 excerpt: Soulmate is an easy difficulty Linux machine that showcases exploitation of an authentication bypass vulnerability in CrushFTP, allowing players to access an admin user account. By uploading a malicious PHP file to the application's web root, remote command execution is achieved. For privilege escalation, another remote command execution vulnerability in the Erlang/OTP SSH server is exploited to gain root access.
 ---
 

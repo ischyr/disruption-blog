@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>0xd1s - Security Research Blog</title>
+    <link>https://blog.disruption-academy.com/</link>
+    <description>Security research, exploit development, and technical write-ups covering various aspects of offensive security and penetration testing.</description>
+    <language>en</language>
+    <lastBuildDate>Sat, 13 Jun 2026 15:38:44 GMT</lastBuildDate>
+    <atom:link href="https://blog.disruption-academy.com/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackTheBox - Soulmate</title>
+      <link>https://blog.disruption-academy.com/blog/htb-soulmate</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/htb-soulmate</guid>
+      <pubDate>Sat, 13 Jun 2026 00:00:00 GMT</pubDate>
+      <category>HackTheBox</category>
+      <category>Easy</category>
+      <category>Linux</category>
+      <description>Soulmate is an easy difficulty Linux machine that showcases exploitation of an authentication bypass vulnerability in CrushFTP, allowing players to access an admin user account. By uploading a malicious PHP file to the application&apos;s web root, remote command execution is achieved. For privilege escalation, another remote command execution vulnerability in the Erlang/OTP SSH server is exploited to gain root access.</description>
+    </item>
+    <item>
+      <title>Welcome to the Blog</title>
+      <link>https://blog.disruption-academy.com/blog/welcome-to-the-blog</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/welcome-to-the-blog</guid>
+      <pubDate>Thu, 11 Jun 2026 00:00:00 GMT</pubDate>
+      <category>Getting Started</category>
+      <description>How this blog is built, and how to publish your own write-ups by creating a folder with a markdown file and its images.</description>
+    </item>
+  </channel>
+</rss>

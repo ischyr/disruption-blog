@@ -13,11 +13,11 @@ const primary = [
 ]
 
 const more = [
-  { to: '/quiz', label: 'Quiz' },
   { to: '/glossary', label: 'Glossary' },
   { to: '/graph', label: 'Graph' },
   { to: '/snippets', label: 'Snippets' },
   { to: '/war-stories', label: 'War Stories' },
+  { to: '/ctf', label: 'CTF Events' },
 ]
 
 const allLinks = [...primary, ...more]

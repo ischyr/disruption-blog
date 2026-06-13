@@ -1,5 +1,7 @@
-import { Link } from 'react-router-dom'
 import { formatDate } from '../lib/posts'
+import TransitionLink from './TransitionLink'
+import DecryptText from './DecryptText'
+import BookmarkButton from './BookmarkButton'
 
 const MAX_TAGS = 3
 
@@ -8,10 +10,16 @@ export default function PostCard({ post }) {
 
   return (
     <article className="card post-card">
-      <Link to={`/blog/${post.slug}`} className="card-inner">
+      <BookmarkButton slug={post.slug} variant="icon" />
+      <TransitionLink to={`/blog/${post.slug}`} className="card-inner">
         {post.image && (
           <div className="card-cover">
-            <img src={post.image} alt="" loading="lazy" />
+            <img
+              src={post.image}
+              alt=""
+              loading="lazy"
+              style={{ viewTransitionName: `cover-${post.slug}` }}
+            />
           </div>
         )}
 
@@ -27,7 +35,9 @@ export default function PostCard({ post }) {
             </div>
           )}
 
-          <h3 className="card-title">{post.title}</h3>
+          <h3 className="card-title">
+            <DecryptText text={post.title} />
+          </h3>
           <p className="card-excerpt">{post.excerpt}</p>
 
           <div className="card-foot">
@@ -50,7 +60,7 @@ export default function PostCard({ post }) {
             <span className="read-link">Read →</span>
           </div>
         </div>
-      </Link>
+      </TransitionLink>
     </article>
   )
 }

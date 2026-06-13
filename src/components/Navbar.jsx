@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { NavLink, Link, useLocation } from 'react-router-dom'
 import { site } from '../config'
+import { useDecrypt } from '../lib/useDecrypt'
+import { useSaved } from '../lib/bookmarks'
 import ThemeToggle from './ThemeToggle'
+import UtcClock from './UtcClock'
 
 const primary = [
   { to: '/', label: 'Home', end: true },
@@ -19,9 +22,21 @@ const more = [
   { to: '/war-stories', label: 'War Stories' },
   { to: '/ctf', label: 'CTF Events' },
   { to: '/toolbox', label: 'Toolbox' },
+  { to: '/saved', label: 'Saved' },
 ]
 
 const allLinks = [...primary, ...more]
+
+// NavLink whose label scrambles → resolves on hover/focus.
+function DecryptNavLink({ to, label, end, className, badge, ...rest }) {
+  const { display, bind } = useDecrypt(label)
+  return (
+    <NavLink to={to} end={end} className={className} {...bind} {...rest}>
+      {display}
+      {badge}
+    </NavLink>
+  )
+}
 
 function SocialIcon({ href, label, children }) {
   return (
@@ -71,6 +86,7 @@ function MoreMenu() {
   const [open, setOpen] = useState(false)
   const ref = useRef(null)
   const { pathname } = useLocation()
+  const savedCount = useSaved().length
   const isActive = more.some((l) => l.to === pathname)
 
   useEffect(() => {
@@ -105,16 +121,20 @@ function MoreMenu() {
       {open && (
         <div className="nav-more-menu" role="menu">
           {more.map((l) => (
-            <NavLink
+            <DecryptNavLink
               key={l.to}
               to={l.to}
+              label={l.label}
               role="menuitem"
+              badge={
+                l.to === '/saved' && savedCount > 0 ? (
+                  <span className="nav-count">{savedCount}</span>
+                ) : null
+              }
               className={({ isActive }) =>
                 isActive ? 'nav-more-item active' : 'nav-more-item'
               }
-            >
-              {l.label}
-            </NavLink>
+            />
           ))}
         </div>
       )}
@@ -125,6 +145,8 @@ function MoreMenu() {
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const { pathname } = useLocation()
+  const savedCount = useSaved().length
+  const logo = useDecrypt(site.handle)
 
   // close the mobile menu on navigation
   useEffect(() => {
@@ -146,28 +168,28 @@ export default function Navbar() {
   return (
     <header className="navbar">
       <div className="navbar-inner">
-        <Link to="/" className="navbar-logo">
+        <Link to="/" className="navbar-logo" {...logo.bind}>
           <span className="logo-mark">&gt;_</span>
-          {site.handle}
+          {logo.display}
         </Link>
 
         <nav className="navbar-links">
           {primary.map((l) => (
-            <NavLink
+            <DecryptNavLink
               key={l.to}
               to={l.to}
+              label={l.label}
               end={l.end}
               className={({ isActive }) =>
                 isActive ? 'nav-link active' : 'nav-link'
               }
-            >
-              {l.label}
-            </NavLink>
+            />
           ))}
           <MoreMenu />
         </nav>
 
         <div className="navbar-socials">
+          <UtcClock className="navbar-clock" />
           <Socials />
           <ThemeToggle />
         </div>
@@ -191,16 +213,20 @@ export default function Navbar() {
         <div className="navbar-mobile-inner">
           <nav className="navbar-mobile-links">
             {allLinks.map((l) => (
-              <NavLink
+              <DecryptNavLink
                 key={l.to}
                 to={l.to}
+                label={l.label}
                 end={l.end}
+                badge={
+                  l.to === '/saved' && savedCount > 0 ? (
+                    <span className="nav-count">{savedCount}</span>
+                  ) : null
+                }
                 className={({ isActive }) =>
                   isActive ? 'navbar-mobile-link active' : 'navbar-mobile-link'
                 }
-              >
-                {l.label}
-              </NavLink>
+              />
             ))}
           </nav>
           <div className="navbar-mobile-socials">

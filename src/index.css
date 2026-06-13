@@ -4037,3 +4037,185 @@ a {
     font-size: 2.1rem;
   }
 }
+
+/* ── Live UTC clock (navbar + footer) ─────────────────────────────── */
+.utc-clock {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  white-space: nowrap;
+  user-select: none;
+}
+.utc-label {
+  color: var(--faint);
+  letter-spacing: 0.06em;
+}
+.utc-time {
+  color: var(--muted-2);
+  font-variant-numeric: tabular-nums;
+}
+.navbar-clock {
+  padding-right: 0.85rem;
+  border-right: 1px solid var(--border);
+}
+.footer-copy {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+.footer-clock {
+  font-size: 0.72rem;
+}
+@media (max-width: 1040px) {
+  .navbar-clock {
+    display: none;
+  }
+}
+
+/* ── Saved / bookmark ─────────────────────────────────────────────── */
+.nav-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.15rem;
+  height: 1.15rem;
+  margin-left: 0.45rem;
+  padding: 0 0.32rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 600;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+.bookmark-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  border: 1px solid var(--border-bright);
+  background: var(--panel-2);
+  color: var(--muted-2);
+  cursor: pointer;
+  border-radius: 9px;
+  transition: color 0.15s, border-color 0.15s, background 0.15s, transform 0.12s,
+    opacity 0.18s;
+}
+.bookmark-btn svg {
+  width: 16px;
+  height: 16px;
+}
+.bookmark-btn:hover {
+  color: var(--text-bright);
+  border-color: #3a3a40;
+}
+.bookmark-btn:active {
+  transform: scale(0.94);
+}
+.bookmark-btn.saved {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* labelled — post header */
+.bookmark-label {
+  padding: 0.38rem 0.8rem;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+.bookmark-text {
+  white-space: nowrap;
+}
+
+/* compact icon — cards */
+.bookmark-icon {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  z-index: 3;
+  width: 32px;
+  height: 32px;
+  justify-content: center;
+  border-radius: 8px;
+  background: rgba(8, 8, 9, 0.6);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  transform: translateY(-4px);
+}
+.post-card {
+  position: relative;
+}
+.post-card:hover .bookmark-icon,
+.bookmark-icon:focus-visible,
+.bookmark-icon.saved {
+  opacity: 1;
+  transform: none;
+}
+/* no hover on touch — always show so it stays reachable */
+@media (hover: none) {
+  .bookmark-icon {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.post-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.post-title-row .bookmark-label {
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+/* /saved empty state */
+.saved-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+  padding: 3.5rem 1rem;
+  color: var(--faint);
+}
+.saved-empty svg {
+  width: 46px;
+  height: 46px;
+  opacity: 0.5;
+}
+.saved-empty .shell-output {
+  margin: 0;
+  max-width: 42ch;
+}
+.kbd-inline {
+  font-family: var(--font-mono);
+  font-size: 0.82em;
+  padding: 0.05rem 0.4rem;
+  border: 1px solid var(--border-bright);
+  border-radius: 5px;
+  background: var(--panel-2);
+  color: var(--muted-2);
+}
+
+/* ── View Transitions (cover morph: card ⇄ post hero) ─────────────── */
+html.vt-active .route-fade {
+  animation: none !important;
+}
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-group(*) {
+    animation-duration: 0.42s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.32s;
+  }
+}

@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom'
 import { site } from '../config'
+import UtcClock from './UtcClock'
 
 export default function Footer() {
   return (
     <footer className="footer">
       <div className="footer-inner">
-        <span>
+        <span className="footer-copy">
           © {new Date().getFullYear()} {site.handle}
+          <UtcClock className="footer-clock" />
         </span>
         <nav className="footer-links">
           <Link to="/blog">Blog</Link>

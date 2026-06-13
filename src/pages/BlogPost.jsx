@@ -10,6 +10,7 @@ import PostNav from '../components/PostNav'
 import PostQR from '../components/PostQR'
 import AuthorCard from '../components/AuthorCard'
 import MachineCard from '../components/MachineCard'
+import BookmarkButton from '../components/BookmarkButton'
 
 export default function BlogPost() {
   const { slug } = useParams()
@@ -65,11 +66,18 @@ export default function BlogPost() {
           <div className="post-header">
             {post.image && (
               <div className="post-cover">
-                <img src={post.image} alt="" />
+                <img
+                  src={post.image}
+                  alt=""
+                  style={{ viewTransitionName: `cover-${post.slug}` }}
+                />
               </div>
             )}
             <div className="post-header-body">
-              <h1 className="post-title">{post.title}</h1>
+              <div className="post-title-row">
+                <h1 className="post-title">{post.title}</h1>
+                <BookmarkButton slug={post.slug} variant="label" />
+              </div>
               <div className="card-meta">
                 <span className="card-meta-item">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

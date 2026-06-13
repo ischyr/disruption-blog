@@ -141,6 +141,26 @@ a {
   }
 }
 
+/* ── Scroll reveal ────────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 /* ── Reading progress bar ─────────────────────────────────────────── */
 .reading-progress {
   position: fixed;
@@ -281,6 +301,14 @@ a {
   .adjacent:hover .adjacent-bg,
   .hero-card:hover {
     transform: none;
+  }
+  .navbar-mobile {
+    transition: opacity 0.2s ease;
+  }
+  .navbar-mobile.open .navbar-mobile-link,
+  .burger-bar {
+    animation: none;
+    transition: opacity 0.2s ease;
   }
 }
 
@@ -476,11 +504,52 @@ a {
   cursor: pointer;
 }
 
-.navbar-burger svg {
-  width: 22px;
-  height: 22px;
+/* animated hamburger → X */
+.burger-box {
+  position: relative;
+  width: 20px;
+  height: 14px;
 }
 
+.burger-bar {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s ease, top 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.burger-bar:nth-child(1) { top: 0; }
+.burger-bar:nth-child(2) { top: 6px; }
+.burger-bar:nth-child(3) { top: 12px; }
+
+.navbar-burger.open .burger-bar:nth-child(1) {
+  top: 6px;
+  transform: rotate(45deg);
+}
+.navbar-burger.open .burger-bar:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0.2);
+}
+.navbar-burger.open .burger-bar:nth-child(3) {
+  top: 6px;
+  transform: rotate(-45deg);
+}
+
+@keyframes navItemIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* the slide-down menu animates open AND closed via the grid-rows trick */
 .navbar-mobile {
   display: none;
 }
@@ -647,6 +716,91 @@ a {
   display: flex;
   gap: 0.9rem;
   flex-wrap: wrap;
+}
+
+/* typed specialties in the hero subline */
+.typewriter {
+  color: var(--text-bright);
+  font-weight: 600;
+}
+
+.tw-cursor {
+  display: inline-block;
+  width: 0.55ch;
+  height: 1.05em;
+  margin-left: 1px;
+  vertical-align: -0.15em;
+  background: var(--accent);
+  animation: twBlink 1s steps(1) infinite;
+}
+
+@keyframes twBlink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* hero search bar */
+.hero-search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.6rem;
+  max-width: 460px;
+  padding: 0.4rem 0.4rem 0.4rem 0.9rem;
+  background: var(--panel);
+  border: 1px solid var(--border-bright);
+  border-radius: 11px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.hero-search:focus-within {
+  border-color: #3a3a40;
+  box-shadow: 0 0 0 3px var(--hover-bg);
+}
+
+.hero-search > svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--muted);
+}
+
+.hero-search input {
+  flex: 1;
+  min-width: 0;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+}
+
+.hero-search input:focus {
+  outline: none;
+}
+
+.hero-search input::placeholder {
+  color: var(--faint);
+}
+
+.hero-search button {
+  flex-shrink: 0;
+  padding: 0.45rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--text-bright);
+  background: var(--text-bright);
+  color: var(--bg);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.hero-search button:hover {
+  background: var(--text);
+  border-color: var(--text);
 }
 
 /* hero showcase card — mimics offgridsec "finding" card */
@@ -818,6 +972,11 @@ a {
   gap: 1.5rem;
 }
 
+/* the blog index packs 3 across (cards shrink to fit) */
+.post-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
 .card {
   background: var(--panel);
   border: 1px solid var(--border);
@@ -965,7 +1124,12 @@ a {
   margin: 0;
   color: var(--muted);
   font-size: 0.88rem;
-  flex: 1;
+  line-height: 1.6;
+  /* clamp to ~3 lines and fade the text out at the bottom */
+  max-height: 4.8em;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, #000 45%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 45%, transparent 100%);
 }
 
 .cat-link {
@@ -3114,6 +3278,13 @@ a {
   }
 }
 
+@media (max-width: 1000px) {
+  /* blog index drops from 3 → 2 columns before going single on mobile */
+  .post-grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 900px) {
   .hero {
     grid-template-columns: 1fr;
@@ -3149,18 +3320,47 @@ a {
     display: flex;
   }
 
+  /* grid-rows 0fr → 1fr animates the real content height both ways */
   .navbar-mobile {
-    display: block;
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition: grid-template-rows 0.34s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.25s ease;
+  }
+
+  .navbar-mobile.open {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+
+  .navbar-mobile-inner {
+    overflow: hidden;
+    min-height: 0;
     border-top: 1px solid var(--border);
     background: var(--bg-soft);
     padding: 0.6rem 1rem 1rem;
-    animation: routeFade 0.18s ease both;
   }
 
   .navbar-mobile-links {
     display: flex;
     flex-direction: column;
   }
+
+  /* staggered reveal of the links when the menu opens */
+  .navbar-mobile.open .navbar-mobile-link {
+    animation: navItemIn 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .navbar-mobile.open .navbar-mobile-link:nth-child(1) { animation-delay: 0.04s; }
+  .navbar-mobile.open .navbar-mobile-link:nth-child(2) { animation-delay: 0.07s; }
+  .navbar-mobile.open .navbar-mobile-link:nth-child(3) { animation-delay: 0.1s; }
+  .navbar-mobile.open .navbar-mobile-link:nth-child(4) { animation-delay: 0.13s; }
+  .navbar-mobile.open .navbar-mobile-link:nth-child(5) { animation-delay: 0.16s; }
+  .navbar-mobile.open .navbar-mobile-link:nth-child(6) { animation-delay: 0.19s; }
+  .navbar-mobile.open .navbar-mobile-link:nth-child(7) { animation-delay: 0.22s; }
+  .navbar-mobile.open .navbar-mobile-link:nth-child(8) { animation-delay: 0.25s; }
+  .navbar-mobile.open .navbar-mobile-link:nth-child(9) { animation-delay: 0.28s; }
+  .navbar-mobile.open .navbar-mobile-link:nth-child(n + 10) { animation-delay: 0.31s; }
 
   .navbar-mobile-link {
     padding: 0.85rem 0.4rem;

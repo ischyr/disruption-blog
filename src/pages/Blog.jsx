@@ -87,7 +87,7 @@ export default function Blog() {
       </p>
 
       {filtered.length > 0 ? (
-        <div className="post-grid">
+        <div className="post-grid post-grid-3">
           {filtered.map((post) => (
             <PostCard key={post.slug} post={post} />
           ))}

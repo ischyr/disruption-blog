@@ -7,6 +7,9 @@ import PostCard from '../components/PostCard'
 import StatIcon from '../components/StatIcon'
 import TerminalDots from '../components/TerminalDots'
 import ContributionHeatmap from '../components/ContributionHeatmap'
+import Reveal from '../components/Reveal'
+import Typewriter from '../components/Typewriter'
+import HeroSearch from '../components/HeroSearch'
 
 export default function Home() {
   const featured = posts[0]
@@ -24,7 +27,9 @@ export default function Home() {
             Exploits, write-ups &amp; research.{' '}
             <span className="dim">Documented.</span>
           </h1>
-          <p className="hero-sub">{site.tagline}</p>
+          <p className="hero-sub">
+            I specialize in <Typewriter phrases={site.specialties} />
+          </p>
           <div className="hero-actions">
             <Link to="/blog" className="btn btn-primary">
               Read the blog
@@ -33,6 +38,7 @@ export default function Home() {
               About me
             </Link>
           </div>
+          <HeroSearch />
         </div>
 
         {featured && (
@@ -72,44 +78,51 @@ export default function Home() {
         )}
       </section>
 
-      <section className="stats">
-        <Link to="/blog" className="stat">
-          <StatIcon type="articles" />
-          <span className="stat-value">{posts.length}</span>
-          <span className="stat-label">articles published</span>
-        </Link>
-        <Link to="/tools" className="stat">
-          <StatIcon type="tools" />
-          <span className="stat-value">{tools.length}</span>
-          <span className="stat-label">tools released</span>
-        </Link>
-        <Link to="/about" className="stat">
-          <StatIcon type="certs" />
-          <span className="stat-value">{certs.length}</span>
-          <span className="stat-label">certifications</span>
-        </Link>
-      </section>
-
-      <section className="activity">
-        <div className="section-header">
-          <h2>Posting activity</h2>
-        </div>
-        <ContributionHeatmap />
-      </section>
-
-      <section className="latest">
-        <div className="section-header">
-          <h2>Latest posts</h2>
-          <Link to="/blog" className="cat-link">
-            view all →
+      <Reveal>
+        <section className="stats">
+          <Link to="/blog" className="stat">
+            <StatIcon type="articles" />
+            <span className="stat-value">{posts.length}</span>
+            <span className="stat-label">articles published</span>
           </Link>
-        </div>
-        <div className="post-grid">
-          {latest.map((post) => (
-            <PostCard key={post.slug} post={post} />
-          ))}
-        </div>
-      </section>
+          <Link to="/tools" className="stat">
+            <StatIcon type="tools" />
+            <span className="stat-value">{tools.length}</span>
+            <span className="stat-label">tools released</span>
+          </Link>
+          <Link to="/about" className="stat">
+            <StatIcon type="certs" />
+            <span className="stat-value">{certs.length}</span>
+            <span className="stat-label">certifications</span>
+          </Link>
+        </section>
+      </Reveal>
+
+      <Reveal>
+        <section className="activity">
+          <div className="section-header">
+            <h2>Posting activity</h2>
+          </div>
+          <ContributionHeatmap />
+        </section>
+      </Reveal>
+
+      <Reveal>
+        <section className="latest">
+          <div className="section-header">
+            <h2>Latest posts</h2>
+            <Link to="/blog" className="cat-link">
+              view all →
+            </Link>
+          </div>
+          <div className="post-grid">
+            {latest.map((post) => (
+              <PostCard key={post.slug} post={post} />
+            ))}
+          </div>
+        </section>
+      </Reveal>
+
     </div>
   )
 }

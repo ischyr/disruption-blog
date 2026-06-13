@@ -178,18 +178,16 @@ export default function Navbar() {
           aria-expanded={open}
           onClick={() => setOpen((o) => !o)}
         >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-            {open ? (
-              <path d="M6 6l12 12M18 6 6 18" />
-            ) : (
-              <path d="M3 6h18M3 12h18M3 18h18" />
-            )}
-          </svg>
+          <span className="burger-box">
+            <span className="burger-bar" />
+            <span className="burger-bar" />
+            <span className="burger-bar" />
+          </span>
         </button>
       </div>
 
-      {open && (
-        <div className="navbar-mobile">
+      <div className={`navbar-mobile${open ? ' open' : ''}`}>
+        <div className="navbar-mobile-inner">
           <nav className="navbar-mobile-links">
             {allLinks.map((l) => (
               <NavLink
@@ -209,7 +207,7 @@ export default function Navbar() {
             <ThemeToggle />
           </div>
         </div>
-      )}
+      </div>
     </header>
   )
 }

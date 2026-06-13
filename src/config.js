@@ -8,6 +8,14 @@ export const site = {
   role: 'Security Researcher & Senior Penetration Tester',
   tagline:
     'Security research, exploit development, and technical write-ups covering various aspects of offensive security and penetration testing.',
+  // cycled (typed) in the hero subline
+  specialties: [
+    'web application exploitation',
+    'Active Directory attacks',
+    'exploit development',
+    'red team operations',
+    'malware development',
+  ],
   about: [
     'I am a security researcher and penetration tester focused on offensive security: web application testing, network penetration, red teaming and exploit development.',
     'This blog is where I publish my research, CTF write-ups, tooling and anything else I find interesting in the security space.',

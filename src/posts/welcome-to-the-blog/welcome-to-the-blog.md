@@ -2,7 +2,7 @@
 title: Welcome to the Blog
 date: 2026-06-11
 image: welcome-cover.svg
-tags: [Meta, Getting Started]
+tags: [Getting Started]
 excerpt: How this blog is built, and how to publish your own write-ups by creating a folder with a markdown file and its images.
 ---
 

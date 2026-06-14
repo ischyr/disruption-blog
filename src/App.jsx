@@ -19,6 +19,8 @@ import StartHere from './pages/StartHere'
 import CtfEvents from './pages/CtfEvents'
 import KevBoard from './pages/KevBoard'
 import Cves from './pages/Cves'
+import Ransomware from './pages/Ransomware'
+import ZeroDays from './pages/ZeroDays'
 import Toolbox from './pages/Toolbox'
 import Saved from './pages/Saved'
 import NotFound from './pages/NotFound'
@@ -49,6 +51,8 @@ export default function App() {
             <Route path="/ctf" element={<CtfEvents />} />
             <Route path="/kev" element={<KevBoard />} />
             <Route path="/cves" element={<Cves />} />
+            <Route path="/ransomware" element={<Ransomware />} />
+            <Route path="/0day" element={<ZeroDays />} />
             <Route path="/toolbox" element={<Toolbox />} />
             <Route path="/saved" element={<Saved />} />
             <Route path="*" element={<NotFound />} />

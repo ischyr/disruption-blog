@@ -23,6 +23,8 @@ const more = [
   { to: '/ctf', label: 'CTF Events' },
   { to: '/kev', label: 'CISA KEV' },
   { to: '/cves', label: 'Latest CVEs' },
+  { to: '/0day', label: '0-Day ITW' },
+  { to: '/ransomware', label: 'Ransomware' },
   { to: '/toolbox', label: 'Toolbox' },
   { to: '/saved', label: 'Saved' },
 ]

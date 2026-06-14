@@ -4,7 +4,8 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
-  # rebuild daily so /ctf, /kev and /cves refresh from their feeds without a push
+  # rebuild daily so the live feeds (/ctf, /kev, /cves, /ransomware, /0day)
+  # refresh from their sources without a manual push
   schedule:
     - cron: '0 6 * * *'
 

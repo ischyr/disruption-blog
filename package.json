@@ -8,8 +8,10 @@
     "fetch:ctf": "node scripts/fetch-ctf.mjs",
     "fetch:kev": "node scripts/fetch-cisa-kev.mjs",
     "fetch:cves": "node scripts/fetch-cves.mjs",
+    "fetch:ransomware": "node scripts/fetch-ransomware.mjs",
+    "fetch:pzero": "node scripts/fetch-pzero.mjs",
     "gen:feeds": "node scripts/gen-feeds.mjs",
-    "prebuild": "node scripts/fetch-ctf.mjs && node scripts/fetch-cisa-kev.mjs && node scripts/fetch-cves.mjs && node scripts/gen-feeds.mjs",
+    "prebuild": "node scripts/fetch-ctf.mjs && node scripts/fetch-cisa-kev.mjs && node scripts/fetch-cves.mjs && node scripts/fetch-ransomware.mjs && node scripts/fetch-pzero.mjs && node scripts/gen-feeds.mjs",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"

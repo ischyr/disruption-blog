@@ -296,3 +296,9 @@ There are 2 more ways to install a `.vsix` file worth knowing about:
 
 - **.VSIX Files** - Manual installation using a pre-packaged `.vsix` extension file.
 - **VSCode URI Handler** - An undocumented method of installing extensions using the VSCode URI handler.
+
+## References
+
+- [Leveraging VSCode Extensions for Initial Access - MDSec](https://www.mdsec.co.uk/2023/08/leveraging-vscode-extensions-for-initial-access/)
+- [vsix-generator](https://github.com/ischyr/vsix-generator)
+- [VSCode Extension API - Activation Events](https://code.visualstudio.com/api/references/activation-events)

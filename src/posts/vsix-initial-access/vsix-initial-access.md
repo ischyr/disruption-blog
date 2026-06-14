@@ -6,7 +6,7 @@ tags: [Initial Access, Red Team]
 excerpt: Developer tooling is a soft target. Here is how a VSCode extension turns a trusted IDE into a code-execution primitive, how to build a proof-of-concept VSIX, the delivery vectors that actually land, and how blue teams catch it.
 ---
 
-# Leveraging VSCode Extensions for Initial Access
+# VSCode Extensions - Initial Access
 
 Developers run an enormous amount of untrusted code without thinking about it.
 Not in the browser - in their editor. Visual Studio Code ships an extension

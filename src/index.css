@@ -4219,3 +4219,196 @@ html.vt-active .route-fade {
     animation-duration: 0.32s;
   }
 }
+
+/* ── CISA KEV board ───────────────────────────────────────────────── */
+.kev-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+.kev-card {
+  display: block;
+  padding: 1.1rem 1.3rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--border-bright);
+  border-radius: 12px;
+  transition: border-color 0.15s, transform 0.15s;
+}
+.kev-card:hover {
+  border-color: var(--border-bright);
+  border-left-color: var(--accent);
+  transform: translateY(-2px);
+}
+.kev-top {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+.kev-cve {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-bright);
+}
+.kev-ransom {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  color: var(--sev-critical);
+  border: 1px solid var(--sev-critical);
+}
+.kev-due {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-bright);
+  color: var(--muted-2);
+}
+.kev-due-soon {
+  color: var(--sev-medium);
+  border-color: var(--sev-medium);
+}
+.kev-due-overdue {
+  color: var(--sev-critical);
+  border-color: var(--sev-critical);
+}
+.kev-name {
+  margin: 0 0 0.4rem;
+  font-size: 1.04rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+  color: var(--text-bright);
+}
+.kev-desc {
+  margin: 0 0 0.8rem;
+  color: var(--muted-2);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.kev-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+}
+.kev-vendor {
+  color: var(--muted);
+}
+.kev-dates {
+  color: var(--faint);
+  white-space: nowrap;
+}
+
+/* ── Latest CVEs ──────────────────────────────────────────────────── */
+.cve-filter {
+  margin-bottom: 1.1rem;
+}
+.cve-filter .tag-chip {
+  text-transform: capitalize;
+}
+.cve-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 1rem;
+}
+.cve-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding: 1.1rem 1.2rem 1.2rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--border-bright);
+  border-radius: 12px;
+  transition: border-color 0.15s, transform 0.15s;
+}
+.cve-card.sev-critical { border-top-color: var(--sev-critical); }
+.cve-card.sev-high { border-top-color: var(--sev-high); }
+.cve-card.sev-medium { border-top-color: var(--sev-medium); }
+.cve-card.sev-low { border-top-color: var(--sev-low); }
+.cve-card:hover {
+  border-color: var(--border-bright);
+  transform: translateY(-2px);
+}
+.cve-top {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.cve-score {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: var(--panel-2);
+  border: 1px solid var(--border-bright);
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.cve-headline {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+.cve-id {
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--text-bright);
+}
+.cve-sev {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.cve-desc {
+  margin: 0;
+  flex: 1;
+  color: var(--muted-2);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.cve-foot {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+.cve-cwe {
+  color: var(--muted);
+  padding: 0.08rem 0.45rem;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: var(--panel-2);
+}
+.cve-date {
+  color: var(--faint);
+  margin-left: auto;
+}

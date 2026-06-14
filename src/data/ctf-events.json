@@ -1,20 +1,5 @@
 [
   {
-    "id": 3314,
-    "title": "SCTF 2026",
-    "ctftime_url": "https://ctftime.org/event/3314/",
-    "url": "https://sctf2026.xctf.org.cn/",
-    "start": "2026-06-14T01:00:00+00:00",
-    "finish": "2026-06-15T01:00:00+00:00",
-    "format": "Jeopardy",
-    "onsite": false,
-    "location": "On-line",
-    "restrictions": "Open",
-    "weight": 0,
-    "participants": 21,
-    "logo": "https://ctftime.org//media/events/logo_18.jpg"
-  },
-  {
     "id": 3299,
     "title": "Sieberrsec CTF 7.0",
     "ctftime_url": "https://ctftime.org/event/3299/",
@@ -26,7 +11,7 @@
     "location": "",
     "restrictions": "Open",
     "weight": 0,
-    "participants": 41,
+    "participants": 46,
     "logo": "https://ctftime.org//media/events/icon_10.png"
   },
   {
@@ -41,7 +26,7 @@
     "location": "",
     "restrictions": "Open",
     "weight": 65.05,
-    "participants": 52,
+    "participants": 56,
     "logo": ""
   },
   {
@@ -56,7 +41,7 @@
     "location": "",
     "restrictions": "Casual",
     "weight": 0,
-    "participants": 12,
+    "participants": 17,
     "logo": "https://ctftime.org//media/events/image_1_1.png"
   },
   {
@@ -71,7 +56,7 @@
     "location": "",
     "restrictions": "Open",
     "weight": 88.82,
-    "participants": 385,
+    "participants": 398,
     "logo": ""
   },
   {
@@ -86,7 +71,7 @@
     "location": "",
     "restrictions": "Open",
     "weight": 0,
-    "participants": 6,
+    "participants": 7,
     "logo": "https://ctftime.org//media/events/main_logo_1.png"
   },
   {
@@ -116,7 +101,7 @@
     "location": "",
     "restrictions": "Open",
     "weight": 22.14,
-    "participants": 86,
+    "participants": 87,
     "logo": "https://ctftime.org//media/events/Ban_sao_cua_V1T_1.png"
   },
   {
@@ -131,7 +116,7 @@
     "location": "",
     "restrictions": "Open",
     "weight": 79.25,
-    "participants": 80,
+    "participants": 81,
     "logo": "https://ctftime.org//media/events/sekai2_SEKAI_CTF_Square_Black_BG.r_1_1_1_1.png"
   },
   {
@@ -148,5 +133,20 @@
     "weight": 0,
     "participants": 1,
     "logo": "https://ctftime.org//media/events/m0nt3c4rl0_logo.jpg"
+  },
+  {
+    "id": 3315,
+    "title": "MindBreak 2026 by ESGI",
+    "ctftime_url": "https://ctftime.org/event/3315/",
+    "url": "https://linktr.ee/m1ndbr34k",
+    "start": "2026-07-03T21:00:00+00:00",
+    "finish": "2026-07-04T06:00:00+00:00",
+    "format": "Jeopardy",
+    "onsite": true,
+    "location": "Paris, France",
+    "restrictions": "Open",
+    "weight": 0,
+    "participants": 2,
+    "logo": "https://ctftime.org//media/events/mindbreak_2.png"
   }
 ]

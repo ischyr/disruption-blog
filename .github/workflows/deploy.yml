@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
-  # rebuild daily so /ctf refreshes from CTFtime without a manual push
+  # rebuild daily so /ctf, /kev and /cves refresh from their feeds without a push
   schedule:
     - cron: '0 6 * * *'
 

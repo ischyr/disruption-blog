@@ -21,6 +21,8 @@ const more = [
   { to: '/snippets', label: 'Snippets' },
   { to: '/war-stories', label: 'War Stories' },
   { to: '/ctf', label: 'CTF Events' },
+  { to: '/kev', label: 'CISA KEV' },
+  { to: '/cves', label: 'Latest CVEs' },
   { to: '/toolbox', label: 'Toolbox' },
   { to: '/saved', label: 'Saved' },
 ]

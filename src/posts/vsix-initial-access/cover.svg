@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d0d0e"/>
+      <stop offset="1" stop-color="#050505"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="22%" cy="88%" r="55%">
+      <stop offset="0" stop-color="#e5484d" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#e5484d" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <!-- grid -->
+  <g stroke="#1c1c1f" stroke-width="1">
+    <path d="M0 158 H1200 M0 316 H1200 M0 474 H1200 M300 0 V630 M600 0 V630 M900 0 V630"/>
+  </g>
+  <!-- decorative VSIX package shape (top-right) -->
+  <g fill="none" stroke="#2a2a2e" stroke-width="2">
+    <rect x="940" y="60" width="160" height="110" rx="6"/>
+    <line x1="940" y1="90" x2="1100" y2="90"/>
+    <rect x="960" y="72" width="40" height="12" rx="3"/>
+  </g>
+  <!-- .vsix label inside shape -->
+  <text x="975" y="148" font-family="'JetBrains Mono', monospace" font-size="18" fill="#2e2e32">.vsix</text>
+  <!-- arrow from box downward -->
+  <g stroke="#2a2a2e" stroke-width="2" fill="none">
+    <line x1="1020" y1="170" x2="1020" y2="210"/>
+    <polyline points="1010,202 1020,214 1030,202"/>
+  </g>
+  <!-- terminal prompt line -->
+  <text x="80" y="290" font-family="'JetBrains Mono', monospace" font-size="22" fill="#e5484d">0xd1s@sh:~#</text>
+  <text x="270" y="290" font-family="'JetBrains Mono', monospace" font-size="22" fill="#8a8a93"> code --install-extension payload.vsix</text>
+  <!-- main heading -->
+  <text x="80" y="370" font-family="'JetBrains Mono', monospace" font-size="52" font-weight="700" fill="#fafafa">VSCode Extensions</text>
+  <text x="80" y="436" font-family="'JetBrains Mono', monospace" font-size="52" font-weight="700" fill="#e5484d">Initial Access</text>
+  <!-- subline -->
+  <text x="80" y="496" font-family="'JetBrains Mono', monospace" font-size="26" fill="#8a8a93">red team · initial access · developer tooling</text>
+</svg>

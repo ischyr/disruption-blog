@@ -14,4 +14,11 @@ export const tools = [
     language: 'React, Node.js, Python, Terraform',
     link: 'https://github.com/ischyr/rt-operations-center',
   },
+    {
+    name: 'vsix-generator',
+    description:
+      'A simple VSIX extension generator written in Python. Quickly generate a VS Code extension packaged as a .vsix file using a template-based system.',
+    language: 'Python, JavaScript, XML',
+    link: 'https://github.com/ischyr/vsix-generator',
+  },
 ]

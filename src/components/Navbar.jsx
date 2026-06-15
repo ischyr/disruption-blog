@@ -12,7 +12,6 @@ const primary = [
   { to: '/about', label: 'About' },
   { to: '/blog', label: 'Blog' },
   { to: '/tools', label: 'Tools' },
-  { to: '/videos', label: 'Videos' },
 ]
 
 const more = [

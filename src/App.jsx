@@ -10,7 +10,6 @@ import About from './pages/About'
 import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
 import Tools from './pages/Tools'
-import Videos from './pages/Videos'
 import Glossary from './pages/Glossary'
 import Graph from './pages/Graph'
 import Snippets from './pages/Snippets'
@@ -42,7 +41,6 @@ export default function App() {
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/tools" element={<Tools />} />
-            <Route path="/videos" element={<Videos />} />
             <Route path="/glossary" element={<Glossary />} />
             <Route path="/graph" element={<Graph />} />
             <Route path="/snippets" element={<Snippets />} />

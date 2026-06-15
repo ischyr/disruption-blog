@@ -11,12 +11,12 @@ const primary = [
   { to: '/start-here', label: 'Start Here' },
   { to: '/about', label: 'About' },
   { to: '/blog', label: 'Blog' },
+  { to: '/graph', label: 'Graph' },
   { to: '/tools', label: 'Tools' },
 ]
 
 const more = [
   { to: '/glossary', label: 'Glossary' },
-  { to: '/graph', label: 'Graph' },
   { to: '/snippets', label: 'Snippets' },
   { to: '/war-stories', label: 'War Stories' },
   { to: '/ctf', label: 'CTF Events' },

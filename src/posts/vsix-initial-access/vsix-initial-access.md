@@ -22,9 +22,7 @@ delivery vectors that work in practice, and finish with detection and hardening
 so the blue-team side is covered too.
 
 > [!WARNING]
-> This is offensive tradecraft written for authorised red-team engagements,
-> CTFs and defensive research. Only deploy any of this against systems and
-> users you have explicit, written permission to test.
+> This is offensive tradecraft written for authorised red-team engagements.
 
 ## Why the extension model is the problem
 

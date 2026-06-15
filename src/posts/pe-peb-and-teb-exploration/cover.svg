@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d0d0e"/>
+      <stop offset="1" stop-color="#050505"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="80%" cy="20%" r="55%">
+      <stop offset="0" stop-color="#e5484d" stop-opacity="0.15"/>
+      <stop offset="1" stop-color="#e5484d" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <!-- grid -->
+  <g stroke="#1c1c1f" stroke-width="1">
+    <path d="M0 158 H1200 M0 316 H1200 M0 474 H1200 M300 0 V630 M600 0 V630 M900 0 V630"/>
+  </g>
+  <!-- decorative PE structure blocks (top right) -->
+  <g fill="none" stroke="#2a2a2e" stroke-width="2">
+    <rect x="920" y="55"  width="200" height="28" rx="3"/>
+    <rect x="920" y="87"  width="200" height="28" rx="3"/>
+    <rect x="920" y="119" width="200" height="28" rx="3"/>
+    <rect x="920" y="151" width="200" height="58" rx="3"/>
+    <rect x="920" y="213" width="200" height="28" rx="3"/>
+  </g>
+  <text x="932" y="74"  font-family="'JetBrains Mono', monospace" font-size="13" fill="#3a3a3e">DOS Header</text>
+  <text x="932" y="106" font-family="'JetBrains Mono', monospace" font-size="13" fill="#3a3a3e">DOS Stub</text>
+  <text x="932" y="138" font-family="'JetBrains Mono', monospace" font-size="13" fill="#3a3a3e">NT Headers</text>
+  <text x="932" y="170" font-family="'JetBrains Mono', monospace" font-size="13" fill="#3a3a3e">Section Headers</text>
+  <text x="932" y="186" font-family="'JetBrains Mono', monospace" font-size="11" fill="#2e2e32">(one per section)</text>
+  <text x="932" y="232" font-family="'JetBrains Mono', monospace" font-size="13" fill="#3a3a3e">Sections (.text...)</text>
+  <!-- main heading -->
+  <text x="80" y="310" font-family="'JetBrains Mono', monospace" font-size="54" font-weight="700" fill="#fafafa">PE, PEB</text>
+  <text x="80" y="376" font-family="'JetBrains Mono', monospace" font-size="54" font-weight="700" fill="#e5484d">and TEB</text>
+  <text x="80" y="434" font-family="'JetBrains Mono', monospace" font-size="30" font-weight="700" fill="#fafafa">Exploration</text>
+  <!-- subline -->
+  <text x="80" y="494" font-family="'JetBrains Mono', monospace" font-size="24" fill="#8a8a93">windows internals · malware development</text>
+</svg>

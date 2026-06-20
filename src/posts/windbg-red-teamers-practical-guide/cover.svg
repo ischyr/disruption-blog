@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d0d0e"/>
+      <stop offset="1" stop-color="#050505"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="76%" cy="28%" r="50%">
+      <stop offset="0" stop-color="#e5484d" stop-opacity="0.13"/>
+      <stop offset="1" stop-color="#e5484d" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <!-- grid -->
+  <g stroke="#1c1c1f" stroke-width="1">
+    <path d="M0 158 H1200 M0 316 H1200 M0 474 H1200 M300 0 V630 M600 0 V630 M900 0 V630"/>
+  </g>
+
+  <!-- top right: disassembly comparison panel -->
+  <!-- "clean" label -->
+  <text x="870" y="68" font-family="'JetBrains Mono', monospace" font-size="11" fill="#2e2e32">; clean stub</text>
+  <!-- clean stub lines -->
+  <text x="870" y="86"  font-family="'JetBrains Mono', monospace" font-size="12" fill="#3a3a3e">4c 8b d1    </text>
+  <text x="980" y="86"  font-family="'JetBrains Mono', monospace" font-size="12" fill="#3a3a3e">mov r10,rcx</text>
+  <text x="870" y="103" font-family="'JetBrains Mono', monospace" font-size="12" fill="#3a3a3e">b8 18 00 00 00  </text>
+  <text x="980" y="103" font-family="'JetBrains Mono', monospace" font-size="12" fill="#3a3a3e">mov eax,18h</text>
+  <text x="870" y="120" font-family="'JetBrains Mono', monospace" font-size="12" fill="#3a3a3e">0f 05       </text>
+  <text x="980" y="120" font-family="'JetBrains Mono', monospace" font-size="12" fill="#3a3a3e">syscall</text>
+  <text x="870" y="137" font-family="'JetBrains Mono', monospace" font-size="12" fill="#3a3a3e">c3          </text>
+  <text x="980" y="137" font-family="'JetBrains Mono', monospace" font-size="12" fill="#3a3a3e">ret</text>
+
+  <!-- divider -->
+  <line x1="860" y1="152" x2="1180" y2="152" stroke="#1e1e22" stroke-width="1"/>
+
+  <!-- "hooked" label -->
+  <text x="870" y="172" font-family="'JetBrains Mono', monospace" font-size="11" fill="#5a1a1c">; hooked stub</text>
+  <!-- hooked stub lines - red tint -->
+  <text x="870" y="190" font-family="'JetBrains Mono', monospace" font-size="12" fill="#e5484d">e9 cb 12 34 ab  </text>
+  <text x="980" y="190" font-family="'JetBrains Mono', monospace" font-size="12" fill="#c43a3d">jmp edr+0x1234</text>
+  <text x="870" y="207" font-family="'JetBrains Mono', monospace" font-size="12" fill="#3a3a3e">90          </text>
+  <text x="980" y="207" font-family="'JetBrains Mono', monospace" font-size="12" fill="#3a3a3e">nop</text>
+  <text x="870" y="224" font-family="'JetBrains Mono', monospace" font-size="12" fill="#3a3a3e">90          </text>
+  <text x="980" y="224" font-family="'JetBrains Mono', monospace" font-size="12" fill="#3a3a3e">nop</text>
+
+  <!-- small bracket grouping the hooked line -->
+  <rect x="858" y="180" width="3" height="50" rx="1" fill="#e5484d" opacity="0.5"/>
+
+  <!-- main heading -->
+  <text x="80" y="296" font-family="'JetBrains Mono', monospace" font-size="60" font-weight="700" fill="#fafafa">WinDbg</text>
+  <text x="80" y="370" font-family="'JetBrains Mono', monospace" font-size="60" font-weight="700" fill="#e5484d">for Red Teamers</text>
+  <!-- subline -->
+  <text x="80" y="430" font-family="'JetBrains Mono', monospace" font-size="25" fill="#fafafa">Hook detection. Memory forensics. Live analysis.</text>
+  <text x="80" y="480" font-family="'JetBrains Mono', monospace" font-size="22" fill="#8a8a93">windows internals · debugging · red teaming</text>
+</svg>

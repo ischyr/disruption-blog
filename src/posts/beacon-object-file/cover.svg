@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d0d0e"/>
+      <stop offset="1" stop-color="#050505"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="78%" cy="25%" r="52%">
+      <stop offset="0" stop-color="#e5484d" stop-opacity="0.13"/>
+      <stop offset="1" stop-color="#e5484d" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <!-- grid -->
+  <g stroke="#1c1c1f" stroke-width="1">
+    <path d="M0 158 H1200 M0 316 H1200 M0 474 H1200 M300 0 V630 M600 0 V630 M900 0 V630"/>
+  </g>
+
+  <!-- BOF loader chain (top right) -->
+  <!-- .o file box -->
+  <rect x="900" y="48" width="150" height="34" rx="4" fill="none" stroke="#2a2a2e" stroke-width="2"/>
+  <text x="930" y="70" font-family="'JetBrains Mono', monospace" font-size="13" fill="#3a3a3e">mybof.x64.o</text>
+  <!-- arrow -->
+  <line x1="975" y1="82" x2="975" y2="106" stroke="#2a2a2e" stroke-width="2"/>
+  <polyline points="968,100 975,109 982,100" fill="none" stroke="#2a2a2e" stroke-width="2"/>
+  <!-- Parse COFF box -->
+  <rect x="900" y="109" width="150" height="34" rx="4" fill="none" stroke="#2a2a2e" stroke-width="2"/>
+  <text x="916" y="131" font-family="'JetBrains Mono', monospace" font-size="13" fill="#3a3a3e">Parse Sections</text>
+  <!-- arrow -->
+  <line x1="975" y1="143" x2="975" y2="167" stroke="#2a2a2e" stroke-width="2"/>
+  <polyline points="968,161 975,170 982,161" fill="none" stroke="#2a2a2e" stroke-width="2"/>
+  <!-- Resolve Symbols box -->
+  <rect x="880" y="170" width="190" height="34" rx="4" fill="none" stroke="#2a2a2e" stroke-width="2"/>
+  <text x="888" y="192" font-family="'JetBrains Mono', monospace" font-size="12" fill="#3a3a3e">Resolve KERNEL32$Func</text>
+  <!-- arrow -->
+  <line x1="975" y1="204" x2="975" y2="228" stroke="#2a2a2e" stroke-width="2"/>
+  <polyline points="968,222 975,231 982,222" fill="none" stroke="#2a2a2e" stroke-width="2"/>
+  <!-- go() box - red accent -->
+  <rect x="920" y="231" width="110" height="34" rx="4" fill="none" stroke="#e5484d" stroke-width="2"/>
+  <text x="943" y="253" font-family="'JetBrains Mono', monospace" font-size="14" fill="#e5484d">go(args, len)</text>
+  <!-- small label -->
+  <text x="888" y="284" font-family="'JetBrains Mono', monospace" font-size="10" fill="#2a2a2e">in-process · no new process</text>
+
+  <!-- main heading -->
+  <text x="80" y="296" font-family="'JetBrains Mono', monospace" font-size="60" font-weight="700" fill="#fafafa">Beacon</text>
+  <text x="80" y="370" font-family="'JetBrains Mono', monospace" font-size="60" font-weight="700" fill="#e5484d">Object Files</text>
+  <!-- subline -->
+  <text x="80" y="430" font-family="'JetBrains Mono', monospace" font-size="26" fill="#fafafa">In-process execution. No new processes.</text>
+  <text x="80" y="480" font-family="'JetBrains Mono', monospace" font-size="22" fill="#8a8a93">malware dev · cobalt strike · windows internals</text>
+</svg>

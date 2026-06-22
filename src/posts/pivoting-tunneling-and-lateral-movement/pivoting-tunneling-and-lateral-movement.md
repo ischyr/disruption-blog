@@ -2,7 +2,7 @@
 title: Pivoting, Tunneling and Lateral Movement
 date: 2026-06-15
 image: cover.svg
-tags: [Red Team, Pivoting, Lateral Movement]
+tags: [Red Team]
 excerpt: A practical reference covering every pivoting and tunneling technique you will reach for on an internal engagement - SSH, Ligolo-NG, Chisel, Chisel, socat, sshuttle, DNS/ICMP tunneling - plus a full lateral movement playbook for Windows environments.
 ---
 

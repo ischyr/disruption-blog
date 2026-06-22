@@ -2,7 +2,7 @@
 title: WinDbg for Red Teamers - A Practical Guide
 date: 2026-06-20
 image: cover.svg
-tags: [Windows Internals, Red Teaming]
+tags: [Windows Internals, Red Team]
 excerpt: A practical guide to WinDbg from a red team perspective - covering essential commands, process inspection, live EDR hook detection, IAT analysis, and step-by-step investigation workflows for identifying what a security product is watching inside your process.
 ---
 

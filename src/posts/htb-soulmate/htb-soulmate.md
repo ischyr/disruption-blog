@@ -6,7 +6,7 @@ tags: [HackTheBox, Easy, Linux]
 platform: HackTheBox
 os: Linux
 difficulty: Easy
-points: 20
+points: 45
 released: 2025-08-30
 ip: 10.10.11.86
 boxAvatar: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/2c47fcf9c85c7fbdda73a9c1b54fd60e.png

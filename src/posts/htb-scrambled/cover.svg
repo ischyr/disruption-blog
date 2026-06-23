@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <clipPath id="clip">
+      <circle cx="200" cy="200" r="182"/>
+    </clipPath>
+    <pattern id="grid" width="16" height="16" patternUnits="userSpaceOnUse">
+      <path d="M 16 0 L 0 0 0 16" fill="none" stroke="#12121e" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+
+  <!-- Ring frame -->
+  <circle cx="200" cy="200" r="200" fill="#080408"/>
+  <circle cx="200" cy="200" r="196" fill="#e5484d"/>
+  <circle cx="200" cy="200" r="186" fill="#8a1818"/>
+  <circle cx="200" cy="200" r="183" fill="#0d0d1a"/>
+
+  <g clip-path="url(#clip)">
+    <rect width="400" height="400" fill="#0d0d1a"/>
+    <rect width="400" height="400" fill="url(#grid)" opacity="0.7"/>
+
+    <!-- Scattered "scrambled" data blocks (8x8) — represent encrypted chunks -->
+    <rect x="80"  y="80"  width="8" height="8" fill="#e5484d"/>
+    <rect x="96"  y="72"  width="8" height="8" fill="#4060e0"/>
+    <rect x="64"  y="96"  width="8" height="8" fill="#40c060"/>
+    <rect x="80"  y="112" width="8" height="8" fill="#8040c0"/>
+    <rect x="56"  y="128" width="8" height="8" fill="#40b0c0"/>
+    <rect x="64"  y="144" width="8" height="8" fill="#e07820"/>
+    <rect x="48"  y="168" width="8" height="8" fill="#e5484d"/>
+    <rect x="40"  y="192" width="8" height="8" fill="#4060e0"/>
+    <rect x="48"  y="216" width="8" height="8" fill="#40c060"/>
+    <rect x="64"  y="236" width="8" height="8" fill="#8040c0"/>
+    <rect x="80"  y="252" width="8" height="8" fill="#40b0c0"/>
+    <rect x="96"  y="268" width="8" height="8" fill="#e07820"/>
+    <rect x="112" y="280" width="8" height="8" fill="#e5484d"/>
+    <rect x="128" y="292" width="8" height="8" fill="#4060e0"/>
+    <rect x="152" y="300" width="8" height="8" fill="#40c060"/>
+    <rect x="176" y="308" width="8" height="8" fill="#8040c0"/>
+    <rect x="200" y="312" width="8" height="8" fill="#40b0c0"/>
+    <rect x="224" y="308" width="8" height="8" fill="#e07820"/>
+    <rect x="248" y="296" width="8" height="8" fill="#e5484d"/>
+    <rect x="264" y="280" width="8" height="8" fill="#4060e0"/>
+    <rect x="280" y="264" width="8" height="8" fill="#40c060"/>
+    <rect x="296" y="248" width="8" height="8" fill="#8040c0"/>
+    <rect x="316" y="224" width="8" height="8" fill="#40b0c0"/>
+    <rect x="328" y="200" width="8" height="8" fill="#e07820"/>
+    <rect x="332" y="176" width="8" height="8" fill="#e5484d"/>
+    <rect x="328" y="152" width="8" height="8" fill="#4060e0"/>
+    <rect x="316" y="128" width="8" height="8" fill="#40c060"/>
+    <rect x="296" y="108" width="8" height="8" fill="#8040c0"/>
+    <rect x="272" y="92"  width="8" height="8" fill="#40b0c0"/>
+    <rect x="248" y="80"  width="8" height="8" fill="#e07820"/>
+    <rect x="224" y="72"  width="8" height="8" fill="#e5484d"/>
+    <rect x="200" y="68"  width="8" height="8" fill="#4060e0"/>
+    <rect x="176" y="72"  width="8" height="8" fill="#40c060"/>
+    <rect x="152" y="80"  width="8" height="8" fill="#8040c0"/>
+    <rect x="128" y="72"  width="8" height="8" fill="#40b0c0"/>
+    <rect x="104" y="76"  width="8" height="8" fill="#e07820"/>
+    <!-- Inner scattered (slightly dimmer) -->
+    <rect x="96"  y="136" width="8" height="8" fill="#4060e0" opacity="0.5"/>
+    <rect x="308" y="164" width="8" height="8" fill="#e5484d" opacity="0.5"/>
+    <rect x="304" y="240" width="8" height="8" fill="#40c060" opacity="0.5"/>
+    <rect x="100" y="256" width="8" height="8" fill="#8040c0" opacity="0.5"/>
+
+    <!-- Domain label -->
+    <text x="200" y="110" font-family="'JetBrains Mono', monospace" font-size="13" fill="#4060e0" text-anchor="middle" font-weight="700" letter-spacing="3">SCRM.LOCAL</text>
+    <text x="200" y="127" font-family="'JetBrains Mono', monospace" font-size="8"  fill="#2a3060" text-anchor="middle" letter-spacing="1">NTLM DISABLED · KERBEROS ONLY</text>
+
+    <!-- PIXEL ART KERBEROS KEY (16px blocks) -->
+    <!-- Grid origin: x=46, y=152. Block size: 16px. -->
+    <!-- Ring row 0 (y=152): cols 1-5 -->
+    <rect x="62"  y="152" width="16" height="16" fill="#f0c040"/>
+    <rect x="78"  y="152" width="16" height="16" fill="#f0c040"/>
+    <rect x="94"  y="152" width="16" height="16" fill="#f0c040"/>
+    <rect x="110" y="152" width="16" height="16" fill="#f0c040"/>
+    <rect x="126" y="152" width="16" height="16" fill="#f0c040"/>
+    <!-- Ring row 1 (y=168): cols 0,1,5,6 -->
+    <rect x="46"  y="168" width="16" height="16" fill="#f0c040"/>
+    <rect x="62"  y="168" width="16" height="16" fill="#f0c040"/>
+    <rect x="126" y="168" width="16" height="16" fill="#f0c040"/>
+    <rect x="142" y="168" width="16" height="16" fill="#f0c040"/>
+    <!-- Ring row 2 (y=184): cols 0,6 + shaft cols 7-14 -->
+    <rect x="46"  y="184" width="16" height="16" fill="#f0c040"/>
+    <rect x="142" y="184" width="16" height="16" fill="#f0c040"/>
+    <rect x="158" y="184" width="16" height="16" fill="#f0c040"/>
+    <rect x="174" y="184" width="16" height="16" fill="#f0c040"/>
+    <rect x="190" y="184" width="16" height="16" fill="#f0c040"/>
+    <rect x="206" y="184" width="16" height="16" fill="#f0c040"/>
+    <rect x="222" y="184" width="16" height="16" fill="#f0c040"/>
+    <rect x="238" y="184" width="16" height="16" fill="#f0c040"/>
+    <rect x="254" y="184" width="16" height="16" fill="#f0c040"/>
+    <!-- Ring row 3 (y=200): cols 0,6 + shaft cols 7-14 -->
+    <rect x="46"  y="200" width="16" height="16" fill="#f0c040"/>
+    <rect x="142" y="200" width="16" height="16" fill="#f0c040"/>
+    <rect x="158" y="200" width="16" height="16" fill="#f0c040"/>
+    <rect x="174" y="200" width="16" height="16" fill="#f0c040"/>
+    <rect x="190" y="200" width="16" height="16" fill="#f0c040"/>
+    <rect x="206" y="200" width="16" height="16" fill="#f0c040"/>
+    <rect x="222" y="200" width="16" height="16" fill="#f0c040"/>
+    <rect x="238" y="200" width="16" height="16" fill="#f0c040"/>
+    <rect x="254" y="200" width="16" height="16" fill="#f0c040"/>
+    <!-- Ring row 4 (y=216): cols 0,1,5,6 + teeth at cols 10,14 -->
+    <rect x="46"  y="216" width="16" height="16" fill="#f0c040"/>
+    <rect x="62"  y="216" width="16" height="16" fill="#f0c040"/>
+    <rect x="126" y="216" width="16" height="16" fill="#f0c040"/>
+    <rect x="142" y="216" width="16" height="16" fill="#f0c040"/>
+    <rect x="206" y="216" width="16" height="16" fill="#f0c040"/>
+    <rect x="254" y="216" width="16" height="16" fill="#f0c040"/>
+    <!-- Ring row 5 (y=232): cols 1-5 + teeth continuation -->
+    <rect x="62"  y="232" width="16" height="16" fill="#f0c040"/>
+    <rect x="78"  y="232" width="16" height="16" fill="#f0c040"/>
+    <rect x="94"  y="232" width="16" height="16" fill="#f0c040"/>
+    <rect x="110" y="232" width="16" height="16" fill="#f0c040"/>
+    <rect x="126" y="232" width="16" height="16" fill="#f0c040"/>
+    <rect x="206" y="232" width="16" height="16" fill="#f0c040"/>
+    <!-- Extra tooth block (shadow tone) -->
+    <rect x="206" y="248" width="16" height="16" fill="#b08020"/>
+
+    <!-- Silver ticket label below shaft -->
+    <text x="162" y="274" font-family="'JetBrains Mono', monospace" font-size="8" fill="#c0c0d0" text-anchor="middle" letter-spacing="1">SILVER TICKET</text>
+
+    <!-- MSSQL database cylinder (8px blocks) at bottom-right -->
+    <text x="292" y="274" font-family="'JetBrains Mono', monospace" font-size="8" fill="#506090" text-anchor="middle">MSSQL</text>
+    <!-- top cap (y=280): cols 1,2,3 → x=284,292,300 -->
+    <rect x="284" y="280" width="8" height="8" fill="#6070a0"/>
+    <rect x="292" y="280" width="8" height="8" fill="#7080b0"/>
+    <rect x="300" y="280" width="8" height="8" fill="#6070a0"/>
+    <!-- top rim (y=288): all 5 cols -->
+    <rect x="276" y="288" width="8" height="8" fill="#506090"/>
+    <rect x="284" y="288" width="8" height="8" fill="#6070a0"/>
+    <rect x="292" y="288" width="8" height="8" fill="#7080b0"/>
+    <rect x="300" y="288" width="8" height="8" fill="#6070a0"/>
+    <rect x="308" y="288" width="8" height="8" fill="#506090"/>
+    <!-- body (y=296,304,312): sides only -->
+    <rect x="276" y="296" width="8" height="8" fill="#404070"/>
+    <rect x="308" y="296" width="8" height="8" fill="#404070"/>
+    <rect x="276" y="304" width="8" height="8" fill="#404070"/>
+    <rect x="308" y="304" width="8" height="8" fill="#404070"/>
+    <rect x="276" y="312" width="8" height="8" fill="#404070"/>
+    <rect x="308" y="312" width="8" height="8" fill="#404070"/>
+    <!-- bottom rim (y=320): all 5 cols -->
+    <rect x="276" y="320" width="8" height="8" fill="#506090"/>
+    <rect x="284" y="320" width="8" height="8" fill="#6070a0"/>
+    <rect x="292" y="320" width="8" height="8" fill="#7080b0"/>
+    <rect x="300" y="320" width="8" height="8" fill="#6070a0"/>
+    <rect x="308" y="320" width="8" height="8" fill="#506090"/>
+    <!-- bottom cap (y=328): cols 1,2,3 -->
+    <rect x="284" y="328" width="8" height="8" fill="#506090"/>
+    <rect x="292" y="328" width="8" height="8" fill="#404070"/>
+    <rect x="300" y="328" width="8" height="8" fill="#506090"/>
+
+    <!-- Bottom labels -->
+    <text x="200" y="344" font-family="'JetBrains Mono', monospace" font-size="8"  fill="#303050" text-anchor="middle" letter-spacing="1">hackthebox · windows · active directory</text>
+    <text x="200" y="364" font-family="'JetBrains Mono', monospace" font-size="22" fill="#e5484d" text-anchor="middle" font-weight="700" letter-spacing="3">SCRAMBLED</text>
+  </g>
+</svg>

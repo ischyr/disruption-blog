@@ -1,7 +1,7 @@
 ---
 title: HackTheBox - Scrambled
 date: 2026-06-23
-image: cover.svg
+image: cover.png
 tags: [HackTheBox, Medium, Windows, Active Directory]
 platform: HackTheBox
 os: Windows

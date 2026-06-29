@@ -61,7 +61,7 @@ export default function Home() {
 
               <div className="finding-label">Preview</div>
               <div className="finding-snippet">
-                {featured.body.trim().slice(0, 260)}
+                {featured.preview.slice(0, 260)}
               </div>
 
               <div className="finding-foot">

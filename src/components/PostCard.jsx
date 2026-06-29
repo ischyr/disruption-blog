@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { formatDate } from '../lib/posts'
 import TransitionLink from './TransitionLink'
 import DecryptText from './DecryptText'
@@ -5,7 +6,7 @@ import BookmarkButton from './BookmarkButton'
 
 const MAX_TAGS = 3
 
-export default function PostCard({ post }) {
+function PostCard({ post }) {
   const extraTags = post.tags.length - MAX_TAGS
 
   return (
@@ -64,3 +65,7 @@ export default function PostCard({ post }) {
     </article>
   )
 }
+
+// Cards are pure over their `post`; memoizing avoids re-rendering the whole grid
+// on each keystroke in the search box or when toggling a single bookmark.
+export default memo(PostCard)

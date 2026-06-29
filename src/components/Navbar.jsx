@@ -156,15 +156,19 @@ export default function Navbar() {
     setOpen(false)
   }, [pathname])
 
-  // close on Escape + lock body scroll while the mobile menu is open
+  // close on Escape + lock body scroll while the mobile menu is open.
+  // the `menu-open` class lets the floating buttons (ruler, back-to-top)
+  // hide themselves so they don't overlap the menu.
   useEffect(() => {
     if (!open) return
     const onKey = (e) => e.key === 'Escape' && setOpen(false)
     document.addEventListener('keydown', onKey)
     document.body.style.overflow = 'hidden'
+    document.body.classList.add('menu-open')
     return () => {
       document.removeEventListener('keydown', onKey)
       document.body.style.overflow = ''
+      document.body.classList.remove('menu-open')
     }
   }, [open])
 

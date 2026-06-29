@@ -22,26 +22,36 @@
 //   # Markdown content here...
 //
 //   Reference images from this folder inline with: {% diagram %}
+//
+// PERFORMANCE: the listing only needs metadata, so the (often large) markdown
+// BODIES are NOT eagerly bundled. `virtual:post-meta` (see vite-plugin-posts.js)
+// ships a tiny frontmatter index, and each body is fetched on demand via
+// `loadPostBody` — one code-split chunk per post. This keeps the initial bundle
+// flat regardless of how many posts the blog grows to.
+import meta from 'virtual:post-meta'
+import { folderOf, parseFrontmatter } from './postMeta'
 
-const files = import.meta.glob('../posts/*/*.md', {
-  query: '?raw',
-  import: 'default',
-  eager: true,
-})
-
-// Images co-located with posts → resolved to bundled (hashed) URLs.
+// Co-located post images → bundled (hashed) URLs. Just a small map of
+// filename → URL string; the image files themselves load lazily via <img>.
 const imageFiles = import.meta.glob('../posts/*/*.{png,jpg,jpeg,gif,webp,avif,svg}', {
   query: '?url',
   import: 'default',
   eager: true,
 })
 
-const IMG_EXT = ['png', 'jpg', 'jpeg', 'gif', 'webp', 'avif', 'svg']
+// Lazy (NON-eager) loaders for the raw markdown — each becomes its own chunk,
+// downloaded only when that post is opened.
+const bodyLoaders = import.meta.glob('../posts/*/*.md', {
+  query: '?raw',
+  import: 'default',
+})
 
-function folderOf(path) {
-  const parts = path.split('/')
-  return parts[parts.length - 2]
+const loaderBySlug = {}
+for (const [path, loader] of Object.entries(bodyLoaders)) {
+  loaderBySlug[folderOf(path)] = loader
 }
+
+const IMG_EXT = ['png', 'jpg', 'jpeg', 'gif', 'webp', 'avif', 'svg']
 
 function imagesForFolder(folder) {
   const map = {}
@@ -99,91 +109,41 @@ export function resolveImages(body, images) {
   return lines.join('\n')
 }
 
-function parseFrontmatter(raw) {
-  const match = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?/.exec(raw)
-  if (!match) return { meta: {}, body: raw }
-
-  const meta = {}
-  for (const line of match[1].split(/\r?\n/)) {
-    const idx = line.indexOf(':')
-    if (idx === -1) continue
-    const key = line.slice(0, idx).trim()
-    let value = line.slice(idx + 1).trim()
-    if (/^\[.*\]$/.test(value)) {
-      meta[key] = value
-        .slice(1, -1)
-        .split(',')
-        .map((s) => s.trim().replace(/^["']|["']$/g, ''))
-        .filter(Boolean)
-    } else {
-      meta[key] = value.replace(/^["']|["']$/g, '')
-    }
-  }
-  return { meta, body: raw.slice(match[0].length) }
+// Resolve a raw frontmatter image name to a bundled URL (passes through
+// absolute /public paths and external URLs untouched).
+function resolveCover(name, images) {
+  if (!name) return ''
+  if (/^https?:\/\//i.test(name) || name.startsWith('/')) return name
+  return lookupImage(images, name) || name
 }
 
-function readTime(text) {
-  const words = text.trim().split(/\s+/).length
-  return `${Math.max(1, Math.ceil(words / 200))} min read`
-}
-
-function autoExcerpt(body) {
-  const plain = body
-    .replace(/```[\s\S]*?```/g, '')
-    .replace(/\{%[^%}]*%\}/g, '')
-    .replace(/[#>*_`[\]()!-]/g, '')
-    .replace(/\s+/g, ' ')
-    .trim()
-  return plain.length > 180 ? `${plain.slice(0, 180)}…` : plain
-}
-
-export const posts = Object.entries(files)
-  .map(([path, raw]) => {
-    const slug = folderOf(path)
-    const images = imagesForFolder(slug)
-    const { meta, body } = parseFrontmatter(raw)
-
-    // Cover: a folder image name, an absolute /public path, or an external URL.
-    let cover = meta.image || meta.cover || ''
-    if (cover && !/^https?:\/\//i.test(cover) && !cover.startsWith('/')) {
-      cover = lookupImage(images, cover) || cover
-    }
-
-    // Optional CTF/HTB "machine" box — shown as an info card on the write-up.
-    const machineKeys = ['os', 'difficulty', 'points', 'platform', 'released', 'ip']
-    let machine = null
-    if (machineKeys.some((k) => meta[k])) {
-      let avatar = meta.boxAvatar || meta.avatar || ''
-      if (avatar && !/^https?:\/\//i.test(avatar) && !avatar.startsWith('/')) {
-        avatar = lookupImage(images, avatar) || avatar
-      }
-      machine = {
-        os: meta.os || '',
-        difficulty: meta.difficulty || '',
-        points: meta.points || '',
-        platform: meta.platform || '',
-        released: meta.released || '',
-        ip: meta.ip || '',
-        avatar,
-      }
-    }
+export const posts = meta
+  .map((m) => {
+    const images = imagesForFolder(m.slug)
+    const machine = m.machine
+      ? { ...m.machine, avatar: resolveCover(m.machine.avatar, images) }
+      : null
 
     return {
-      slug,
-      title: meta.title || slug,
-      date: meta.date || '1970-01-01',
-      tags: Array.isArray(meta.tags) ? meta.tags : meta.tags ? [meta.tags] : [],
-      excerpt: meta.excerpt || autoExcerpt(body),
-      image: cover,
+      ...m,
+      image: resolveCover(m.image, images),
       images,
       machine,
-      readTime: readTime(body),
-      body,
     }
   })
   .sort((a, b) => new Date(b.date) - new Date(a.date))
 
 export const getPost = (slug) => posts.find((p) => p.slug === slug)
+
+// Fetch and return a post's raw markdown body (without frontmatter). The body
+// lives in its own chunk, so this resolves a network/disk fetch the first time
+// a given post is opened, then is cached by the bundler/browser.
+export async function loadPostBody(slug) {
+  const loader = loaderBySlug[slug]
+  if (!loader) return ''
+  const raw = await loader()
+  return parseFrontmatter(raw).body
+}
 
 // Posts most related to `slug` by shared tags, falling back to recency to fill
 // up to `n` results.

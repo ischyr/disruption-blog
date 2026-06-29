@@ -1,6 +1,6 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { posts, getPost, formatDate, resolveImages, relatedPosts } from '../lib/posts'
+import { posts, getPost, formatDate, resolveImages, relatedPosts, loadPostBody } from '../lib/posts'
 import { extractHeadings } from '../lib/toc'
 import { site } from '../config'
 import Markdown from '../components/Markdown'
@@ -16,13 +16,30 @@ export default function BlogPost() {
   const { slug } = useParams()
   const post = getPost(slug)
 
-  const headings = useMemo(
-    () => (post ? extractHeadings(post.body) : []),
-    [post]
-  )
+  // The body lives in its own code-split chunk; fetch it when the slug changes.
+  // We store the body together with the slug it belongs to, then derive loading
+  // state — so the effect only ever calls setState from its async callback.
+  const [loaded, setLoaded] = useState({ slug: null, body: '' })
+
+  useEffect(() => {
+    if (!post) return
+    let active = true
+    loadPostBody(slug)
+      .then((raw) => active && setLoaded({ slug, body: raw }))
+      .catch(() => active && setLoaded({ slug, body: '' }))
+    return () => {
+      active = false
+    }
+  }, [slug, post])
+
+  const ready = loaded.slug === slug
+  const rawBody = ready ? loaded.body : ''
+  const loading = Boolean(post) && !ready
+
+  const headings = useMemo(() => extractHeadings(rawBody), [rawBody])
   const body = useMemo(
-    () => (post ? resolveImages(post.body, post.images) : ''),
-    [post]
+    () => (post ? resolveImages(rawBody, post.images) : ''),
+    [rawBody, post]
   )
   const hasToc = headings.length >= 2
 
@@ -111,7 +128,18 @@ export default function BlogPost() {
           </div>
 
           <MachineCard machine={post.machine} />
-          <Markdown>{body}</Markdown>
+          {loading ? (
+            <div className="post-skeleton" aria-hidden="true">
+              <span className="post-skeleton-line" />
+              <span className="post-skeleton-line" />
+              <span className="post-skeleton-line short" />
+              <span className="post-skeleton-block" />
+              <span className="post-skeleton-line" />
+              <span className="post-skeleton-line short" />
+            </div>
+          ) : (
+            <Markdown>{body}</Markdown>
+          )}
         </article>
 
         <PostNav prev={prev} next={next} />

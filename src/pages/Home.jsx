@@ -19,6 +19,7 @@ export default function Home() {
   return (
     <div className="page">
       <section className="hero">
+        <div className="hero-wolf" aria-hidden="true" />
         <div className="hero-left">
           <span className="hero-pill">
             <span className="pill-dot" />

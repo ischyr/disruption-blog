@@ -20,6 +20,7 @@ export default function BlogPost() {
   // We store the body together with the slug it belongs to, then derive loading
   // state — so the effect only ever calls setState from its async callback.
   const [loaded, setLoaded] = useState({ slug: null, body: '' })
+  const [excerptOpen, setExcerptOpen] = useState(false)
 
   useEffect(() => {
     if (!post) return
@@ -122,6 +123,21 @@ export default function BlogPost() {
                       {tag}
                     </Link>
                   ))}
+                </div>
+              )}
+              {post.excerpt && (
+                <div className={`post-excerpt${excerptOpen ? ' open' : ''}`}>
+                  <p className="post-excerpt-text">{post.excerpt}</p>
+                  {post.excerpt.length > 140 && (
+                    <button
+                      type="button"
+                      className="post-excerpt-toggle"
+                      onClick={() => setExcerptOpen((o) => !o)}
+                      aria-expanded={excerptOpen}
+                    >
+                      {excerptOpen ? 'Show less' : 'Show more'}
+                    </button>
+                  )}
                 </div>
               )}
             </div>

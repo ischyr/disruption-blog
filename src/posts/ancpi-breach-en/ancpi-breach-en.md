@@ -8,7 +8,11 @@ excerpt: An investigation into the July 2026 breach of ANCPI, Romania's national
 
 # ANCPI Breach
 
+> **Disclaimer:** This article is published for journalistic and educational purposes only. It is based exclusively on publicly available sources. It does not host, link to, or redistribute any leaked, stolen, or personal data.
+
 > This analysis is based on open-source intelligence: material published by the threat actor as proof of compromise, ANCPI's own public statements, and press interviews. Attacker-supplied artifacts cannot be independently verified in full, and are treated as claims corroborated where possible. Romanian-language sources have been translated into English, and sensitive details in screenshots have been redacted.
+
+> **On the sources and the public interest:** Every screenshot in this article was taken from the archive the attacker published as proof of the breach. That material is already available on a clear-net forum, is expected to be sold and to spread further into the public domain, and will most likely be indexed by search engines within days. Given the gravity of the situation, the public - and above all the victims - have a legitimate interest in understanding what happened. This article reports on that already-public material; it does not host, sell, or provide access to any of the underlying data.
 
 In mid-July 2026, ANCPI, the Romanian institution that maintains the national cadastre and land registry, suffered what it later described as the largest cyber-attack in its history. A single threat actor, operating under the handle **bytetobreach**, published proof of a deep compromise: source code for core national systems, exfiltrated databases, Active Directory reconnaissance, and evidence of ransomware deployment. This paper reconstructs the incident from the public evidence, contrasts it with the agency's messaging, and sets out what a mature security program would have done differently.
 

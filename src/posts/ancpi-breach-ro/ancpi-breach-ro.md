@@ -8,7 +8,11 @@ excerpt: O analiză a breșei din iulie 2026 suferite de ANCPI, agenția națion
 
 # Breșa ANCPI
 
+> **Disclaimer:** Acest articol este publicat exclusiv în scop jurnalistic și educațional. Se bazează exclusiv pe surse publice. Nu găzduiește, nu distribuie și nu oferă acces la niciun fel de date scurse, sustrase sau personale.
+
 > Această analiză se bazează pe informații din surse deschise (OSINT): materiale publicate de atacator ca dovadă a compromiterii, declarațiile publice ale ANCPI și interviuri de presă. Artefactele furnizate de atacator nu pot fi verificate independent în întregime și sunt tratate ca afirmații, coroborate acolo unde este posibil. Citatele în limba engleză au fost traduse în română, iar detaliile sensibile din capturile de ecran au fost cenzurate.
+
+> **Despre surse și interesul public:** Toate capturile de ecran din acest articol au fost preluate din arhiva publicată de atacator ca dovadă a breșei. Acel material este deja disponibil pe un forum din clear net, urmează cel mai probabil să fie vândut și să se răspândească în spațiul public, iar în câteva zile va fi, foarte probabil, indexat de motoarele de căutare. Având în vedere gravitatea situației, publicul - și mai ales victimele - au un interes legitim să afle ce s-a întâmplat. Acest articol relatează despre acel material deja public; nu găzduiește, nu vinde și nu oferă acces la niciuna dintre datele subiacente.
 
 La mijlocul lunii iulie 2026, ANCPI, instituția română care administrează cadastrul național și cartea funciară, a suferit ceea ce a descris ulterior drept cel mai mare atac cibernetic din istoria sa. Un singur atacator, care operează sub pseudonimul **bytetobreach**, a publicat dovezi ale unei compromiteri profunde: codul sursă al unor sisteme naționale esențiale, baze de date exfiltrate, recunoaștere a Active Directory și dovezi ale desfășurării unui ransomware. Această lucrare reconstituie incidentul pornind de la dovezile publice, îl compară cu comunicarea instituției și arată ce ar fi făcut diferit un program de securitate matur.
 

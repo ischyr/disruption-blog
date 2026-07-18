@@ -4,18 +4,17 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeSlug from 'rehype-slug'
 import rehypeHighlight from 'rehype-highlight'
-import { common } from 'lowlight'
-import powershell from 'highlight.js/lib/languages/powershell'
-import dos from 'highlight.js/lib/languages/dos'
-import http from 'highlight.js/lib/languages/http'
-import nginx from 'highlight.js/lib/languages/nginx'
+import c from 'highlight.js/lib/languages/c'
+import bash from 'highlight.js/lib/languages/bash'
+import plaintext from 'highlight.js/lib/languages/plaintext'
 import 'highlight.js/styles/github-dark-dimmed.css'
 import remarkCallouts from '../lib/remarkCallouts'
 import MermaidDiagram from './MermaidDiagram'
 
-// `common` covers ~35 popular languages; register extras useful for
-// security write-ups on top of it.
-const languages = { ...common, powershell, dos, http, nginx }
+// Only these languages are bundled, to keep the reader chunk small. Any other
+// code-fence language falls back to plain text (rehypeHighlight ignoreMissing).
+// `plaintext` also covers the `text` / `txt` fences via its built-in aliases.
+const languages = { c, bash, plaintext }
 
 // Recursively collect plain text from rendered children (used to recover the
 // raw source of a fenced code block, e.g. for mermaid).

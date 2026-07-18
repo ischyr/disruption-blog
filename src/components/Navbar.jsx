@@ -17,13 +17,7 @@ const primary = [
 
 const more = [
   { to: '/glossary', label: 'Glossary' },
-  { to: '/snippets', label: 'Snippets' },
-  { to: '/war-stories', label: 'War Stories' },
   { to: '/ctf', label: 'CTF Events' },
-  { to: '/kev', label: 'CISA KEV' },
-  { to: '/cves', label: 'Latest CVEs' },
-  { to: '/0day', label: '0-Day ITW' },
-  { to: '/ransomware', label: 'Ransomware' },
   { to: '/toolbox', label: 'Toolbox' },
   { to: '/saved', label: 'Saved' },
 ]

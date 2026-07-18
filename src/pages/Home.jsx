@@ -10,7 +10,6 @@ import ContributionHeatmap from '../components/ContributionHeatmap'
 import Reveal from '../components/Reveal'
 import Typewriter from '../components/Typewriter'
 import HeroSearch from '../components/HeroSearch'
-import HomeFeeds from '../components/HomeFeeds'
 
 export default function Home() {
   const featured = posts[0]
@@ -124,11 +123,6 @@ export default function Home() {
           </div>
         </section>
       </Reveal>
-
-      <Reveal>
-        <HomeFeeds />
-      </Reveal>
-
     </div>
   )
 }

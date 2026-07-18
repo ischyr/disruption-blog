@@ -26,8 +26,6 @@ const STATIC_ROUTES = [
   'videos',
   'glossary',
   'graph',
-  'snippets',
-  'war-stories',
   'start-here',
   'ctf',
 ]

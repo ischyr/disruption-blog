@@ -17,14 +17,8 @@ const BlogPost = lazy(() => import('./pages/BlogPost'))
 const Tools = lazy(() => import('./pages/Tools'))
 const Glossary = lazy(() => import('./pages/Glossary'))
 const Graph = lazy(() => import('./pages/Graph'))
-const Snippets = lazy(() => import('./pages/Snippets'))
-const WarStories = lazy(() => import('./pages/WarStories'))
 const StartHere = lazy(() => import('./pages/StartHere'))
 const CtfEvents = lazy(() => import('./pages/CtfEvents'))
-const KevBoard = lazy(() => import('./pages/KevBoard'))
-const Cves = lazy(() => import('./pages/Cves'))
-const Ransomware = lazy(() => import('./pages/Ransomware'))
-const ZeroDays = lazy(() => import('./pages/ZeroDays'))
 const Toolbox = lazy(() => import('./pages/Toolbox'))
 const Saved = lazy(() => import('./pages/Saved'))
 const NotFound = lazy(() => import('./pages/NotFound'))
@@ -49,14 +43,8 @@ export default function App() {
               <Route path="/tools" element={<Tools />} />
               <Route path="/glossary" element={<Glossary />} />
               <Route path="/graph" element={<Graph />} />
-              <Route path="/snippets" element={<Snippets />} />
-              <Route path="/war-stories" element={<WarStories />} />
               <Route path="/start-here" element={<StartHere />} />
               <Route path="/ctf" element={<CtfEvents />} />
-              <Route path="/kev" element={<KevBoard />} />
-              <Route path="/cves" element={<Cves />} />
-              <Route path="/ransomware" element={<Ransomware />} />
-              <Route path="/0day" element={<ZeroDays />} />
               <Route path="/toolbox" element={<Toolbox />} />
               <Route path="/saved" element={<Saved />} />
               <Route path="*" element={<NotFound />} />

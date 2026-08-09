@@ -1,6 +1,6 @@
 ---
 title: The Range Village
-date: 2026-07-27
+date: 2026-08-09
 image: cover.png
 tags: [Active Directory]
 excerpt: A walkthrough of async.sg's Range Village at DEF CON Singapore - a 12-flag Active Directory range spanning a child domain, its parent, and a separate trusted forest. The path covers sudo and Polkit misconfigurations on a Linux jump host, NTLM relaying, Kerberoasting, SSTI-to-RCE on an internal web app, local privilege escalation via GodPotato, S4U2self abuse, cross-domain compromise through DCSync and inter-realm ticket capture, and ADCS template abuse in a third domain.

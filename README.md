@@ -81,7 +81,6 @@ Embed a folder image inline:
 | What | Where |
 | --- | --- |
 | Name (`0xd1s`), role, tagline, socials, academy, about text | `src/config.js` |
-| Tools page entries | `src/data/tools.js` |
 | Certifications (About page) | `src/data/certs.js` |
 | Certification badge images | `public/certs/` |
 | Post images (cover + inline) | the post's own folder in `src/posts/` |
@@ -93,7 +92,6 @@ Embed a folder image inline:
 - `/about` — About / certifications / skills / academy
 - `/blog` — All posts (with search + tag filter)
 - `/blog/:slug` — A single post
-- `/tools` — Published tooling
 - `/videos` — YouTube videos (edit `src/data/videos.js`)
 - `/quiz` — Interactive security quiz (edit `src/data/quiz.js`)
 - `/glossary` — Searchable terms reference (edit `src/data/glossary.js`)

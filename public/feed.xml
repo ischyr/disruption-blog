@@ -5,8 +5,329 @@
     <link>https://blog.disruption-academy.com/</link>
     <description>Security research, exploit development, and technical write-ups covering various aspects of offensive security and penetration testing.</description>
     <language>en</language>
-    <lastBuildDate>Sun, 14 Jun 2026 12:46:01 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 14 Oct 2026 15:33:19 GMT</lastBuildDate>
     <atom:link href="https://blog.disruption-academy.com/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackSmarter - BitStream</title>
+      <link>https://blog.disruption-academy.com/blog/hsm-bitstream</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/hsm-bitstream</guid>
+      <pubDate>Sat, 15 Aug 2026 00:00:00 GMT</pubDate>
+      <category>HackSmarter</category>
+      <category>Easy</category>
+      <category>Windows</category>
+      <category>Active Directory</category>
+      <description>An easy HackSmarter range that still packs a full attack chain across a segmented network. A stored XSS on the public web app steals an admin cookie, an IDOR over internal messages leaks SQL service credentials, and MSSQL xp_cmdshell plus SeImpersonate (GodPotato) gives local administrator on the SQL host. From there the path pivots with Ligolo into the domain: cracking a cached credential, kerberoasting EDDIE, stealing an Edge-saved password, abusing a GenericAll ACL, and finding hardcoded Backup Operators credentials in a share script that lead to a DCSync and full domain compromise.</description>
+    </item>
+    <item>
+      <title>HackSmarter - Fragments</title>
+      <link>https://blog.disruption-academy.com/blog/hsm-fragments</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/hsm-fragments</guid>
+      <pubDate>Tue, 11 Aug 2026 00:00:00 GMT</pubDate>
+      <category>HackSmarter</category>
+      <category>Hard</category>
+      <category>Windows</category>
+      <category>Active Directory</category>
+      <description>A HackSmarter hard Windows/Active Directory box that starts with nothing but an exposed NFS export and an NTP service. Timeroasting cracks a pre-staged machine account, which opens up domain recon, a Group Policy Preferences credential leak, and a spray to a first user. From there the path winds through browser-stored credentials, a chain of ACL abuses (write access, AS-REP roasting, ReadGMSAPassword, a logonHours fix, AddSelf and GenericAll), and finishes with a Defender-evading GodPotato SeImpersonate escalation to local administrator.</description>
+    </item>
+    <item>
+      <title>The Range Village</title>
+      <link>https://blog.disruption-academy.com/blog/defcon-sg-range-village</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/defcon-sg-range-village</guid>
+      <pubDate>Sun, 09 Aug 2026 00:00:00 GMT</pubDate>
+      <category>Active Directory</category>
+      <description>A walkthrough of async.sg&apos;s Range Village at DEF CON Singapore - a 12-flag Active Directory range spanning a child domain, its parent, and a separate trusted forest. The path covers sudo and Polkit misconfigurations on a Linux jump host, NTLM relaying, Kerberoasting, SSTI-to-RCE on an internal web app, local privilege escalation via GodPotato, S4U2self abuse, cross-domain compromise through DCSync and inter-realm ticket capture, and ADCS template abuse in a third domain.</description>
+    </item>
+    <item>
+      <title>Direct Syscalls</title>
+      <link>https://blog.disruption-academy.com/blog/direct-syscalls</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/direct-syscalls</guid>
+      <pubDate>Mon, 27 Jul 2026 00:00:00 GMT</pubDate>
+      <category>Windows Internals</category>
+      <category>Malware Development</category>
+      <description>Direct syscalls bypass user-mode API hooks by invoking Windows system calls directly from user space. This technique retrieves syscall numbers (SSNs) from ntdll.dll, assembles raw syscall stubs, and calls them directly, defeating EDR hooks that monitor hooked NT functions.</description>
+    </item>
+    <item>
+      <title>Ronin - Mask</title>
+      <link>https://blog.disruption-academy.com/blog/ronin-mask</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/ronin-mask</guid>
+      <pubDate>Sat, 25 Jul 2026 00:00:00 GMT</pubDate>
+      <category>Ronin</category>
+      <category>Easy</category>
+      <category>Linux</category>
+      <description>Chaining the Next.js CVE-2025-29927 middleware bypass to leak the app config and read files by path traversal, stealing jim&apos;s SSH key for a foothold, then a symlink through a root sudo cat rule to dump /etc/shadow and crack root.</description>
+    </item>
+    <item>
+      <title>Ronin - Recovery</title>
+      <link>https://blog.disruption-academy.com/blog/ronin-recovery</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/ronin-recovery</guid>
+      <pubDate>Sat, 25 Jul 2026 00:00:00 GMT</pubDate>
+      <category>Ronin</category>
+      <category>Hard</category>
+      <category>Windows</category>
+      <category>Active Directory</category>
+      <description>Null-bind LDAP/RPC leaks a description-field password, and a BloodHound-mapped chain - spray to j.ortega, shadow credentials on s.connery, a strings password from mount.exe, a WriteSPN kerberoast, then GenericAll on the DC - lands a DC01$ DCSync for Administrator.</description>
+    </item>
+    <item>
+      <title>ANCPI Breach</title>
+      <link>https://blog.disruption-academy.com/blog/ancpi-breach-en</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/ancpi-breach-en</guid>
+      <pubDate>Sat, 18 Jul 2026 00:00:00 GMT</pubDate>
+      <category>Investigation</category>
+      <description>An investigation into the July 2026 breach of ANCPI, Romania&apos;s national cadastre and land-registry agency, by the threat actor bytetobreach. It reconstructs the full attack chain from a ForgeRock OpenAM RCE to near-total domain compromise, weighs the evidence against the agency&apos;s public denials, profiles the actor, and closes with an exhaustive set of remediation recommendations.</description>
+    </item>
+    <item>
+      <title>Breșa ANCPI</title>
+      <link>https://blog.disruption-academy.com/blog/ancpi-breach-ro</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/ancpi-breach-ro</guid>
+      <pubDate>Sat, 18 Jul 2026 00:00:00 GMT</pubDate>
+      <category>Investigation</category>
+      <description>O analiză a breșei din iulie 2026 suferite de ANCPI, agenția națională de cadastru și publicitate imobiliară, provocată de actorul bytetobreach. Reconstituie întregul lanț de atac, de la un RCE în ForgeRock OpenAM până la compromiterea aproape totală a domeniului, compară dovezile cu negările publice ale instituției, creionează profilul atacatorului și se încheie cu un set exhaustiv de recomandări de remediere.</description>
+    </item>
+    <item>
+      <title>HackSmarter - ShadowGate2</title>
+      <link>https://blog.disruption-academy.com/blog/hsm-shadowgate2</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/hsm-shadowgate2</guid>
+      <pubDate>Thu, 16 Jul 2026 00:00:00 GMT</pubDate>
+      <category>HackSmarter</category>
+      <category>Medium</category>
+      <category>Windows</category>
+      <category>Active Directory</category>
+      <description>A medium Active Directory box that uncovers a hidden dev subdomain, bypasses its SQL login to plant NTLMv2-theft files and crack a reviewer&apos;s hash, walks a chain of ForceChangePassword, WriteOwner and GenericAll edges through MSSQL impersonation and a logonHours bypass, revives a deleted account from the AD Recycle Bin, and abuses AD CS ESC3 to authenticate as Administrator.</description>
+    </item>
+    <item>
+      <title>HackSmarter - Slayer</title>
+      <link>https://blog.disruption-academy.com/blog/hsm-slayer</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/hsm-slayer</guid>
+      <pubDate>Sat, 04 Jul 2026 00:00:00 GMT</pubDate>
+      <category>HackSmarter</category>
+      <category>Easy</category>
+      <category>Windows</category>
+      <description>An easy standalone Windows box where phished user credentials lead to RDP access, an administrator password left behind in PowerShell history offers an unintended shortcut to full compromise, and the intended path abuses a weak service permission on SysMgmtAgent to rewrite its binPath and join the local Administrators group.</description>
+    </item>
+    <item>
+      <title>HackSmarter - Edge</title>
+      <link>https://blog.disruption-academy.com/blog/hsm-edge</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/hsm-edge</guid>
+      <pubDate>Fri, 03 Jul 2026 00:00:00 GMT</pubDate>
+      <category>HackSmarter</category>
+      <category>Easy</category>
+      <category>Windows</category>
+      <description>An easy Windows box that reuses assumed-breach credentials into a WinRM shell, dumps in-memory Microsoft Edge passwords to recover a VDI service account, breaks out of an RDP kiosk through a browser file download to spawn a shell, and loots a PuTTY config holding local administrator credentials.</description>
+    </item>
+    <item>
+      <title>Just Enough Administration</title>
+      <link>https://blog.disruption-academy.com/blog/just-enough-administration-jea</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/just-enough-administration-jea</guid>
+      <pubDate>Fri, 03 Jul 2026 00:00:00 GMT</pubDate>
+      <category>Windows</category>
+      <category>Windows Internals</category>
+      <description>A deep dive into PowerShell Just Enough Administration (JEA) from an attacker&apos;s perspective - how JEA endpoints work, why their run-as accounts are high-value, how to enumerate and detect a constrained endpoint, and the full range of breakout techniques from dangerous cmdlets and language-mode abuse to output-stream exfiltration and session-configuration backdoors.</description>
+    </item>
+    <item>
+      <title>Kiosk Breakout - Cheatsheet</title>
+      <link>https://blog.disruption-academy.com/blog/kiosk-breakout-cheatsheet</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/kiosk-breakout-cheatsheet</guid>
+      <pubDate>Fri, 03 Jul 2026 00:00:00 GMT</pubDate>
+      <category>Windows</category>
+      <category>Cheatsheet</category>
+      <description>A consolidated kiosk and restricted-desktop breakout cheatsheet covering Windows, Citrix, RDP/VDI and iPad. Command execution, dialog-box pivots, path-restriction bypasses, browser tricks, alternative execution, file transfer, credential hunting and privilege escalation, all in one reference.</description>
+    </item>
+    <item>
+      <title>HackSmarter - 404Bank</title>
+      <link>https://blog.disruption-academy.com/blog/hsm-404bank</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/hsm-404bank</guid>
+      <pubDate>Thu, 02 Jul 2026 00:00:00 GMT</pubDate>
+      <category>HackSmarter</category>
+      <category>Medium</category>
+      <category>Windows</category>
+      <category>Active Directory</category>
+      <description>A medium Active Directory box that decodes a hardcoded hash from a fake banking binary for a foothold, walks an ACL chain of ForceChangePassword and Shadow Credentials edges to loot credentials, pivots through ligolo to an internal admin app, re-enables a disabled service account, and abuses an AD CS ESC4 template to impersonate the Administrator.</description>
+    </item>
+    <item>
+      <title>HackSmarter - Triathlon</title>
+      <link>https://blog.disruption-academy.com/blog/hsm-triathlon</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/hsm-triathlon</guid>
+      <pubDate>Thu, 02 Jul 2026 00:00:00 GMT</pubDate>
+      <category>HackSmarter</category>
+      <category>Hard</category>
+      <category>Windows</category>
+      <category>Active Directory</category>
+      <description>A hard three-host Active Directory box that builds a user list from real-world OSINT, chains AS-REP Roasting and Kerberoasting without pre-authentication for a foothold, relays a coerced NTLM hash across servers lacking SMB signing, cracks a cached domain credential, and forges a Golden Certificate from the compromised CA to DCSync the krbtgt hash.</description>
+    </item>
+    <item>
+      <title>HackSmarter - Dismay</title>
+      <link>https://blog.disruption-academy.com/blog/hsm-dismay</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/hsm-dismay</guid>
+      <pubDate>Wed, 01 Jul 2026 00:00:00 GMT</pubDate>
+      <category>HackSmarter</category>
+      <category>Medium</category>
+      <category>Windows</category>
+      <category>Active Directory</category>
+      <description>A medium three-host Active Directory box that pivots through a standalone WSUS server to loot credentials from Recycle Bin documents and a password-protected archive, chains ForceChangePassword and GenericAll edges across several users, and relays a coerced domain controller through AD CS ESC8 to DCSync the Administrator hash.</description>
+    </item>
+    <item>
+      <title>HackSmarter - Arasaka</title>
+      <link>https://blog.disruption-academy.com/blog/hsm-arasaka</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/hsm-arasaka</guid>
+      <pubDate>Mon, 29 Jun 2026 00:00:00 GMT</pubDate>
+      <category>HackSmarter</category>
+      <category>Easy</category>
+      <category>Windows</category>
+      <category>Active Directory</category>
+      <description>An easy Active Directory box that Kerberoasts a service account, chains GenericAll and GenericWrite edges to reset a user and run a Shadow Credentials attack, then abuses an AD CS ESC1 template to impersonate a Domain Admin and recover its NT hash for a WinRM shell.</description>
+    </item>
+    <item>
+      <title>HackSmarter - MartiniAD</title>
+      <link>https://blog.disruption-academy.com/blog/hsm-martiniad</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/hsm-martiniad</guid>
+      <pubDate>Mon, 29 Jun 2026 00:00:00 GMT</pubDate>
+      <category>HackSmarter</category>
+      <category>Easy</category>
+      <category>Windows</category>
+      <category>Active Directory</category>
+      <description>An easy Active Directory box that starts with anonymous SMB access leaking a set of credentials, moves through LDAP signing restrictions and offline hash cracking to a WinRM foothold, and finishes by spotting password reuse between a service account and a Domain Admin to dump the krbtgt hash from NTDS.</description>
+    </item>
+    <item>
+      <title>HackSmarter - Past</title>
+      <link>https://blog.disruption-academy.com/blog/hsm-past</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/hsm-past</guid>
+      <pubDate>Mon, 29 Jun 2026 00:00:00 GMT</pubDate>
+      <category>HackSmarter</category>
+      <category>Medium</category>
+      <category>Windows</category>
+      <category>Active Directory</category>
+      <description>A medium Active Directory box that pivots from a Guest-readable share through a Timeroasting attack to take over a machine account, loots cleartext credentials from SYSVOL, bypasses an NTLM account restriction with Kerberos, and abuses a GenericAll edge over the domain controller to DCSync the domain.</description>
+    </item>
+    <item>
+      <title>HackSmarter - ShadowGate</title>
+      <link>https://blog.disruption-academy.com/blog/hsm-shadowgate</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/hsm-shadowgate</guid>
+      <pubDate>Mon, 29 Jun 2026 00:00:00 GMT</pubDate>
+      <category>HackSmarter</category>
+      <category>Easy</category>
+      <category>Windows</category>
+      <category>Active Directory</category>
+      <description>An easy Active Directory box that enumerates users over anonymous RPC, gains a foothold through AS-REP Roasting and offline cracking, abuses a GenericWrite edge with a Shadow Credentials attack to take over a second account, and chains AD CS ESC8 to compromise the domain controller and DCSync the krbtgt hash.</description>
+    </item>
+    <item>
+      <title>HackSmarter - Welcome</title>
+      <link>https://blog.disruption-academy.com/blog/hsm-welcome</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/hsm-welcome</guid>
+      <pubDate>Mon, 29 Jun 2026 00:00:00 GMT</pubDate>
+      <category>HackSmarter</category>
+      <category>Easy</category>
+      <category>Windows</category>
+      <category>Active Directory</category>
+      <description>An easy Active Directory box that cracks a password-protected PDF to recover a temporary password, pivots through a GenericAll edge to reset a chain of service accounts, and abuses an AD CS ESC1 template to impersonate the Domain Admin and recover its NT hash.</description>
+    </item>
+    <item>
+      <title>HackTheBox - Haze</title>
+      <link>https://blog.disruption-academy.com/blog/htb-haze</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/htb-haze</guid>
+      <pubDate>Fri, 26 Jun 2026 00:00:00 GMT</pubDate>
+      <category>HackTheBox</category>
+      <category>Hard</category>
+      <category>Windows</category>
+      <category>Active Directory</category>
+      <description>Haze is a hard difficulty Windows machine focused on web exploitation, domain abuse, and Windows privilege escalation. Initial access is gained by exploiting a Splunk Arbitrary File Read (CVE-2024-36991) to extract an LDAP bind password, which is then decrypted using splunk.secret. With valid credentials, a BloodHound scan reveals further accounts, and password spraying provides access to a user with GMSA management rights. This allows abuse of the PrincipalsAllowedToRetrieveManagedPassword property to dump hashes and pivot into a privileged service account. Using Shadow Credentials, access is escalated to another user. Backup files expose more credentials, eventually giving admin access to Splunk. Finally, a custom app upload enables a reverse shell, and SeImpersonatePrivilege is abused to impersonate SYSTEM, completing the escalation chain.</description>
+    </item>
+    <item>
+      <title>HackTheBox - Overwatch</title>
+      <link>https://blog.disruption-academy.com/blog/htb-overwatch</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/htb-overwatch</guid>
+      <pubDate>Wed, 24 Jun 2026 00:00:00 GMT</pubDate>
+      <category>HackTheBox</category>
+      <category>Medium</category>
+      <category>Windows</category>
+      <category>Active Directory</category>
+      <description>Overwatch is a medium-difficulty Windows machine focused on Active Directory enumeration, MSSQL abuse, and insecure .NET application development. Initial access is obtained through an anonymously accessible SMB share containing a custom .NET monitoring application, from which hardcoded MSSQL credentials are recovered. Further enumeration reveals a linked server configuration that can be abused through malicious DNS record injection to coerce MSSQL authentication and capture additional credentials using Responder, ultimately leading to WinRM access. For privilege escalation, the monitoring application is reverse-engineered, revealing a SOAP-based service vulnerable to PowerShell command injection, allowing arbitrary command execution as NT AUTHORITY\\SYSTEM.</description>
+    </item>
+    <item>
+      <title>HackTheBox - Sweep</title>
+      <link>https://blog.disruption-academy.com/blog/htb-sweep</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/htb-sweep</guid>
+      <pubDate>Wed, 24 Jun 2026 00:00:00 GMT</pubDate>
+      <category>HackTheBox</category>
+      <category>Medium</category>
+      <category>Windows</category>
+      <category>Active Directory</category>
+      <description>Sweep is a medium difficulty Windows box that involves Active Directory and Lansweeper, a technology asset intelligence tool. The attacker abuses an enabled guest account to gain access to Lansweeper, which has Map Credentials configured, which are login/password combinations for accessing and scanning network assets remotely. The attacker deploys a honeypot SSH server to read the configured credentials. The compromised account is a member of the Lansweeper Discovery group, which has GenericAll ACL over the Lansweeper Admins group. Any account member of the Lansweeper Admins group has administrator privileges on the Lansweeper dashboard. The attacker creates and deploys a package on the Domain Controller to gain complete control.</description>
+    </item>
+    <item>
+      <title>HackTheBox - Scrambled</title>
+      <link>https://blog.disruption-academy.com/blog/htb-scrambled</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/htb-scrambled</guid>
+      <pubDate>Tue, 23 Jun 2026 00:00:00 GMT</pubDate>
+      <category>HackTheBox</category>
+      <category>Medium</category>
+      <category>Windows</category>
+      <category>Active Directory</category>
+      <description>Scrambled is a medium Windows Active Directory machine. Enumerating the website hosted on the remote machine a potential attacker is able to deduce the credentials for the user ksimpson. On the website, it is also stated that NTLM authentication is disabled meaning that Kerberos authentication is to be used. Accessing the Public share with the credentials of ksimpson, a PDF file states that an attacker retrieved the credentials of an SQL database. This is a hint that there is an SQL service running on the remote machine. Enumerating the normal user accounts, it is found that the account SqlSvc has a Service Principal Name (SPN) associated with it. An attacker can use this information to perform an attack that is knows as kerberoasting and get the hash of SqlSvc. After cracking the hash and acquiring the credentials for the SqlSvc account an attacker can perform a silver ticket attack to forge a ticket and impersonate the user Administrator on the remote MSSQL service. Enumeration of the database reveals the credentials for user MiscSvc, which can be used to execute code on the remote machine using PowerShell remoting. System enumeration as the new user reveals a .NET application, which is listening on port 4411. Reverse engineering the application reveals that it is using the insecure Binary Formatter class to transmit data, allowing the attacker to upload their own payload and get code execution as nt authority\system.</description>
+    </item>
+    <item>
+      <title>HackTheBox - StreamIO</title>
+      <link>https://blog.disruption-academy.com/blog/htb-streamio</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/htb-streamio</guid>
+      <pubDate>Mon, 22 Jun 2026 00:00:00 GMT</pubDate>
+      <category>HackTheBox</category>
+      <category>Medium</category>
+      <category>Windows</category>
+      <category>Active Directory</category>
+      <description>StreamIO is a medium machine that covers subdomain enumeration leading to an SQL injection in order to retrieve stored user credentials, which are cracked to gain access to an administration panel. The administration panel is vulnerable to LFI, which allows us to retrieve the source code for the administration pages and leads to identifying a remote file inclusion vulnerability, the abuse of which gains us access to the system. After the initial shell we leverage the SQLCMD command line utility to enumerate databases and obtain further credentials used in lateral movement. As the secondary user we use WinPEAS to enumerate the system and find saved browser databases, which are decoded to expose new credentials. Using the new credentials within BloodHound we discover that the user has the ability to add themselves to a specific group in which they can read LDAP secrets. Without direct access to the account we use PowerShell to abuse this feature and add ourselves to the Core Staff group, then access LDAP to disclose the administrator LAPS password.</description>
+    </item>
+    <item>
+      <title>Beacon Object Files - From Zero to Hero</title>
+      <link>https://blog.disruption-academy.com/blog/beacon-object-file</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/beacon-object-file</guid>
+      <pubDate>Sat, 20 Jun 2026 00:00:00 GMT</pubDate>
+      <category>Malware Development</category>
+      <category>Windows Internals</category>
+      <description>A complete guide to Beacon Object Files - starting from what they are and why they exist, through writing your first BOF, mastering Dynamic Function Resolution, all the way to advanced evasion techniques like AMSI patching, ETW bypasses, and NTDLL unhooking.</description>
+    </item>
+    <item>
+      <title>WinDbg for Red Teamers - A Practical Guide</title>
+      <link>https://blog.disruption-academy.com/blog/windbg-red-teamers-practical-guide</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/windbg-red-teamers-practical-guide</guid>
+      <pubDate>Sat, 20 Jun 2026 00:00:00 GMT</pubDate>
+      <category>Windows Internals</category>
+      <category>Red Team</category>
+      <description>A practical guide to WinDbg from a red team perspective - covering essential commands, process inspection, live EDR hook detection, IAT analysis, and step-by-step investigation workflows for identifying what a security product is watching inside your process.</description>
+    </item>
+    <item>
+      <title>DLL Proxying</title>
+      <link>https://blog.disruption-academy.com/blog/dll-proxing</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/dll-proxing</guid>
+      <pubDate>Tue, 16 Jun 2026 00:00:00 GMT</pubDate>
+      <category>Malware Development</category>
+      <category>Windows Internals</category>
+      <description>A practical walkthrough of DLL proxying - finding hijackable DLLs with Process Monitor, enumerating exports, building a proxy DLL that forwards every legitimate call to the original while executing your payload, and deploying it against a real application.</description>
+    </item>
+    <item>
+      <title>PE, PEB and TEB Exploration</title>
+      <link>https://blog.disruption-academy.com/blog/pe-peb-and-teb-exploration</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/pe-peb-and-teb-exploration</guid>
+      <pubDate>Mon, 15 Jun 2026 00:00:00 GMT</pubDate>
+      <category>Windows Internals</category>
+      <category>Malware Development</category>
+      <description>A deep dive into the Portable Executable format, the Process Environment Block and the Thread Environment Block - the three fundamental Windows structures every malware developer and analyst must understand.</description>
+    </item>
+    <item>
+      <title>Pivoting, Tunneling and Lateral Movement</title>
+      <link>https://blog.disruption-academy.com/blog/pivoting-tunneling-and-lateral-movement</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/pivoting-tunneling-and-lateral-movement</guid>
+      <pubDate>Mon, 15 Jun 2026 00:00:00 GMT</pubDate>
+      <category>Red Team</category>
+      <description>A practical reference covering every pivoting and tunneling technique you will reach for on an internal engagement - SSH, Ligolo-NG, Chisel, Chisel, socat, sshuttle, DNS/ICMP tunneling - plus a full lateral movement playbook for Windows environments.</description>
+    </item>
+    <item>
+      <title>VSCode Extensions - Initial Access</title>
+      <link>https://blog.disruption-academy.com/blog/vsix-initial-access</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/vsix-initial-access</guid>
+      <pubDate>Sun, 14 Jun 2026 00:00:00 GMT</pubDate>
+      <category>Initial Access</category>
+      <category>Red Team</category>
+      <description>Developer tooling is a soft target. Here is how a VSCode extension turns a trusted IDE into a code-execution primitive, how to build a proof-of-concept VSIX, the delivery vectors that actually land, and how blue teams catch it.</description>
+    </item>
     <item>
       <title>HackTheBox - Soulmate</title>
       <link>https://blog.disruption-academy.com/blog/htb-soulmate</link>

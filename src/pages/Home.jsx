@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import { site } from '../config'
 import { posts, formatDate } from '../lib/posts'
-import { tools } from '../data/tools'
 import { certs } from '../data/certs'
 import PostCard from '../components/PostCard'
 import StatIcon from '../components/StatIcon'
@@ -85,11 +84,6 @@ export default function Home() {
             <StatIcon type="articles" />
             <span className="stat-value">{posts.length}</span>
             <span className="stat-label">articles published</span>
-          </Link>
-          <Link to="/tools" className="stat">
-            <StatIcon type="tools" />
-            <span className="stat-value">{tools.length}</span>
-            <span className="stat-label">tools released</span>
           </Link>
           <Link to="/about" className="stat">
             <StatIcon type="certs" />

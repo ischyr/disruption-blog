@@ -12,7 +12,6 @@ export default function Footer() {
         </span>
         <nav className="footer-links">
           <Link to="/blog">Blog</Link>
-          <Link to="/tools">Tools</Link>
           <a href={site.socials.github} target="_blank" rel="noreferrer">
             GitHub
           </a>

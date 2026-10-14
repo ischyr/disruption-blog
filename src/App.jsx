@@ -14,7 +14,6 @@ const Home = lazy(() => import('./pages/Home'))
 const About = lazy(() => import('./pages/About'))
 const Blog = lazy(() => import('./pages/Blog'))
 const BlogPost = lazy(() => import('./pages/BlogPost'))
-const Tools = lazy(() => import('./pages/Tools'))
 const Glossary = lazy(() => import('./pages/Glossary'))
 const Graph = lazy(() => import('./pages/Graph'))
 const StartHere = lazy(() => import('./pages/StartHere'))
@@ -40,7 +39,6 @@ export default function App() {
               <Route path="/about" element={<About />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
-              <Route path="/tools" element={<Tools />} />
               <Route path="/glossary" element={<Glossary />} />
               <Route path="/graph" element={<Graph />} />
               <Route path="/start-here" element={<StartHere />} />

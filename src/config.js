@@ -33,7 +33,6 @@ export const site = {
   socials: {
     github: 'https://github.com/ischyr',
     linkedin: 'https://www.linkedin.com/in/iulian-schifirnet-238049201/',
-    youtube: 'https://www.youtube.com/@disruption-training',
     academy: 'https://www.disruption-academy.com/',
   },
 }

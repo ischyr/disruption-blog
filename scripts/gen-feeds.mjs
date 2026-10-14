@@ -22,7 +22,6 @@ const STATIC_ROUTES = [
   '',
   'about',
   'blog',
-  'videos',
   'glossary',
   'graph',
   'start-here',

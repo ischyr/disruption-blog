@@ -92,7 +92,6 @@ Embed a folder image inline:
 - `/about` — About / certifications / skills / academy
 - `/blog` — All posts (with search + tag filter)
 - `/blog/:slug` — A single post
-- `/videos` — YouTube videos (edit `src/data/videos.js`)
 - `/quiz` — Interactive security quiz (edit `src/data/quiz.js`)
 - `/glossary` — Searchable terms reference (edit `src/data/glossary.js`)
 - `/graph` — Force-directed graph of posts linked by shared tags

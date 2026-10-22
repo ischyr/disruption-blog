@@ -1,65 +1,5 @@
 [
   {
-    "id": 3364,
-    "title": "Securinets CTF Quals 2026",
-    "ctftime_url": "https://ctftime.org/event/3364/",
-    "url": "https://ctf.securinets.tn/",
-    "start": "2026-10-17T09:00:00+00:00",
-    "finish": "2026-10-18T21:00:00+00:00",
-    "format": "Jeopardy",
-    "onsite": false,
-    "location": "",
-    "restrictions": "Open",
-    "weight": 85.12,
-    "participants": 218,
-    "logo": "https://ctftime.org//media/events/logo_red_copy_1_2.jpg"
-  },
-  {
-    "id": 3471,
-    "title": "SOLAR CTF 2026",
-    "ctftime_url": "https://ctftime.org/event/3471/",
-    "url": "https://solarctf.ru/",
-    "start": "2026-10-17T09:00:00+00:00",
-    "finish": "2026-10-18T09:00:00+00:00",
-    "format": "Jeopardy",
-    "onsite": false,
-    "location": "",
-    "restrictions": "Academic",
-    "weight": 0,
-    "participants": 22,
-    "logo": "https://ctftime.org//media/events/ctf_time_4.png"
-  },
-  {
-    "id": 3279,
-    "title": "DEADFACE CTF 2026",
-    "ctftime_url": "https://ctftime.org/event/3279/",
-    "url": "https://ctf.deadface.io/",
-    "start": "2026-10-17T14:00:00+00:00",
-    "finish": "2026-10-19T00:00:00+00:00",
-    "format": "Jeopardy",
-    "onsite": false,
-    "location": "",
-    "restrictions": "Open",
-    "weight": 35.39,
-    "participants": 174,
-    "logo": "https://ctftime.org//media/events/logo_deadface_ctf_2026.png"
-  },
-  {
-    "id": 3409,
-    "title": "SAS CTF 2026 Finals",
-    "ctftime_url": "https://ctftime.org/event/3409/",
-    "url": "https://ctf.thesascon.com/",
-    "start": "2026-10-20T03:00:00+00:00",
-    "finish": "2026-10-20T14:00:00+00:00",
-    "format": "Attack-Defense",
-    "onsite": true,
-    "location": "Indonesia, Bali",
-    "restrictions": "Prequalified",
-    "weight": 49.5,
-    "participants": 0,
-    "logo": "https://ctftime.org//media/events/SAS26_temp_1.png"
-  },
-  {
     "id": 3369,
     "title": "cruXipher 2026 - ATMoS '26, BITS Hyderabad",
     "ctftime_url": "https://ctftime.org/event/3369/",
@@ -71,8 +11,23 @@
     "location": "",
     "restrictions": "Open",
     "weight": 0,
-    "participants": 24,
+    "participants": 134,
     "logo": "https://ctftime.org//media/events/cruX_logo_1.png"
+  },
+  {
+    "id": 3477,
+    "title": "CREST CTF 2.0",
+    "ctftime_url": "https://ctftime.org/event/3477/",
+    "url": "https://crest.ctf7.com/",
+    "start": "2026-10-23T05:30:00+00:00",
+    "finish": "2026-10-23T11:30:00+00:00",
+    "format": "Jeopardy",
+    "onsite": false,
+    "location": "",
+    "restrictions": "Individual",
+    "weight": 0,
+    "participants": 0,
+    "logo": "https://ctftime.org//media/events/WhatsApp_Image_2026-10-11_at_14.32.54.jpeg"
   },
   {
     "id": 3340,
@@ -86,7 +41,7 @@
     "location": "",
     "restrictions": "Open",
     "weight": 91.16,
-    "participants": 136,
+    "participants": 295,
     "logo": "https://ctftime.org//media/events/63dc69a784f6f69a935d3cd01afa2fa7.jpg"
   },
   {
@@ -101,7 +56,7 @@
     "location": "",
     "restrictions": "Open",
     "weight": 25,
-    "participants": 25,
+    "participants": 81,
     "logo": "https://ctftime.org//media/events/RSTCON-BLK_1.png"
   },
   {
@@ -116,7 +71,7 @@
     "location": "",
     "restrictions": "Open",
     "weight": 94.74,
-    "participants": 99,
+    "participants": 170,
     "logo": "https://ctftime.org//media/events/hacklu25.jpg"
   },
   {
@@ -148,5 +103,50 @@
     "weight": 0,
     "participants": 11,
     "logo": "https://ctftime.org//media/events/87939ee617d4b7c6287bebf8cd7a620c.jpg"
+  },
+  {
+    "id": 3473,
+    "title": "BSides Peoria CTF 2026",
+    "ctftime_url": "https://ctftime.org/event/3473/",
+    "url": "https://bsidespeoriac.tf/",
+    "start": "2026-10-24T14:45:00+00:00",
+    "finish": "2026-10-24T20:45:00+00:00",
+    "format": "Jeopardy",
+    "onsite": true,
+    "location": "Peoria, Illinois, USA",
+    "restrictions": "Casual",
+    "weight": 0,
+    "participants": 4,
+    "logo": "https://ctftime.org//media/events/cropped-BSIDES_PEORIA-2026_10pct.png"
+  },
+  {
+    "id": 3443,
+    "title": "Sudocrypt v16.0",
+    "ctftime_url": "https://ctftime.org/event/3443/",
+    "url": "https://sudocrypt.com/",
+    "start": "2026-10-27T03:30:00+00:00",
+    "finish": "2026-10-28T15:30:00+00:00",
+    "format": "Hack quest",
+    "onsite": false,
+    "location": "",
+    "restrictions": "Open",
+    "weight": 0,
+    "participants": 24,
+    "logo": "https://ctftime.org//media/events/WhatsApp_Image_2026-09-14_at_12.17.30.jpeg"
+  },
+  {
+    "id": 3444,
+    "title": "Srdnlen CTF 2026 Finals (Sardinia Cyber Camp)",
+    "ctftime_url": "https://ctftime.org/event/3444/",
+    "url": "https://ctf.srdnlen.it/",
+    "start": "2026-10-29T09:00:00+00:00",
+    "finish": "2026-10-29T17:00:00+00:00",
+    "format": "Jeopardy",
+    "onsite": true,
+    "location": "Italy, Cagliari",
+    "restrictions": "Prequalified",
+    "weight": 25,
+    "participants": 0,
+    "logo": "https://ctftime.org//media/events/e04b66f1d17c437f935e29d0fbe7beed_2.png"
   }
 ]

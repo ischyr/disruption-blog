@@ -1,6 +1,7 @@
 import { site } from '../config'
 import { certs } from '../data/certs'
 import CertBadge from '../components/CertBadge'
+import { useTitle } from '../lib/useTitle'
 
 const skills = [
   'Web Application Pentesting',
@@ -14,6 +15,7 @@ const skills = [
 ]
 
 export default function About() {
+  useTitle('About')
   return (
     <div className="page page-narrow">
       <h1 className="page-title">About</h1>

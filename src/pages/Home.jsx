@@ -9,8 +9,10 @@ import ContributionHeatmap from '../components/ContributionHeatmap'
 import Reveal from '../components/Reveal'
 import Typewriter from '../components/Typewriter'
 import HeroSearch from '../components/HeroSearch'
+import { useTitle } from '../lib/useTitle'
 
 export default function Home() {
+  useTitle()
   const featured = posts[0]
   const latest = posts.slice(0, 2)
 

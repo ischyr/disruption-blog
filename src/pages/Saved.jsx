@@ -2,8 +2,10 @@ import { Link } from 'react-router-dom'
 import { posts } from '../lib/posts'
 import { useSaved } from '../lib/bookmarks'
 import PostCard from '../components/PostCard'
+import { useTitle } from '../lib/useTitle'
 
 export default function Saved() {
+  useTitle('Saved')
   const slugs = useSaved()
   // preserve saved order (newest-saved first); drop any slugs no longer present
   const savedPosts = slugs

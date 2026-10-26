@@ -9,7 +9,9 @@ import bash from 'highlight.js/lib/languages/bash'
 import plaintext from 'highlight.js/lib/languages/plaintext'
 import 'highlight.js/styles/github-dark-dimmed.css'
 import remarkCallouts from '../lib/remarkCallouts'
+import rehypeTerminal from '../lib/rehypeTerminal'
 import MermaidDiagram from './MermaidDiagram'
+import TerminalDots from './TerminalDots'
 
 // Only these languages are bundled, to keep the reader chunk small. Any other
 // code-fence language falls back to plain text (rehypeHighlight ignoreMissing).
@@ -25,17 +27,46 @@ function getText(children) {
   return ''
 }
 
+// Long tool output (nmap, secretsdump…) folds so a post isn't a wall of text.
+const FOLD_OVER = 30 // blocks longer than this many lines fold…
+const FOLD_TO = 15 // …down to this many (keep in sync with .codeblock.folded pre)
+
 function CodeBlock({ children }) {
   const ref = useRef(null)
+  const boxRef = useRef(null)
   const [copied, setCopied] = useState(false)
   const [wrap, setWrap] = useState(false)
+  const [expanded, setExpanded] = useState(false)
+
+  // the Commands panel / Ctrl+K palette ask a folded block to open before
+  // jumping to a line inside it
+  useEffect(() => {
+    const el = boxRef.current
+    if (!el) return
+    const open = () => setExpanded(true)
+    el.addEventListener('codeblock:expand', open)
+    return () => el.removeEventListener('codeblock:expand', open)
+  }, [])
 
   const className = children?.props?.className || ''
   const lang = /language-([\w+#-]+)/.exec(className)?.[1] || 'text'
+  const source = getText(children?.props?.children)
 
   // mermaid fences render as diagrams, not code
   if (lang === 'mermaid') {
-    return <MermaidDiagram chart={getText(children?.props?.children).trim()} />
+    return <MermaidDiagram chart={source.trim()} />
+  }
+
+  const lineCount = source.replace(/\n$/, '').split('\n').length
+  const foldable = lineCount > FOLD_OVER
+  const folded = foldable && !expanded
+
+  const toggleFold = () => {
+    // folding a block you've scrolled into: bring its top back into view
+    // first, so the page doesn't jump past it
+    const top = boxRef.current?.getBoundingClientRect().top ?? 0
+    if (expanded && top < 0) window.scrollBy({ top: top - 90 })
+    setExpanded((e) => !e)
   }
 
   const copy = async () => {
@@ -49,9 +80,12 @@ function CodeBlock({ children }) {
     }
   }
 
+  // styled as a terminal window: traffic-light dots, the language as the
+  // window title, and the actions on the right
   return (
-    <div className="codeblock">
+    <div className={`codeblock${folded ? ' folded' : ''}`} ref={boxRef}>
       <div className="codeblock-header">
+        <TerminalDots />
         <span className="codeblock-lang">{lang}</span>
         <div className="codeblock-actions">
           <button
@@ -71,6 +105,16 @@ function CodeBlock({ children }) {
       <pre ref={ref} className={wrap ? 'wrap' : undefined}>
         {children}
       </pre>
+      {foldable && (
+        <button
+          type="button"
+          className="codeblock-fold"
+          onClick={toggleFold}
+          aria-expanded={!folded}
+        >
+          {folded ? `show all (${lineCount} lines) ▾` : `collapse to ${FOLD_TO} lines ▴`}
+        </button>
+      )}
     </div>
   )
 }
@@ -128,7 +172,11 @@ export default function Markdown({ children }) {
     <div className="markdown">
       <ReactMarkdown
         remarkPlugins={[remarkGfm, remarkCallouts]}
-        rehypePlugins={[rehypeSlug, [rehypeHighlight, { languages, ignoreMissing: true }]]}
+        rehypePlugins={[
+          rehypeSlug,
+          [rehypeHighlight, { languages, ignoreMissing: true }],
+          rehypeTerminal, // after highlighting, so prompts land between tokens
+        ]}
         components={{
           pre: CodeBlock,
           h1: H1,
@@ -137,12 +185,15 @@ export default function Markdown({ children }) {
           a: ({ node, ...props }) => (
             <a {...props} target="_blank" rel="noreferrer" />
           ),
-          img: ({ node, ...props }) => (
+          img: ({ src, alt, title }) => (
             <img
-              {...props}
+              src={src}
+              alt={alt}
+              title={title}
               className="md-img"
               loading="lazy"
-              onClick={() => props.src && setZoom(props.src)}
+              decoding="async"
+              onClick={() => src && setZoom(src)}
             />
           ),
         }}

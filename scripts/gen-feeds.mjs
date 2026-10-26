@@ -23,7 +23,6 @@ const STATIC_ROUTES = [
   'about',
   'blog',
   'glossary',
-  'graph',
   'start-here',
   'ctf',
 ]

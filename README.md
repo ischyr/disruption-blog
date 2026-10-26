@@ -84,6 +84,8 @@ Embed a folder image inline:
 | Certifications (About page) | `src/data/certs.js` |
 | Certification badge images | `public/certs/` |
 | Post images (cover + inline) | the post's own folder in `src/posts/` |
+| Share preview image (LinkedIn, Discord…) | the cover by default; put an `og.png` (1200×630) in the post's folder to override it — required when the cover is an SVG |
+| Per-page HTML (titles, share tags) | generated after every build by `scripts/gen-pages.mjs` |
 | Colors & theme | `:root` block in `src/index.css` |
 
 ## Pages
@@ -94,4 +96,3 @@ Embed a folder image inline:
 - `/blog/:slug` — A single post
 - `/quiz` — Interactive security quiz (edit `src/data/quiz.js`)
 - `/glossary` — Searchable terms reference (edit `src/data/glossary.js`)
-- `/graph` — Force-directed graph of posts linked by shared tags

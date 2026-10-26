@@ -1,7 +1,9 @@
 import { useMemo, useState } from 'react'
 import { glossary } from '../data/glossary'
+import { useTitle } from '../lib/useTitle'
 
 export default function Glossary() {
+  useTitle('Glossary')
   const [q, setQ] = useState('')
 
   const sorted = useMemo(

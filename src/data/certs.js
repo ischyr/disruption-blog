@@ -8,6 +8,8 @@
 // edit these to the dates you actually earned them.
 export const certs = [
   { name: 'eCPPT', full: 'eLearnSecurity Certified Professional Penetration Tester', img: '/certs/ecppt.png', date: '2026' },
+  { name: 'eWPT', full: 'eLearnSecurity Web Application Penetration Tester', img: '/certs/ewpt.png', date: '2026' },
+  { name: 'ACPT', full: 'AlteredSecurity Certified Penetration Tester', img: '/certs/acpt.png', date: '2026' },
   { name: 'CNPen', full: 'Certified Network Penetration Tester', img: '/certs/cnpen.png', date: '2025' },
   { name: 'PNPT', full: 'Practical Network Penetration Tester', img: '/certs/pnpt.png', date: '2024' },
   { name: 'OSCP', full: 'Offensive Security Certified Professional', img: '/certs/oscp.png', date: '2022' },

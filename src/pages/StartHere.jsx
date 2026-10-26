@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { site } from '../config'
 import { tracks } from '../data/learningPaths'
+import { useTitle } from '../lib/useTitle'
 
 function levelClass(level) {
   const l = level.toLowerCase()
@@ -165,6 +166,7 @@ function CertHelper() {
 }
 
 export default function StartHere() {
+  useTitle('Start Here')
   const [active, setActive] = useState(tracks[0].id)
   const track = tracks.find((t) => t.id === active)
 

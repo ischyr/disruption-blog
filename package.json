@@ -9,13 +9,11 @@
     "gen:feeds": "node scripts/gen-feeds.mjs",
     "prebuild": "node scripts/fetch-ctf.mjs && node scripts/gen-feeds.mjs",
     "build": "vite build",
+    "postbuild": "node scripts/gen-pages.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
-    "d3-force": "^3.0.0",
-    "d3-selection": "^3.0.0",
-    "d3-zoom": "^3.0.0",
     "github-slugger": "^2.0.0",
     "highlight.js": "^11.11.1",
     "lowlight": "^3.3.0",

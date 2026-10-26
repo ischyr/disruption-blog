@@ -6,19 +6,18 @@ import ScrollToTop from './components/ScrollToTop'
 import ReadingProgress from './components/ReadingProgress'
 import BackToTop from './components/BackToTop'
 import ReadingRuler from './components/ReadingRuler'
+import PaletteLauncher from './components/PaletteLauncher'
 
 // Pages are code-split so the heavy, route-specific deps (react-markdown +
-// highlight.js on a post, mermaid for diagrams, d3 for the graph) only download
+// highlight.js on a post, mermaid for diagrams) only download
 // when that route is actually visited — keeping first paint fast.
 const Home = lazy(() => import('./pages/Home'))
 const About = lazy(() => import('./pages/About'))
 const Blog = lazy(() => import('./pages/Blog'))
 const BlogPost = lazy(() => import('./pages/BlogPost'))
 const Glossary = lazy(() => import('./pages/Glossary'))
-const Graph = lazy(() => import('./pages/Graph'))
 const StartHere = lazy(() => import('./pages/StartHere'))
 const CtfEvents = lazy(() => import('./pages/CtfEvents'))
-const Toolbox = lazy(() => import('./pages/Toolbox'))
 const Saved = lazy(() => import('./pages/Saved'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
@@ -40,10 +39,8 @@ export default function App() {
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/glossary" element={<Glossary />} />
-              <Route path="/graph" element={<Graph />} />
               <Route path="/start-here" element={<StartHere />} />
               <Route path="/ctf" element={<CtfEvents />} />
-              <Route path="/toolbox" element={<Toolbox />} />
               <Route path="/saved" element={<Saved />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
@@ -53,6 +50,7 @@ export default function App() {
       <Footer />
       <BackToTop />
       <ReadingRuler />
+      <PaletteLauncher />
     </div>
   )
 }

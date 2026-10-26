@@ -1,7 +1,9 @@
 import { Link, useLocation } from 'react-router-dom'
 import { site } from '../config'
+import { useTitle } from '../lib/useTitle'
 
 export default function NotFound() {
+  useTitle('404')
   const { pathname } = useLocation()
 
   return (

@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useLocation, useParams } from 'react-router-dom'
 import { posts, getPost, formatDate, resolveImages, relatedPosts, loadPostBody } from '../lib/posts'
 import { extractHeadings } from '../lib/toc'
+import { extractCommands } from '../lib/commands'
+import { jumpTo } from '../lib/jumpTo'
 import { site } from '../config'
 import Markdown from '../components/Markdown'
 import TableOfContents from '../components/TableOfContents'
@@ -11,10 +13,13 @@ import PostQR from '../components/PostQR'
 import AuthorCard from '../components/AuthorCard'
 import MachineCard from '../components/MachineCard'
 import BookmarkButton from '../components/BookmarkButton'
+import CommandsPanel from '../components/CommandsPanel'
+import { useTitle } from '../lib/useTitle'
 
 export default function BlogPost() {
   const { slug } = useParams()
   const post = getPost(slug)
+  useTitle(post ? post.title : 'Not found')
 
   // The body lives in its own code-split chunk; fetch it when the slug changes.
   // We store the body together with the slug it belongs to, then derive loading
@@ -44,6 +49,19 @@ export default function BlogPost() {
   )
   const hasToc = headings.length >= 2
 
+  // arriving from the Ctrl+K palette with a command: jump to it once the body
+  // has rendered (keyed on location.key so picking it again re-jumps)
+  const location = useLocation()
+  const jump = location.state?.jump
+  useEffect(() => {
+    if (!ready || !jump) return
+    const t = setTimeout(() => jumpTo(jump), 80)
+    return () => clearTimeout(t)
+  }, [ready, jump, location.key])
+  const commands = useMemo(() => extractCommands(rawBody), [rawBody])
+  // a couple of stray commands isn't worth a cheat sheet
+  const hasCommands = commands.length >= 3
+
   // neighbours (posts are sorted newest-first): prev = newer, next = older
   const idx = posts.findIndex((p) => p.slug === slug)
   const prev = idx > 0 ? posts[idx - 1] : null
@@ -72,6 +90,7 @@ export default function BlogPost() {
       {hasSidebar && (
         <aside className="post-rail-left">
           <PostQR />
+          {hasCommands && <CommandsPanel commands={commands} />}
         </aside>
       )}
 
@@ -112,6 +131,10 @@ export default function BlogPost() {
                   {post.readTime}
                 </span>
               </div>
+              {/* only shown when printing / saving as PDF */}
+              <p className="print-source">
+                {site.handle} · {window.location.origin}/blog/{post.slug}
+              </p>
               {post.tags.length > 0 && (
                 <div className="tag-row">
                   {post.tags.map((tag) => (
@@ -144,6 +167,7 @@ export default function BlogPost() {
           </div>
 
           <MachineCard machine={post.machine} />
+          {hasCommands && <CommandsPanel commands={commands} variant="inline" />}
           {loading ? (
             <div className="post-skeleton" aria-hidden="true">
               <span className="post-skeleton-line" />

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import events from '../data/ctf-events.json'
+import { useTitle } from '../lib/useTitle'
 
 const CTFTIME_URL = 'https://ctftime.org/event/list/upcoming'
 
@@ -31,6 +32,7 @@ function EventLogo({ src, alt }) {
 }
 
 export default function CtfEvents() {
+  useTitle('CTF Events')
   return (
     <div className="page page-narrow">
       <div className="ctf-head">

@@ -7,7 +7,7 @@ platform: HackTheBox
 os: Linux
 difficulty: Easy
 points: 45
-released: 2022-06-23
+released: 2026-06-23
 ip: 10.129.244.146
 boxAvatar: htb-cover.png
 excerpt: An easy Linux box running a telecom company's public site on Craft CMS. A pre-auth RCE chain against the admin panel's outdated Craft CMS version gives a www-data shell, and database credentials sitting in a Craft .env file crack a bcrypt hash to pivot to a real user. From there, a vulnerable local telnet binary accepts an authentication bypass through a crafted USER environment variable, handing over root directly.

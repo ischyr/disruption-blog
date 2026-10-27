@@ -5,7 +5,7 @@
     <link>https://blog.disruption-academy.com/</link>
     <description>Security research, exploit development, and technical write-ups covering various aspects of offensive security and penetration testing.</description>
     <language>en</language>
-    <lastBuildDate>Tue, 27 Oct 2026 13:25:22 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 27 Oct 2026 13:29:20 GMT</lastBuildDate>
     <atom:link href="https://blog.disruption-academy.com/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>HackTheBox - Checkpoint</title>
@@ -37,6 +37,16 @@
       <category>Easy</category>
       <category>Linux</category>
       <description>An easy Linux box fronting a fictional nuclear plant monitoring dashboard built on an outdated Next.js release. A public pre-auth RCE PoC for the version gives a low-privileged shell, and an .env file next to a leaked SQLite database cracks a password for a real system user. From there, a root-owned Node.js process left listening on the V8 Inspector&apos;s unauthenticated debug port hands over full root through the Chrome DevTools Protocol.</description>
+    </item>
+    <item>
+      <title>HackTheBox - WingData</title>
+      <link>https://blog.disruption-academy.com/blog/htb-wingdata</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/htb-wingdata</guid>
+      <pubDate>Tue, 27 Oct 2026 00:00:00 GMT</pubDate>
+      <category>HackTheBox</category>
+      <category>Easy</category>
+      <category>Linux</category>
+      <description>An easy Linux box fronting a file-sharing company&apos;s site. A vhost scan turns up a Wing FTP Server instance vulnerable to a known unauthenticated RCE, which gives a low-privileged shell and access to the server&apos;s stored user password hashes. One cracks, giving SSH access to a real account that can run a backup-restore script as root. The script&apos;s tar extraction uses Python&apos;s &quot;safe&quot; filter=&quot;data&quot; mode, but a since-patched Python tarfile bug (CVE-2025-4517) lets a chain of nested symlinks escape the staging directory anyway, landing a root SSH key and full root.</description>
     </item>
     <item>
       <title>HackSmarter - Kitsune</title>

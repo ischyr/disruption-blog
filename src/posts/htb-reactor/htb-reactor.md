@@ -7,7 +7,7 @@ platform: HackTheBox
 os: Linux
 difficulty: Easy
 points: 45
-released: 2022-05-23
+released: 2026-05-23
 ip: 10.129.245.214
 boxAvatar: htb-cover.png
 excerpt: An easy Linux box fronting a fictional nuclear plant monitoring dashboard built on an outdated Next.js release. A public pre-auth RCE PoC for the version gives a low-privileged shell, and an .env file next to a leaked SQLite database cracks a password for a real system user. From there, a root-owned Node.js process left listening on the V8 Inspector's unauthenticated debug port hands over full root through the Chrome DevTools Protocol.

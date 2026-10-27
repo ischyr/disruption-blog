@@ -5,7 +5,7 @@
     <link>https://blog.disruption-academy.com/</link>
     <description>Security research, exploit development, and technical write-ups covering various aspects of offensive security and penetration testing.</description>
     <language>en</language>
-    <lastBuildDate>Tue, 27 Oct 2026 13:14:25 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 27 Oct 2026 13:20:55 GMT</lastBuildDate>
     <atom:link href="https://blog.disruption-academy.com/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>HackTheBox - Checkpoint</title>
@@ -17,6 +17,16 @@
       <category>Windows</category>
       <category>Active Directory</category>
       <description>A Windows Active Directory box that starts from a set of valid domain credentials. Abusing self-write rights on a deleted coworker&apos;s account restores it from the Recycle Bin, which opens the door to AS-REP roasting and write access to a VS Code extensions share. A malicious VSIX package lands a second shell, from where a GenericWrite edge over a service account is weaponized into a dMSA via the BadSuccessor/BetterSuccessor technique. The forged ticket exposes a VMware snapshot of a retired server, whose memory dump yields a reused local Administrator hash for the finishing pass-the-hash.</description>
+    </item>
+    <item>
+      <title>HackTheBox - Orion</title>
+      <link>https://blog.disruption-academy.com/blog/htb-orion</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/htb-orion</guid>
+      <pubDate>Tue, 27 Oct 2026 00:00:00 GMT</pubDate>
+      <category>HackTheBox</category>
+      <category>Easy</category>
+      <category>Linux</category>
+      <description>An easy Linux box running a telecom company&apos;s public site on Craft CMS. A pre-auth RCE chain against the admin panel&apos;s outdated Craft CMS version gives a www-data shell, and database credentials sitting in a Craft .env file crack a bcrypt hash to pivot to a real user. From there, a vulnerable local telnet binary accepts an authentication bypass through a crafted USER environment variable, handing over root directly.</description>
     </item>
     <item>
       <title>HackSmarter - Kitsune</title>

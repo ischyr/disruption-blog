@@ -6,7 +6,7 @@ tags: [HackTheBox, Easy, Linux]
 platform: HackTheBox
 os: Linux
 difficulty: Easy
-points:
+points: 45
 released: 2022-06-23
 ip: 10.129.244.146
 boxAvatar: htb-cover.png

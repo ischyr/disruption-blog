@@ -5,7 +5,7 @@
     <link>https://blog.disruption-academy.com/</link>
     <description>Security research, exploit development, and technical write-ups covering various aspects of offensive security and penetration testing.</description>
     <language>en</language>
-    <lastBuildDate>Tue, 27 Oct 2026 13:20:55 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 27 Oct 2026 13:25:22 GMT</lastBuildDate>
     <atom:link href="https://blog.disruption-academy.com/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>HackTheBox - Checkpoint</title>
@@ -27,6 +27,16 @@
       <category>Easy</category>
       <category>Linux</category>
       <description>An easy Linux box running a telecom company&apos;s public site on Craft CMS. A pre-auth RCE chain against the admin panel&apos;s outdated Craft CMS version gives a www-data shell, and database credentials sitting in a Craft .env file crack a bcrypt hash to pivot to a real user. From there, a vulnerable local telnet binary accepts an authentication bypass through a crafted USER environment variable, handing over root directly.</description>
+    </item>
+    <item>
+      <title>HackTheBox - Reactor</title>
+      <link>https://blog.disruption-academy.com/blog/htb-reactor</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/htb-reactor</guid>
+      <pubDate>Tue, 27 Oct 2026 00:00:00 GMT</pubDate>
+      <category>HackTheBox</category>
+      <category>Easy</category>
+      <category>Linux</category>
+      <description>An easy Linux box fronting a fictional nuclear plant monitoring dashboard built on an outdated Next.js release. A public pre-auth RCE PoC for the version gives a low-privileged shell, and an .env file next to a leaked SQLite database cracks a password for a real system user. From there, a root-owned Node.js process left listening on the V8 Inspector&apos;s unauthenticated debug port hands over full root through the Chrome DevTools Protocol.</description>
     </item>
     <item>
       <title>HackSmarter - Kitsune</title>

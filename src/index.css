@@ -136,9 +136,11 @@ a {
   animation: routeFade 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* holds vertical space while a lazily-loaded route chunk downloads */
+/* holds vertical space while a lazily-loaded route chunk downloads — a full
+   screen, so the footer starts below the fold instead of flashing at the top
+   and then jumping down when the page arrives (a large layout shift) */
 .route-loading {
-  min-height: 60vh;
+  min-height: 100vh;
 }
 
 @keyframes routeFade {
@@ -2731,6 +2733,8 @@ body.menu-open .back-to-top {
   padding-bottom: 0.3rem;
 }
 
+/* weeks stretch to fill the card; below ~11px per cell the row stops
+   shrinking and scrolls sideways instead (opened on the latest weeks) */
 .heatmap-months {
   display: flex;
   gap: 3px;
@@ -2738,8 +2742,8 @@ body.menu-open .back-to-top {
 }
 
 .heatmap-month {
-  flex: 0 0 11px;
-  width: 11px;
+  flex: 1 1 0;
+  min-width: 11px;
   font-family: var(--font-mono);
   font-size: 0.66rem;
   color: var(--muted);
@@ -2750,13 +2754,21 @@ body.menu-open .back-to-top {
 .heatmap-grid {
   display: flex;
   gap: 3px;
-  width: max-content;
 }
 
 .heatmap-week {
+  flex: 1 1 0;
+  min-width: 11px;
   display: flex;
   flex-direction: column;
   gap: 3px;
+}
+
+.heatmap-week .heatmap-cell {
+  flex: none;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
 }
 
 .heatmap-cell {
@@ -3760,6 +3772,14 @@ body.menu-open .back-to-top {
 .navbar-search-mobile svg {
   width: 18px;
   height: 18px;
+}
+
+/* shown with the burger; this has to come after the base rule above, which
+   would otherwise win and keep it hidden */
+@media (max-width: 760px) {
+  .navbar-search-mobile {
+    display: inline-flex;
+  }
 }
 
 .palette-backdrop {
@@ -4919,4 +4939,620 @@ html.vt-active .route-fade {
 /* hidden on screen; only the print stylesheet shows it */
 .print-source {
   display: none;
+}
+
+/* ── Home ─────────────────────────────────────────────────────────── */
+/* editorial layout: a masthead over the wolf art, then numbered sections
+   divided by hairlines. Motion is transform/opacity only. */
+.home > * + * {
+  margin-top: 4.5rem;
+}
+
+.h-hero {
+  position: relative;
+  padding-top: 2rem;
+}
+
+.h-art {
+  position: absolute;
+  z-index: 0;
+  top: -3rem;
+  bottom: 5rem;
+  right: -7rem;
+  width: 70%;
+  pointer-events: none;
+  background: url('/images/lone_wolf.webp') no-repeat 60% 70% / cover;
+  -webkit-mask-image: radial-gradient(ellipse 70% 75% at 60% 55%, #000 35%, transparent 78%);
+  mask-image: radial-gradient(ellipse 70% 75% at 60% 55%, #000 35%, transparent 78%);
+  mix-blend-mode: lighten;
+  opacity: 0.9;
+  animation: hFade 1.4s ease both;
+}
+
+:root[data-theme='light'] .h-art {
+  filter: invert(1);
+  mix-blend-mode: multiply;
+  opacity: 0.4;
+}
+
+.h-hero-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  padding-bottom: 4rem;
+}
+
+.h-hero-copy > * {
+  animation: hRise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.h-hero-copy > :nth-child(2) { animation-delay: 0.06s; }
+.h-hero-copy > :nth-child(3) { animation-delay: 0.12s; }
+.h-hero-copy > :nth-child(4) { animation-delay: 0.18s; }
+
+/* plain inline text, so a long role wraps like a sentence on phones */
+.h-kicker {
+  margin: 0 0 1.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.h-kicker-dot {
+  position: relative;
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 0.6rem;
+  vertical-align: 0.05em;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.h-kicker-dot::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  animation: hPing 2.4s ease-out infinite;
+}
+
+.h-kicker-sep {
+  margin: 0 0.3rem;
+  color: var(--faint);
+}
+
+.h-title {
+  margin: 0 0 1.4rem;
+  font-size: clamp(2.5rem, 6.2vw, 4.6rem);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  color: var(--text-bright);
+}
+
+.h-title-dim {
+  color: var(--faint);
+}
+
+.h-accent {
+  color: var(--accent);
+}
+
+.h-lede {
+  margin: 0 0 2.1rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--muted-2);
+}
+
+/* the typed phrase can wrap to a second line on phones; reserve both lines
+   so the buttons below don't jump as it types and deletes */
+@media (max-width: 560px) {
+  .h-lede {
+    min-height: 3.2em;
+  }
+}
+
+.h-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.h-actions .btn span {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.h-actions .btn:hover span {
+  transform: translateX(3px);
+}
+
+.h-search-btn kbd {
+  margin-left: 0.35rem;
+  padding: 0.05rem 0.4rem;
+  border: 1px solid var(--border-bright);
+  border-radius: 5px;
+  background: var(--panel-2);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+/* no keyboard shortcut to advertise on touch screens */
+@media (hover: none), (max-width: 560px) {
+  .h-search-btn kbd {
+    display: none;
+  }
+}
+
+/* spec-sheet row along the bottom of the masthead */
+.h-meta {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 0;
+  border-top: 1px solid var(--border);
+  animation: hRise 0.7s 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.h-meta > div {
+  padding: 1.1rem 1.2rem 0;
+  border-left: 1px solid var(--border);
+}
+
+.h-meta > div:first-child {
+  padding-left: 0;
+  border-left: none;
+}
+
+.h-meta dt {
+  margin-bottom: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--faint);
+}
+
+.h-meta dd {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-bright);
+}
+
+.h-meta dd.h-meta-date {
+  padding-top: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+/* numbered section heads */
+.h-head {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1.6rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.h-head-num {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--accent);
+}
+
+.h-head-title {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-bright);
+}
+
+.h-head-link {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+  transition: color 0.15s;
+}
+
+.h-head-link:hover {
+  color: var(--text-bright);
+}
+
+/* latest: a feature card beside a numbered index */
+.h-latest {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.h-feature {
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--panel);
+  transition: border-color 0.2s;
+}
+
+.h-feature:hover {
+  border-color: var(--border-bright);
+}
+
+.h-feature-cover {
+  aspect-ratio: 16 / 8.5;
+  overflow: hidden;
+  background: var(--panel-2);
+  border-bottom: 1px solid var(--border);
+}
+
+.h-feature-cover img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.h-feature:hover .h-feature-cover img {
+  transform: scale(1.03);
+}
+
+.h-feature-body {
+  padding: 1.4rem 1.5rem 1.5rem;
+}
+
+.h-feature-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.85rem;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--muted);
+}
+
+.h-feature-date {
+  margin-left: auto;
+}
+
+.h-feature-title {
+  margin: 0 0 0.7rem;
+  font-size: 1.6rem;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: var(--text-bright);
+}
+
+.h-feature-excerpt {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0 0 1.2rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--muted-2);
+}
+
+.h-feature-cta {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-bright);
+}
+
+.h-feature-cta span {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.h-feature:hover .h-feature-cta span {
+  transform: translateX(4px);
+}
+
+/* difficulty colours, shared by badges, the mix bar and its legend */
+.h-level-easy { --lvl: var(--ok); }
+.h-level-medium { --lvl: var(--sev-medium); }
+.h-level-hard { --lvl: var(--sev-critical); }
+.h-level-insane { --lvl: var(--sev-low); }
+
+.h-level {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.08rem 0.5rem;
+  border: 1px solid color-mix(in srgb, var(--lvl, var(--muted)) 45%, transparent);
+  border-radius: 999px;
+  color: var(--lvl, var(--muted));
+}
+
+.h-level::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.h-index {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--border);
+}
+
+.h-index-row {
+  display: grid;
+  grid-template-columns: 2.2rem 1fr auto;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.05rem 0.5rem;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+}
+
+.h-index-row:hover {
+  background: var(--hover-bg);
+}
+
+.h-index-num {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--faint);
+  transition: color 0.15s;
+}
+
+.h-index-row:hover .h-index-num {
+  color: var(--accent);
+}
+
+.h-index-main {
+  min-width: 0;
+}
+
+.h-index-title {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text-bright);
+}
+
+.h-index-meta {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.h-index-arrow {
+  color: var(--accent);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.15s, transform 0.2s ease;
+}
+
+.h-index-row:hover .h-index-arrow {
+  opacity: 1;
+  transform: none;
+}
+
+/* topics: a hairline grid (1px gaps over the border colour) */
+.h-topics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--border);
+}
+
+.h-topic {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1.3rem 1.3rem 1.5rem;
+  background: var(--panel);
+  transition: background 0.15s;
+}
+
+.h-topic:hover {
+  background: var(--panel-2);
+}
+
+.h-topic-count {
+  font-size: 2.1rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-bright);
+}
+
+.h-topic-label {
+  font-size: 0.88rem;
+  color: var(--muted-2);
+}
+
+/* share of posts carrying this tag, relative to the most common one */
+.h-topic-bar {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: var(--w);
+  height: 2px;
+  background: var(--text-bright);
+  opacity: 0.16;
+  transition: opacity 0.2s, background 0.2s;
+}
+
+.h-topic:hover .h-topic-bar {
+  background: var(--accent);
+  opacity: 1;
+}
+
+.h-levels {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1.2rem;
+  margin-top: 1.6rem;
+}
+
+.h-levels-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--faint);
+}
+
+.h-levels-bar {
+  display: flex;
+  gap: 3px;
+  height: 8px;
+}
+
+.h-levels-seg {
+  flex-basis: 0;
+  min-width: 8px;
+  border-radius: 2px;
+  background: var(--lvl);
+  opacity: 0.85;
+  transition: opacity 0.15s;
+}
+
+.h-levels-seg:hover {
+  opacity: 1;
+}
+
+.h-levels-legend {
+  display: flex;
+  gap: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+}
+
+.h-levels-key {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--muted);
+  transition: color 0.15s;
+}
+
+.h-levels-key:hover {
+  color: var(--text-bright);
+}
+
+.h-levels-swatch {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--lvl);
+}
+
+.h-levels-n {
+  color: var(--text-bright);
+}
+
+@keyframes hRise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+@keyframes hFade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes hPing {
+  0% {
+    opacity: 0.8;
+    transform: scale(0.6);
+  }
+  80%,
+  100% {
+    opacity: 0;
+    transform: scale(1.6);
+  }
+}
+
+@media (max-width: 900px) {
+  .h-latest {
+    grid-template-columns: 1fr;
+  }
+
+  .h-topics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .h-art {
+    right: -30%;
+    width: 110%;
+    opacity: 0.35;
+  }
+
+  .h-meta {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 1.2rem;
+  }
+
+  .h-meta > div:nth-child(3) {
+    padding-left: 0;
+    border-left: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .home > * + * {
+    margin-top: 3.5rem;
+  }
+
+  .h-hero-copy {
+    padding-bottom: 3rem;
+  }
+
+  .h-levels {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+  }
+
+  .h-feature-date {
+    margin-left: 0;
+  }
+
+  .h-feature-title {
+    font-size: 1.35rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .h-art,
+  .h-hero-copy > *,
+  .h-meta,
+  .h-kicker-dot::after {
+    animation: none;
+  }
 }

@@ -41,7 +41,7 @@
     "location": "Faculty of Automation & Computer Science, Timisoara, Romania",
     "restrictions": "Open",
     "weight": 25,
-    "participants": 10,
+    "participants": 15,
     "logo": "https://ctftime.org//media/events/CTFAC26_1.png"
   },
   {
@@ -56,7 +56,7 @@
     "location": "",
     "restrictions": "Open",
     "weight": 0,
-    "participants": 72,
+    "participants": 86,
     "logo": "https://ctftime.org//media/events/HI_Cyber_Con_2026__CTFtime_Logo__Transparent.png"
   },
   {
@@ -71,7 +71,7 @@
     "location": "",
     "restrictions": "Open",
     "weight": 0,
-    "participants": 17,
+    "participants": 18,
     "logo": "https://ctftime.org//media/events/logo_139.png"
   },
   {
@@ -86,7 +86,7 @@
     "location": "National Institute Of Technology Warangal, Hanamkonda, Telangana, India, 505004",
     "restrictions": "Casual",
     "weight": 0,
-    "participants": 3,
+    "participants": 4,
     "logo": "https://ctftime.org//media/events/hamarc.png"
   },
   {
@@ -101,7 +101,7 @@
     "location": "",
     "restrictions": "Open",
     "weight": 0,
-    "participants": 27,
+    "participants": 33,
     "logo": ""
   },
   {
@@ -131,7 +131,7 @@
     "location": "",
     "restrictions": "Open",
     "weight": 10.31,
-    "participants": 41,
+    "participants": 45,
     "logo": "https://ctftime.org//media/events/CTF_2026_1.png"
   },
   {

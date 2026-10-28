@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import { posts } from '../lib/posts'
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -58,12 +58,23 @@ export default function ContributionHeatmap() {
     }
     return ''
   })
+  // the grid usually starts mid-month: drop that first label when the next
+  // month begins within a couple of weeks, or the two overlap ("OctNov")
+  const second = monthLabels.findIndex((m, i) => i > 0 && m)
+  if (second > 0 && second < 3) monthLabels[0] = ''
+
+  // on narrow screens the grid scrolls sideways — open on the latest weeks
+  const scrollRef = useRef(null)
+  useEffect(() => {
+    const el = scrollRef.current
+    if (el) el.scrollLeft = el.scrollWidth
+  }, [])
 
   const fmt = (d) => `${MONTHS[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`
 
   return (
     <div className="heatmap-card">
-      <div className="heatmap-scroll">
+      <div className="heatmap-scroll" ref={scrollRef}>
         <div className="heatmap-months">
           {monthLabels.map((m, i) => (
             <span key={i} className="heatmap-month">

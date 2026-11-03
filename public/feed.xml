@@ -5,12 +5,22 @@
     <link>https://blog.disruption-academy.com/</link>
     <description>Security research, exploit development, and technical write-ups covering various aspects of offensive security and penetration testing.</description>
     <language>en</language>
-    <lastBuildDate>Tue, 03 Nov 2026 19:31:38 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 03 Nov 2026 19:33:02 GMT</lastBuildDate>
     <atom:link href="https://blog.disruption-academy.com/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>HackTheBox - Cohort</title>
       <link>https://blog.disruption-academy.com/blog/htb-cohort</link>
       <guid isPermaLink="true">https://blog.disruption-academy.com/blog/htb-cohort</guid>
+      <pubDate>Tue, 03 Nov 2026 00:00:00 GMT</pubDate>
+      <category>HackTheBox</category>
+      <category>Easy</category>
+      <category>Linux</category>
+      <description>This machine is still active on HackTheBox, so the write-up is password-protected until it retires.</description>
+    </item>
+    <item>
+      <title>HackTheBox - Connected</title>
+      <link>https://blog.disruption-academy.com/blog/htb-connected</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/htb-connected</guid>
       <pubDate>Tue, 03 Nov 2026 00:00:00 GMT</pubDate>
       <category>HackTheBox</category>
       <category>Easy</category>

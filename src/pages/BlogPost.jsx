@@ -14,6 +14,8 @@ import AuthorCard from '../components/AuthorCard'
 import MachineCard from '../components/MachineCard'
 import BookmarkButton from '../components/BookmarkButton'
 import CommandsPanel from '../components/CommandsPanel'
+import LockedPost from '../components/LockedPost'
+import { wasUnlocked } from '../lib/unlock'
 import { useTitle } from '../lib/useTitle'
 
 export default function BlogPost() {
@@ -27,8 +29,14 @@ export default function BlogPost() {
   const [loaded, setLoaded] = useState({ slug: null, body: '' })
   const [excerptOpen, setExcerptOpen] = useState(false)
 
+  // active-machine write-ups sit behind a password; the body isn't even
+  // fetched until it's unlocked
+  const [unlockedFor, setUnlockedFor] = useState(null)
+  const locked =
+    Boolean(post?.locked) && unlockedFor !== slug && !wasUnlocked(slug, post.lockHash)
+
   useEffect(() => {
-    if (!post) return
+    if (!post || locked) return
     let active = true
     loadPostBody(slug)
       .then((raw) => active && setLoaded({ slug, body: raw }))
@@ -36,7 +44,7 @@ export default function BlogPost() {
     return () => {
       active = false
     }
-  }, [slug, post])
+  }, [slug, post, locked])
 
   const ready = loaded.slug === slug
   const rawBody = ready ? loaded.body : ''
@@ -168,8 +176,17 @@ export default function BlogPost() {
 
           <MachineCard machine={post.machine} />
           {hasCommands && <CommandsPanel commands={commands} variant="inline" />}
-          {loading ? (
-            <div className="post-skeleton" aria-hidden="true">
+          {locked ? (
+            <LockedPost
+              slug={post.slug}
+              hash={post.lockHash}
+              onUnlock={() => setUnlockedFor(post.slug)}
+            />
+          ) : loading ? (
+            <div
+              className={`post-skeleton${unlockedFor === slug ? ' unlock-reveal' : ''}`}
+              aria-hidden="true"
+            >
               <span className="post-skeleton-line" />
               <span className="post-skeleton-line" />
               <span className="post-skeleton-line short" />
@@ -178,7 +195,10 @@ export default function BlogPost() {
               <span className="post-skeleton-line short" />
             </div>
           ) : (
-            <Markdown>{body}</Markdown>
+            // just unlocked: fade the write-up in instead of popping it in
+            <div className={unlockedFor === slug ? 'unlock-reveal' : undefined}>
+              <Markdown>{body}</Markdown>
+            </div>
           )}
         </article>
 

@@ -8,9 +8,10 @@
 //  - `virtual:command-index`: every shell command in every post (see
 //    src/lib/commands.js), for the Ctrl+K palette. It is only ever imported
 //    dynamically, so it becomes its own chunk fetched when the palette opens.
+import { createHash } from 'node:crypto'
 import { readdirSync, readFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
-import { buildMeta, parseFrontmatter } from './src/lib/postMeta.js'
+import { buildMeta, lockPassword, parseFrontmatter } from './src/lib/postMeta.js'
 import { extractCommands } from './src/lib/commands.js'
 
 const META_ID = 'virtual:post-meta'
@@ -42,7 +43,13 @@ export default function postsMetaPlugin() {
 
   const collectMeta = () =>
     readPosts()
-      .map(({ slug, raw }) => buildMeta(raw, slug))
+      .map(({ slug, raw }) => {
+        const meta = buildMeta(raw, slug)
+        // locked posts ship a SHA-256 of their password, never the password
+        const password = lockPassword(parseFrontmatter(raw).meta)
+        if (password) meta.lockHash = createHash('sha256').update(password).digest('hex')
+        return meta
+      })
       // newest first, matching the app's ordering
       .sort((a, b) => new Date(b.date) - new Date(a.date))
 
@@ -50,6 +57,8 @@ export default function postsMetaPlugin() {
     readPosts()
       .map(({ slug, raw }) => {
         const { meta, body } = parseFrontmatter(raw)
+        // locked posts stay out of the Ctrl+K command search
+        if (lockPassword(meta)) return { commands: [] }
         const commands = extractCommands(body).map(({ tool, cmd, raw: text }) =>
           // `raw` (the on-page text) is usually the command itself; skip the dupe
           text === cmd ? { tool, cmd } : { tool, cmd, raw: text }
@@ -71,6 +80,13 @@ export default function postsMetaPlugin() {
       if (id === RESOLVED[META_ID]) return `export default ${JSON.stringify(collectMeta())}`
       if (id === RESOLVED[COMMANDS_ID]) {
         return `export default ${JSON.stringify(collectCommands())}`
+      }
+      // post bodies are bundled as raw markdown (?raw), frontmatter included;
+      // drop the `active:` line so a locked post's password never ships
+      const file = id.replace(/\?raw$/, '')
+      if (id.endsWith('.md?raw') && file.replace(/\\/g, '/').includes('/src/posts/')) {
+        const text = readFileSync(file, 'utf8').replace(/^active:.*\r?\n/m, '')
+        return `export default ${JSON.stringify(text)}`
       }
     },
 

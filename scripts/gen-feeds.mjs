@@ -5,6 +5,7 @@ import { readFileSync, writeFileSync, readdirSync, statSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
 import { site } from '../src/config.js'
+import { LOCKED_EXCERPT } from '../src/lib/postMeta.js'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const postsDir = join(root, 'src', 'posts')
@@ -80,7 +81,8 @@ for (const name of readdirSync(postsDir)) {
     slug: name,
     title: meta.title || name,
     date: meta.date || '1970-01-01',
-    excerpt: meta.excerpt || autoExcerpt(body),
+    // locked (active-machine) posts never put their real summary in the feed
+    excerpt: String(meta.active || '').trim() ? LOCKED_EXCERPT : meta.excerpt || autoExcerpt(body),
     tags: Array.isArray(meta.tags) ? meta.tags : meta.tags ? [meta.tags] : [],
   })
 }

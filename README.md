@@ -86,6 +86,7 @@ Embed a folder image inline:
 | Post images (cover + inline) | the post's own folder in `src/posts/` |
 | Share preview image (LinkedIn, Discord…) | the cover by default; put an `og.png` (1200×630) in the post's folder to override it — required when the cover is an SVG |
 | Per-page HTML (titles, share tags) | generated after every build by `scripts/gen-pages.mjs` |
+| Password-protect an active-machine write-up | add `active: "your-password"` to the post's frontmatter; remove the line when the box retires. The site, feed, share previews and Ctrl+K search all hide it, but the markdown is still readable in this public repo |
 | Colors & theme | `:root` block in `src/index.css` |
 
 ## Pages

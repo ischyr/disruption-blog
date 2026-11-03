@@ -34,6 +34,15 @@ export function parseFrontmatter(raw) {
   return { meta, body: raw.slice(match[0].length) }
 }
 
+// Active HackTheBox machines can't have public write-ups. A post with
+// `active: "<password>"` in its frontmatter is shown behind a password
+// screen, and its listings, feeds and previews use this text instead of the
+// real excerpt. The password itself never leaves the build (see the plugin).
+export const LOCKED_EXCERPT =
+  'This machine is still active on HackTheBox, so the write-up is password-protected until it retires.'
+
+export const lockPassword = (meta) => String(meta.active || '').trim()
+
 export function readTime(text) {
   const words = text.trim().split(/\s+/).length
   return `${Math.max(1, Math.ceil(words / 200))} min read`
@@ -79,8 +88,9 @@ export function buildMeta(raw, slug) {
     title: meta.title || slug,
     date: meta.date || '1970-01-01',
     tags: Array.isArray(meta.tags) ? meta.tags : meta.tags ? [meta.tags] : [],
-    excerpt: meta.excerpt || autoExcerpt(body),
-    preview: buildPreview(body),
+    locked: Boolean(lockPassword(meta)),
+    excerpt: lockPassword(meta) ? LOCKED_EXCERPT : meta.excerpt || autoExcerpt(body),
+    preview: lockPassword(meta) ? '' : buildPreview(body),
     readTime: readTime(body),
     image: meta.image || meta.cover || '',
     machine,

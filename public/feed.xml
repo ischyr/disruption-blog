@@ -5,8 +5,18 @@
     <link>https://blog.disruption-academy.com/</link>
     <description>Security research, exploit development, and technical write-ups covering various aspects of offensive security and penetration testing.</description>
     <language>en</language>
-    <lastBuildDate>Tue, 03 Nov 2026 19:33:02 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 15 Nov 2026 13:04:04 GMT</lastBuildDate>
     <atom:link href="https://blog.disruption-academy.com/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackTheBox - Trick</title>
+      <link>https://blog.disruption-academy.com/blog/htb-trick</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/htb-trick</guid>
+      <pubDate>Sun, 15 Nov 2026 00:00:00 GMT</pubDate>
+      <category>HackTheBox</category>
+      <category>Easy</category>
+      <category>Linux</category>
+      <description>An easy Linux box running nginx, BIND and a pair of PHP applications behind separate virtual hosts. A DNS zone transfer leaks a payroll subdomain whose login form is vulnerable to SQL injection. The database user has the FILE privilege, so sqlmap reads the nginx config off disk, revealing a second marketing subdomain. That site includes pages via a parameter vulnerable to local file inclusion - a double-dot bypass extracts michael&apos;s SSH private key. A passwordless sudo entry for fail2ban restart, combined with a group-writable action config directory, turns a ban trigger into a root shell.</description>
+    </item>
     <item>
       <title>HackTheBox - Cohort</title>
       <link>https://blog.disruption-academy.com/blog/htb-cohort</link>

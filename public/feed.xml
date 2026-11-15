@@ -5,8 +5,18 @@
     <link>https://blog.disruption-academy.com/</link>
     <description>Security research, exploit development, and technical write-ups covering various aspects of offensive security and penetration testing.</description>
     <language>en</language>
-    <lastBuildDate>Sun, 15 Nov 2026 13:04:04 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 15 Nov 2026 13:10:46 GMT</lastBuildDate>
     <atom:link href="https://blog.disruption-academy.com/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackTheBox - Management</title>
+      <link>https://blog.disruption-academy.com/blog/htb-management</link>
+      <guid isPermaLink="true">https://blog.disruption-academy.com/blog/htb-management</guid>
+      <pubDate>Sun, 15 Nov 2026 00:00:00 GMT</pubDate>
+      <category>HackTheBox</category>
+      <category>Easy</category>
+      <category>Linux</category>
+      <description>An easy Linux box for a fictional managed-services provider. Its SSO portal runs OpenAM 16.0.5, vulnerable to a pre-authentication deserialization RCE (CVE-2026-33439) that hands over a shell as the openam service account. From there, GLPI&apos;s database credentials lead to an LDAP bind password encrypted with libsodium XChaCha20-Poly1305 - decrypting it with the on-disk key file pivots to a real user. A permissive sudo rule for rdiff-backup, whose wildcard lets the restricted path be overridden, copies root&apos;s home directory and finishes the box.</description>
+    </item>
     <item>
       <title>HackTheBox - Trick</title>
       <link>https://blog.disruption-academy.com/blog/htb-trick</link>
